@@ -188,6 +188,9 @@ CURRENCIES = (
     'ZAR',
 )
 
+# Login behaviour
+LOGIN_REDIRECT_URL = '/'
+
 # Custom Application Settings
 
 # What CALENDAR period does this fiscal year start on? 1 is January, 12 is December.
