@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load djmoney %}
+
+{% block title %}Opportunity Portfolio Planner{% endblock %}
+
+{% block content %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Agency</th>
+                <th>Client</th>
+                <th>Business Unit</th>
+                <th>Product</th>
+                <th>Fiscal</th>
+                <th>Target</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for opportunity in opportunities %}
+            <tr>
+                <td>{{ opportunity.id }}</td>
+                <td>{{ opportunity.name }}</td>
+                <td>{{ opportunity.description }}</td>
+                <td>{{ opportunity.status }}</td>
+                <td>{{ opportunity.agency.name }}</td>
+                <td>{{ opportunity.client.name }}</td>
+                <td>{{ opportunity.business_unit.name }}</td>
+                <td>{{ opportunity.product.name }}</td>
+                <td>{{ opportunity.fiscal_year.year }}</td>
+                <td>{{ opportunity.target }}</td>
+                <td>
+                    <a href="#" class="btn btn-primary">Edit</a>
+                    <a href="#" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,3 +1,23 @@
 {% extends 'django_bootstrap5/bootstrap5.html' %}
+{% load django_htmx %}
 
-{% block bootstrap5_title %}{% block title %}{% endblock %}{% endblock %}
+{% block bootstrap5_title %}
+    {% block title %}
+    {% endblock %}
+{% endblock %}
+
+{% block bootstrap5_extra_head %}
+    {# HTMX #}
+    <script src="https://unpkg.com/htmx.org@1.9.6" defer></script>
+    {% django_htmx_script %}
+{% endblock %}
+
+{# Ensure we have the CSRF token loaded for HTMX purposes in the entire body of the HTML#}
+{% block bootstrap5_extra_script %}
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            var body = document.querySelector('body');
+            body.setAttribute('hx-headers', '{"X-CSRFToken": "{{ csrf_token }}" }');
+        });
+    </script>
+{% endblock %}
