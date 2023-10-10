@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'portfolio_planner',
     # 3rd Party Apps
     'django_bootstrap5',
+    'widget_tweaks',
     'django_htmx',
     'djmoney',
     'nested_admin',
@@ -170,7 +171,7 @@ if DEBUG and IS_LOCAL:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
     # Ensure you add in all the apps static dirs here
     STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'portfolio_planner/templates/static'),
+        os.path.join(BASE_DIR, 'portfolio_planner/static'),
     ]
 else:
     STORAGES = {
@@ -182,6 +183,10 @@ else:
     GS_BUCKET_NAME = env.str('GOOGLE_STATIC_BUCKET_NAME')
     GS_DEFAULT_ACL = 'publicRead'
 
+# Bootstrap Settings
+BOOTSTRAP5 = {
+    'javascript_in_head': True
+}
 
 # Django-money config
 CURRENCIES = (
