@@ -1,77 +1,94 @@
 {% load widget_tweaks %}
-
 {% with WIDGET_ERROR_CLASS='is-invalid' %}
-
 <form hx-post="{{ request.path }}" class="modal-content">
-  <div class="modal-header">
-    <h5 class="modal-title">Edit Opportunity</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-  </div>
-  <div class="modal-body">
-    <div class="mb-3">
-      <label for="{{ form.name.id_for_label }}" class="form-label">Name</label>
-      {% render_field form.name class="form-control" placeholder="Opportunity Name" %}
-      <div class="invalid-feedback">{{ form.name.errors|first }}</div>
+    <div class="modal-header">
+        <h5 class="modal-title">Edit Opportunity</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
     </div>
+    <div class="modal-body">
+        <div class="row">
+            <!-- First Column -->
+            <div class="col-md-6">
+                <fieldset>
+                    <legend>Basic Details</legend>
+                    <div class="mb-3">
+                        <label for="{{ form.name.id_for_label }}" class="form-label">Name</label>
+                        {% render_field form.name class="form-control" placeholder="Opportunity Name" %}
+                        <div class="invalid-feedback">{{ form.name.errors|first }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.description.id_for_label }}" class="form-label">Description</label>
+                        {% render_field form.description class="form-control" placeholder="Description about the opportunity" %}
+                        <div class="invalid-feedback">{{ form.description.errors|first }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.status.id_for_label }}" class="form-label">Status</label>
+                        {% render_field form.status class="form-control" %}
+                        <div class="invalid-feedback">{{ form.status.errors|first }}</div>
+                    </div>
+                </fieldset>
+            </div>
 
-    <div class="mb-3">
-      <label for="{{ form.description.id_for_label }}" class="form-label">Description</label>
-      {% render_field form.description class="form-control" placeholder="Description about the opportunity" %}
-      <div class="invalid-feedback">{{ form.description.errors|first }}</div>
+            <!-- Second Column -->
+            <div class="col-md-6">
+                <fieldset>
+                    <legend>Associations</legend>
+                    <div class="mb-3">
+                        <label for="{{ form.agency.id_for_label }}" class="form-label">Agency</label>
+                        {% render_field form.agency class="form-control" %}
+                        <div class="invalid-feedback">{{ form.agency.errors|first }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.client.id_for_label }}" class="form-label">Client</label>
+                        {% render_field form.client class="form-control" %}
+                        <div class="invalid-feedback">{{ form.client.errors|first }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.business_unit.id_for_label }}" class="form-label">Business Unit</label>
+                        {% render_field form.business_unit class="form-control" %}
+                        <div class="invalid-feedback">{{ form.business_unit.errors|first }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.product.id_for_label }}" class="form-label">Product</label>
+                        {% render_field form.product class="form-control" %}
+                        <div class="invalid-feedback">{{ form.product.errors|first }}</div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <!-- Third Section -->
+        <fieldset>
+            <legend>Financial Details</legend>
+            <div class="row">
+                <!-- Left Side -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="{{ form.target.id_for_label }}" class="form-label">Target</label>
+                        {% render_field form.target class="form-control" %}
+                        <div class="invalid-feedback">{{ form.target.errors|first }}</div>
+                    </div>
+                </div>
+                <!-- Right Side -->
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="{{ form.fiscal_year.id_for_label }}" class="form-label">Fiscal Year</label>
+                        {% render_field form.fiscal_year class="form-control" %}
+                        <div class="invalid-feedback">{{ form.fiscal_year.errors|first }}</div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
     </div>
-
-    <div class="mb-3">
-      <label for="{{ form.status.id_for_label }}" class="form-label">Status</label>
-      {% render_field form.status class="form-control" %}
-      <div class="invalid-feedback">{{ form.status.errors|first }}</div>
+    <div class="modal-footer">
+        {% if opportunity %}
+        <button type="button" class="btn btn-danger" hx-post="{% url 'remove_opportunity' opportunity_id=opportunity.id %}">Remove</button>
+        <span class="flex-grow-1"></span>
+        {% endif %}
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cancel
+        </button>
+        <button type="submit" class="btn btn-primary">Save</button>
     </div>
-
-    <div class="mb-3">
-      <label for="{{ form.agency.id_for_label }}" class="form-label">Agency</label>
-      {% render_field form.agency class="form-control" %}
-      <div class="invalid-feedback">{{ form.agency.errors|first }}</div>
-    </div>
-
-    <div class="mb-3">
-      <label for="{{ form.client.id_for_label }}" class="form-label">Client</label>
-      {% render_field form.client class="form-control" %}
-      <div class="invalid-feedback">{{ form.client.errors|first }}</div>
-    </div>
-
-    <div class="mb-3">
-      <label for="{{ form.business_unit.id_for_label }}" class="form-label">Business Unit</label>
-      {% render_field form.business_unit class="form-control" %}
-      <div class="invalid-feedback">{{ form.business_unit.errors|first }}</div>
-    </div>
-
-    <div class="mb-3">
-      <label for="{{ form.product.id_for_label }}" class="form-label">Product</label>
-      {% render_field form.product class="form-control" %}
-      <div class="invalid-feedback">{{ form.product.errors|first }}</div>
-    </div>
-
-    <div class="mb-3">
-      <label for="{{ form.target.id_for_label }}" class="form-label">Target</label>
-      {% render_field form.target class="form-control" %}
-      <div class="invalid-feedback">{{ form.target.errors|first }}</div>
-    </div>
-
-    <div class="mb-3">
-      <label for="{{ form.fiscal_year.id_for_label }}" class="form-label">Fiscal Year</label>
-      {% render_field form.fiscal_year class="form-control" %}
-      <div class="invalid-feedback">{{ form.fiscal_year.errors|first }}</div>
-    </div>
-
-  </div>
-  <div class="modal-footer">
-    {% if opportunity %}
-    <button type="button" class="btn btn-danger" hx-post="{% url 'remove_opportunity' opportunity_id=opportunity.id %}">Remove</button>
-    <span class="flex-grow-1"></span>
-    {% endif %}
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-      Cancel
-    </button>
-    <button type="submit" class="btn btn-primary">Save</button>
-  </div>
 </form>
 {% endwith %}
