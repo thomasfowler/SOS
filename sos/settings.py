@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'django_htmx',
     'djmoney',
     'nested_admin',
+    'django_tables2',
 ]
 
 MIDDLEWARE = [
@@ -188,7 +189,10 @@ BOOTSTRAP5 = {
     'javascript_in_head': True
 }
 
-# Django-money config
+# Django Tables2 Settings
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap5.html"
+
+# Django-money Settings
 CURRENCIES = (
     'ZAR',
 )

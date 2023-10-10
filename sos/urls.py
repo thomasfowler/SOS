@@ -9,7 +9,7 @@ from portfolio_planner.views.health import health_check_view
 from portfolio_planner.views.home import HomeOrLoginView
 from portfolio_planner.views.opportunity import PortfolioPlannerView
 from portfolio_planner.views.opportunity import add_opportunity
-from portfolio_planner.views.opportunity import opportunity_list
+from portfolio_planner.views.opportunity import OpportunityListView
 from portfolio_planner.views.opportunity import edit_opportunity
 from portfolio_planner.views.opportunity import remove_opportunity
 
@@ -21,7 +21,7 @@ urlpatterns = [
     path('', HomeOrLoginView.as_view(), name='home'),
     # Portfolio Planner
     path('portfolio-planner/', PortfolioPlannerView.as_view(), name='portfolio_planner'),
-    path('opportunities/', opportunity_list, name='opportunity_list'),
+    path('opportunities/', OpportunityListView.as_view(), name='opportunity_list'),
     path('opportunities/add/', add_opportunity, name='add_opportunity'),
     path('opportunities/<int:opportunity_id>/edit/', edit_opportunity, name='edit_opportunity'),
     path('opportunities/<int:opportunity_id>/remove/', remove_opportunity, name='remove_opportunity'),
