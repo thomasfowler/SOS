@@ -200,3 +200,8 @@ models.png
 
 # Ignore everything in a scratch folder
 /scratch/
+
+# Data Prep
+
+# Ignore source data. Contains confidential information and should not be committed to git.
+/data_prep/source_data/
