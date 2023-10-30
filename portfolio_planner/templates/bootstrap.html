@@ -1,5 +1,6 @@
 {% extends 'django_bootstrap5/bootstrap5.html' %}
 {% load django_htmx %}
+{% load static %}
 
 {% block bootstrap5_title %}
     {% block title %}
@@ -10,6 +11,8 @@
     {# HTMX #}
     <script src="https://unpkg.com/htmx.org@1.9.6"></script>
     {% django_htmx_script %}
+    <script src="{% static 'js/custom.js' %}" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
 {% endblock %}
 
 {# Ensure we have the CSRF token loaded for HTMX purposes in the entire body of the HTML#}

@@ -1,9 +1,9 @@
 import json
 
 from django.http import HttpResponse
-from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.http import require_POST
 from django.views.decorators.http import require_http_methods
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required

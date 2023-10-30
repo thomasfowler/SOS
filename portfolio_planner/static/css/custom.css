@@ -1,0 +1,17 @@
+/* custom.css */
+
+#footer-logo {
+    max-width: 50px; /* adjust as needed */
+    max-height: 50px; /* adjust as needed */
+    margin-top: 10px;
+}
+
+footer {
+    padding: 20px 0;
+    background-color: #f5f5f5; /* a light grey background */
+}
+
+footer p {
+    margin-bottom: 0; /* removes extra space below the text */
+    font-size: 0.9em;
+}

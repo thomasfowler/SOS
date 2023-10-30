@@ -1,22 +1,67 @@
 {% extends 'bootstrap.html' %}
 
+{% load static %}
 {% load django_bootstrap5 %}
 
 {% block bootstrap5_content %}
     <div class="container">
-        <h1>{% block title %}(no title){% endblock %}</h1>
+        <header>
+            <h1>{% block title %}(no title){% endblock %}</h1>
+            <ul class="nav nav-pills">
+                {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'portfolio_planner' %}">Portfolio Planner</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                {% endif %}
+            </ul>
+        </header>
 
-        <ul class="nav nav-pills">
-            {% if user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'portfolio_planner' %}">Portfolio Planner</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
-            {% endif %}
-        </ul>
+        <div class="row">
+            <div class="col-9">
+                <main>
+                    {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+                    {% block content %}(no content){% endblock %}
+                </main>
+            </div>
 
-        {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+            <div class="col-3">
+                <aside>
+                    {% block sidebar %}
+                        <!-- Default Sidebar Content -->
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="#">New Opportunity</a></li>
+                            <li><a href="#">My Opportunities</a></li>
+                            <li><a href="#">Pending Approvals</a></li>
+                        </ul>
 
-        {% block content %}(no content){% endblock %}
+                        <h4>Summary Stats</h4>
+                        <ul>
+                            <!-- TODO: Placeholder for stats -->
+                            <li>Total Revenue: $XXXX</li>
+                            <li>Deals Closed: XX</li>
+                            <li>Avg Deal Size: $XXXX</li>
+                        </ul>
+                    {% endblock %}
+                </aside>
+            </div>
+        </div>
+
+        <footer class="mt-5">
+            <div class="container">
+              <div class="row">
+                <div class="col-3">
+                  <!-- Logo Placeholder -->
+                  <img src="{% static 'images/primary_circle_sos_logo_250.png' %}" alt="Science of Sales Logo" id="footer-logo">
+                </div>
+                <div class="col-9 text-right">
+                  <!-- Copyright -->
+                    {% now "Y" as current_year %}
+                    <p>&copy; {{ current_year }} Science of Sales (Pty) Ltd. All Rights Reserved.</p>
+                </div>
+              </div>
+            </div>
+        </footer>
     </div>
-
 {% endblock %}

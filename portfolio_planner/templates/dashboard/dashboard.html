@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block title %}Science of Sales - GROW Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mt-4 dashboard-container">
+
+    <!-- Performance Table -->
+    <div class="card mb-4 performance-table">
+        <div class="card-header">Performance</div>
+        <div class="card-body">
+            <!-- Table content here -->
+        </div>
+    </div>
+
+    <!-- ACTUAL vs FORECAST vs BUDGET Bar Graph -->
+    <div class="card mb-4 forecast-bar-graph">
+        <div class="card-header">ACTUAL vs FORECAST vs BUDGET</div>
+        <div class="card-body">
+            <!-- Graph content here -->
+        </div>
+    </div>
+
+    <!-- Client Categories -->
+    <div class="row mb-4 client-categories">
+        <div class="col-md-3 game-changers">
+            <!-- GAME CHANGERS placeholder -->
+        </div>
+        <div class="col-md-3 real-opportunity">
+            <!-- REAL OPPORTUNITY placeholder -->
+        </div>
+        <div class="col-md-3 open-clients">
+            <!-- OPEN CLIENTS placeholder -->
+        </div>
+        <div class="col-md-3 wish-clients">
+            <!-- WISH CLIENTS placeholder -->
+        </div>
+    </div>
+
+    <!-- G.R.O.W. Status Tracker -->
+    <div class="card mb-4 grow-status-tracker">
+        <div class="card-header">G.R.O.W. Status Tracker</div>
+        <div class="card-body">
+            <!-- Bar graph content here -->
+        </div>
+    </div>
+
+    <!-- Sales Time Left & Required Sales -->
+    <div class="row mb-4 sales-section">
+        <div class="col-md-6 sales-time-left">
+            <!-- Sales Time Left content here -->
+        </div>
+        <div class="col-md-6 required-sales">
+            <!-- Required Sales content here -->
+        </div>
+    </div>
+
+    <!-- # Deals Pie Chart & Closing Ratios -->
+    <div class="row mb-4 deals-section">
+        <div class="col-md-6 deals-pie-chart">
+            <!-- # Deals pie chart content here -->
+        </div>
+        <div class="col-md-6 closing-ratios">
+            <!-- Closing Ratios content here -->
+        </div>
+    </div>
+</div>
+{% endblock %}
