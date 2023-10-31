@@ -1,17 +1,125 @@
 /* custom.css */
 
+/* Navbar*/
+header {
+    background-color: #f5f5f5;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* A subtle shadow */
+}
+
+header h1 {
+    text-align: center;  /* Center align the title */
+    margin-bottom: 10px;
+}
+
+.nav {
+    display: flex;  /* Flex layout for alignment */
+    justify-content: center;  /* Center align nav items */
+    gap: 15px;  /* Spacing between nav items */
+}
+
+.nav-item {
+    list-style-type: none;  /* Removes bullet points */
+}
+
+.nav-link {
+    color: #6b6b6b;  /* Nav item text color */
+    text-decoration: none;  /* Removes underlines */
+    padding: 5px 10px;  /* Paddings for clickable area and visual balance */
+    border-radius: 5px;  /* Rounded corners for aesthetics */
+    transition: background-color 0.3s;  /* Smooth transition for hover effect */
+}
+
+.nav-link:hover {
+    background-color: #e9ecef;  /* Lighter shade for hover effect */
+    color: #a5d52d;  /* Darker text for contrast */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Shadow for the hover effect */
+}
+
+.nav-pills .nav-link.active {
+    background-color: #e9ecef; /* Same light shade for active link */
+    color: #090909;  /* Darker text for contrast */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Shadow for the active link */
+}
+
+/*Footer*/
 #footer-logo {
-    max-width: 50px; /* adjust as needed */
-    max-height: 50px; /* adjust as needed */
-    margin-top: 10px;
+    max-width: 50px;
+    max-height: 50px;
+    display: block; /* Makes the image a block element */
+    margin: 10px auto; /* Horizontally centers the block element */
 }
 
 footer {
     padding: 20px 0;
-    background-color: #f5f5f5; /* a light grey background */
+    background-color: #f5f5f5;
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* A subtle shadow */
 }
 
 footer p {
-    margin-bottom: 0; /* removes extra space below the text */
+    margin-bottom: 0;
     font-size: 0.9em;
+    line-height: 1.5; /* Adjust line-height for better spacing */
+    font-weight: 500; /* Optional: Make the text a bit bolder */
+}
+
+/* To center the logo and copyright notice within their respective divs */
+footer .col-3, footer .col-9 {
+    display: flex;
+    align-items: center; /* Vertical centering */
+    justify-content: center; /* Horizontal centering */
+}
+
+/*Body*/
+body {
+    background-color: #f8f9fa; /* Light gray background for slight contrast */
+}
+
+/*Login*/
+#login-form {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/*Sidebar*/
+aside {
+    background-color: #f7f7f7;  /* Light grey */
+    padding: 15px;
+    border-radius: 5px;  /* Rounded corners */
+}
+
+aside h4 {
+    font-weight: bold;
+    color: #333;  /* Darker color for emphasis */
+    border-bottom: 2px solid #ddd;  /* Underline for separation */
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+
+.col-3 aside .list-group {
+    /* Any styles specific to this list group */
+}
+
+.col-3 aside .list-group-item a {
+    color: #6b6b6b;  /* Bootstrap's default blue */
+    text-decoration: none;
+}
+
+.col-3 aside .list-group-item a:hover {
+    text-decoration: underline;
+}
+
+aside ul {
+    margin-bottom: 20px;  /* Space between lists */
+}
+
+aside li {
+    margin-bottom: 10px;  /* Space between list items */
+}
+
+aside h4:first-child {
+    margin-top: 0;  /* Remove margin from the first header */
 }

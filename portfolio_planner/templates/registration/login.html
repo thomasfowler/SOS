@@ -1,11 +1,31 @@
 {% extends 'base.html' %}
 
-{% block title %}Login{% endblock %}
+{% load static %}
+
+{% block title %}{% endblock %}
 
 {% block content %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button class="btn btn-primary" type="submit">Login</button>
-    </form>
+    <div class="container h-100 login-container">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-md-4">
+                <div class="text-center mb-4 mt-4">
+                    <img src="{% static 'images/black_rectangle_sos_logo_322.png' %}" alt="Logo" width="275">
+                </div>
+                <form method="post" id="login-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="{{ form.username.id_for_label }}">Username</label>
+                        <input type="text" class="form-control" id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="{{ form.password.id_for_label }}">Password</label>
+                        <input type="password" class="form-control" id="{{ form.password.id_for_label }}" name="{{ form.password.name }}" required>
+                    </div>
+                    <div class="mt-4">
+                        <button class="btn btn-primary btn-block" type="submit">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

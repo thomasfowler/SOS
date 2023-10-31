@@ -17,6 +17,8 @@ class DashboardView(TemplateView):
 
         if action == 'actual_vs_forecast':
             return self.actual_vs_forecast(request, *args, **kwargs)
+        elif action == 'grow_status':
+            return self.grow_status(request, *args, **kwargs)
 
         return super().dispatch(request, *args, **kwargs)
 
@@ -50,3 +52,52 @@ class DashboardView(TemplateView):
 
         return render(request, 'dashboard/components/actual_vs_forecast.html', {'data': json.dumps(chart_data)})
 
+    @method_decorator(require_GET)
+    def grow_status(self, request, *args, **kwargs) -> HttpResponse:
+        period = request.GET.get('period', 'annual')
+
+        # Dummy Grow Data
+        if period == 'annual':
+            datasets = [
+                {'label': 'Budget', 'data': [100, 200, 300, 400]},
+                {'label': 'Actual', 'data': [110, 210, 290, 390]}
+            ]
+        elif period == 'q1':
+            datasets = [
+                {'label': 'Budget', 'data': [22, 45, 33, 50]},
+                {'label': 'Actual', 'data': [20, 43, 35, 52]}
+            ]
+        elif period == 'q2':
+            datasets = [
+                {'label': 'Budget', 'data': [30, 48, 35, 47]},
+                {'label': 'Actual', 'data': [29, 50, 33, 45]}
+            ]
+        elif period == 'q3':
+            datasets = [
+                {'label': 'Budget', 'data': [28, 49, 33, 45]},
+                {'label': 'Actual', 'data': [27, 50, 31, 43]}
+            ]
+        elif period == 'q4':
+            datasets = [
+                {'label': 'Budget', 'data': [20, 58, 40, 48]},
+                {'label': 'Actual', 'data': [24, 60, 38, 45]}
+            ]
+        elif period == 'current_month':
+            datasets = [
+                {'label': 'Budget', 'data': [5, 10, 8, 9]},
+                {'label': 'Actual', 'data': [4, 11, 7, 8]}
+            ]
+        else:
+            datasets = []
+
+        chart_data = {
+            'labels': [
+                'Game Changer',
+                'Real Opportunity',
+                'Open',
+                'Wish'
+            ],
+            'datasets': datasets
+        }
+
+        return render(request, 'dashboard/components/grow_status.html', {'data': json.dumps(chart_data)})

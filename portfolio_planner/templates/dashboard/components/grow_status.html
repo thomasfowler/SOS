@@ -1,0 +1,7 @@
+<canvas id="growStatus" width="400" height="200"></canvas>
+<script>
+    (function() {
+        const chartData = {{ data|safe }};
+        drawChart('bar', 'growStatus', chartData);
+    })();
+</script>
