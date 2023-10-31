@@ -22,6 +22,7 @@ urlpatterns = [
     path('', HomeOrLoginView.as_view(), name='home'),
     # Dashboard
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
+    path('dashboard/<str:action>/', DashboardView.as_view(), name='dashboard_action'),
     # Portfolio Planner
     path('portfolio-planner/', PortfolioPlannerView.as_view(), name='portfolio_planner'),
     path('opportunities/', OpportunityListView.as_view(), name='opportunity_list'),

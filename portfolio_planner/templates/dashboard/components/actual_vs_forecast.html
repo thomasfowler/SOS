@@ -1,0 +1,7 @@
+<canvas id="actualVsForecastVsBudget" width="400" height="200"></canvas>
+<script>
+    (function() {
+        const chartData = {{ data|safe }};
+        drawChart('bar', 'actualVsForecastVsBudget', chartData);
+    })();
+</script>

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
+{% load static %}
 
 {% block title %}Science of Sales - GROW Dashboard{% endblock %}
 
@@ -18,7 +19,26 @@
     <div class="card mb-4 forecast-bar-graph">
         <div class="card-header">ACTUAL vs FORECAST vs BUDGET</div>
         <div class="card-body">
-            <!-- Graph content here -->
+            <select id="periodFilter" name="period" hx-get="actual_vs_forecast/" hx-trigger="change" hx-swap="innerHTML" hx-target="#chart-container" hx-vals="javascript:{period: document.getElementById('periodFilter').value, region: document.getElementById('regionFilter').value, includeArchived: document.getElementById('includeArchivedFilter').checked}">
+                <option value="quarterly">Quarterly</option>
+                <option value="monthly">Monthly</option>
+            </select>
+
+            <select id="regionFilter" name="region" hx-get="actual_vs_forecast/" hx-trigger="change" hx-swap="innerHTML" hx-target="#chart-container" hx-vals="javascript:{period: document.getElementById('periodFilter').value, region: document.getElementById('regionFilter').value, includeArchived: document.getElementById('includeArchivedFilter').checked}">
+                <option disabled selected value> -- select an option -- </option>
+                <option value="north">North</option>
+                <option value="south">South</option>
+                <!-- ... other regions ... -->
+            </select>
+
+            <input type="checkbox" id="includeArchivedFilter" name="includeArchived" hx-get="actual_vs_forecast/" hx-trigger="change" hx-swap="innerHTML" hx-target="#chart-container" hx-vals="javascript:{period: document.getElementById('periodFilter').value, region: document.getElementById('regionFilter').value, includeArchived: document.getElementById('includeArchivedFilter').checked}" value="true"> Include Archived
+
+
+
+
+            <div id="chart-container" hx-get="actual_vs_forecast/" hx-trigger="load">
+                <!-- Bar graph content here - rendered via HTMX -->
+            </div>
         </div>
     </div>
 
@@ -66,4 +86,6 @@
         </div>
     </div>
 </div>
+
+<script src="{% static 'js/charts.js' %}" type="text/javascript"></script>
 {% endblock %}
