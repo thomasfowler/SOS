@@ -16,6 +16,7 @@ class Command(BaseCommand):
         fixture_files = [
             'portfolio_planner/fixtures/master_data/fiscal_year.json',
             'portfolio_planner/fixtures/master_data/media_group.json',
+            'portfolio_planner/fixtures/master_data/product.json',
         ]
 
         for fixture_file in fixture_files:
