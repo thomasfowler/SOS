@@ -103,7 +103,7 @@ class Client(TimeStampedModel, StatusModel):
 
         # If this is a new Client, create a default Business Unit related to it
         if is_new:
-            BusinessUnit.objects.create(
+            BrandBusinessUnit.objects.create(
                 name='Default Business Unit',
                 description='Automatically generated default business unit',
                 client=self  # self is the Client instance
@@ -114,7 +114,7 @@ class Client(TimeStampedModel, StatusModel):
         return self.name
 
 
-class BusinessUnit(TimeStampedModel, StatusModel):
+class BrandBusinessUnit(TimeStampedModel, StatusModel):
     """Business Unit model."""
 
     STATUS = Choices(
@@ -211,7 +211,7 @@ class Opportunity(TimeStampedModel, StatusModel):
     )
     agency = models.ForeignKey(Agency, on_delete=models.CASCADE)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    business_unit = models.ForeignKey(BusinessUnit, on_delete=models.CASCADE)
+    business_unit = models.ForeignKey(BrandBusinessUnit, null=True, blank=True, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     target = MoneyField(max_digits=14, decimal_places=2, default_currency='ZAR')
     fiscal_year = models.ForeignKey(FiscalYear, default=get_current_fiscal_year, on_delete=models.CASCADE)

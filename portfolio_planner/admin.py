@@ -3,7 +3,7 @@ from django.contrib import admin
 import nested_admin
 
 from .models import Agency
-from .models import BusinessUnit
+from .models import BrandBusinessUnit
 from .models import Client
 from .models import Product
 from .models import FiscalYear
@@ -30,7 +30,7 @@ class ClientAdmin(admin.ModelAdmin):
     raw_id_fields = ('user', 'agency',)
 
 
-@admin.register(BusinessUnit)
+@admin.register(BrandBusinessUnit)
 class BusinessUnitAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'status', 'user', 'client', 'created', 'modified')
     list_filter = ('status', 'user', 'client',)
