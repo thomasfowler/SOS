@@ -36,7 +36,7 @@ class MediaGroup(TimeStampedModel, StatusModel):
     )
 
     class Meta:
-        verbose_name_plural = 'Parent Agencies'
+        verbose_name_plural = 'Media Groups'
 
     def __str__(self):
         """Provide human readable representation."""
