@@ -1,0 +1,287 @@
+[
+{
+    "model": "portfolio_planner.brand",
+    "pk": 3,
+    "fields": {
+        "created": "2023-11-13T20:35:43.731Z",
+        "modified": "2023-11-13T20:35:43.731Z",
+        "status_changed": "2023-11-13T20:35:41Z",
+        "client_code": null,
+        "name": "Burger King",
+        "description": "",
+        "status": "active",
+        "user": 6,
+        "agency": null
+    }
+},
+{
+    "model": "portfolio_planner.brand",
+    "pk": 4,
+    "fields": {
+        "created": "2023-11-13T20:36:01.634Z",
+        "modified": "2023-11-13T20:36:01.634Z",
+        "status_changed": "2023-11-13T20:35:48Z",
+        "client_code": null,
+        "name": "CMG Africa",
+        "description": "",
+        "status": "active",
+        "user": 3,
+        "agency": null
+    }
+},
+{
+    "model": "portfolio_planner.brand",
+    "pk": 5,
+    "fields": {
+        "created": "2023-11-13T20:36:14.787Z",
+        "modified": "2023-11-13T20:36:14.787Z",
+        "status_changed": "2023-11-13T20:36:01Z",
+        "client_code": null,
+        "name": "DTS Attorneys",
+        "description": "",
+        "status": "active",
+        "user": 11,
+        "agency": null
+    }
+},
+{
+    "model": "portfolio_planner.brand",
+    "pk": 6,
+    "fields": {
+        "created": "2023-11-13T20:36:34.531Z",
+        "modified": "2023-11-13T20:36:34.531Z",
+        "status_changed": "2023-11-13T20:36:14Z",
+        "client_code": null,
+        "name": "Fed Group",
+        "description": "",
+        "status": "active",
+        "user": 2,
+        "agency": 22
+    }
+},
+{
+    "model": "portfolio_planner.brand",
+    "pk": 7,
+    "fields": {
+        "created": "2023-11-13T20:36:51.501Z",
+        "modified": "2023-11-13T20:36:51.501Z",
+        "status_changed": "2023-11-13T20:36:34Z",
+        "client_code": null,
+        "name": "Fidelity",
+        "description": "",
+        "status": "active",
+        "user": 3,
+        "agency": 2
+    }
+},
+{
+    "model": "portfolio_planner.brand",
+    "pk": 8,
+    "fields": {
+        "created": "2023-11-13T20:37:33.334Z",
+        "modified": "2023-11-13T20:37:33.334Z",
+        "status_changed": "2023-11-13T20:36:51Z",
+        "client_code": null,
+        "name": "First Battery Centre",
+        "description": "",
+        "status": "active",
+        "user": 2,
+        "agency": 22
+    }
+},
+{
+    "model": "portfolio_planner.brand",
+    "pk": 9,
+    "fields": {
+        "created": "2023-11-13T20:37:46.063Z",
+        "modified": "2023-11-13T20:37:46.063Z",
+        "status_changed": "2023-11-13T20:37:33Z",
+        "client_code": null,
+        "name": "Galito's",
+        "description": "",
+        "status": "active",
+        "user": 2,
+        "agency": 22
+    }
+},
+{
+    "model": "portfolio_planner.brand",
+    "pk": 10,
+    "fields": {
+        "created": "2023-11-13T20:41:22.200Z",
+        "modified": "2023-11-13T20:41:22.200Z",
+        "status_changed": "2023-11-13T20:37:46Z",
+        "client_code": null,
+        "name": "KFC",
+        "description": "",
+        "status": "active",
+        "user": 8,
+        "agency": null
+    }
+},
+{
+    "model": "portfolio_planner.brand",
+    "pk": 11,
+    "fields": {
+        "created": "2023-11-13T20:41:34.753Z",
+        "modified": "2023-11-13T20:41:34.753Z",
+        "status_changed": "2023-11-13T20:41:22Z",
+        "client_code": null,
+        "name": "King Price Insurance Company Limited",
+        "description": "",
+        "status": "active",
+        "user": 7,
+        "agency": null
+    }
+},
+{
+    "model": "portfolio_planner.brand",
+    "pk": 12,
+    "fields": {
+        "created": "2023-11-13T20:41:46.805Z",
+        "modified": "2023-11-13T20:41:46.805Z",
+        "status_changed": "2023-11-13T20:41:34Z",
+        "client_code": null,
+        "name": "Lew Geffen Estates (PTY) LTD",
+        "description": "",
+        "status": "active",
+        "user": 10,
+        "agency": null
+    }
+},
+{
+    "model": "portfolio_planner.brand",
+    "pk": 13,
+    "fields": {
+        "created": "2023-11-13T20:41:58.294Z",
+        "modified": "2023-11-13T20:41:58.294Z",
+        "status_changed": "2023-11-13T20:41:46Z",
+        "client_code": null,
+        "name": "MD & D Marketing (Pty) Ltd",
+        "description": "",
+        "status": "active",
+        "user": 8,
+        "agency": null
+    }
+},
+{
+    "model": "portfolio_planner.brand",
+    "pk": 14,
+    "fields": {
+        "created": "2023-11-13T20:42:17.791Z",
+        "modified": "2023-11-13T20:42:17.791Z",
+        "status_changed": "2023-11-13T20:41:58Z",
+        "client_code": null,
+        "name": "Nandos",
+        "description": "",
+        "status": "active",
+        "user": 2,
+        "agency": 9
+    }
+},
+{
+    "model": "portfolio_planner.brand",
+    "pk": 15,
+    "fields": {
+        "created": "2023-11-13T20:42:39.851Z",
+        "modified": "2023-11-13T20:42:39.851Z",
+        "status_changed": "2023-11-13T20:42:17Z",
+        "client_code": null,
+        "name": "NWU Studies",
+        "description": "",
+        "status": "active",
+        "user": 2,
+        "agency": 22
+    }
+},
+{
+    "model": "portfolio_planner.brand",
+    "pk": 16,
+    "fields": {
+        "created": "2023-11-13T20:42:51.795Z",
+        "modified": "2023-11-13T20:42:51.795Z",
+        "status_changed": "2023-11-13T20:42:39Z",
+        "client_code": null,
+        "name": "Pick 'n Pay Retailers",
+        "description": "",
+        "status": "active",
+        "user": 4,
+        "agency": null
+    }
+},
+{
+    "model": "portfolio_planner.brand",
+    "pk": 17,
+    "fields": {
+        "created": "2023-11-13T20:43:09.436Z",
+        "modified": "2023-11-13T20:43:09.436Z",
+        "status_changed": "2023-11-13T20:42:51Z",
+        "client_code": null,
+        "name": "Richfield College",
+        "description": "",
+        "status": "active",
+        "user": 2,
+        "agency": 22
+    }
+},
+{
+    "model": "portfolio_planner.brand",
+    "pk": 18,
+    "fields": {
+        "created": "2023-11-13T20:43:32.567Z",
+        "modified": "2023-11-13T20:43:32.567Z",
+        "status_changed": "2023-11-13T20:43:09Z",
+        "client_code": null,
+        "name": "Rushmere Noach Inc",
+        "description": "",
+        "status": "active",
+        "user": 12,
+        "agency": null
+    }
+},
+{
+    "model": "portfolio_planner.brand",
+    "pk": 19,
+    "fields": {
+        "created": "2023-11-13T20:43:42.580Z",
+        "modified": "2023-11-13T20:43:42.580Z",
+        "status_changed": "2023-11-13T20:43:32Z",
+        "client_code": null,
+        "name": "Silverlake Trading",
+        "description": "",
+        "status": "active",
+        "user": 8,
+        "agency": null
+    }
+},
+{
+    "model": "portfolio_planner.brand",
+    "pk": 20,
+    "fields": {
+        "created": "2023-11-13T20:43:54.692Z",
+        "modified": "2023-11-13T20:43:54.692Z",
+        "status_changed": "2023-11-13T20:43:42Z",
+        "client_code": null,
+        "name": "The Classic India Restaurant",
+        "description": "",
+        "status": "active",
+        "user": 9,
+        "agency": null
+    }
+},
+{
+    "model": "portfolio_planner.brand",
+    "pk": 21,
+    "fields": {
+        "created": "2023-11-13T20:44:08.643Z",
+        "modified": "2023-11-13T20:44:08.643Z",
+        "status_changed": "2023-11-13T20:43:54Z",
+        "client_code": null,
+        "name": "Volpes",
+        "description": "",
+        "status": "active",
+        "user": 6,
+        "agency": null
+    }
+}
+]

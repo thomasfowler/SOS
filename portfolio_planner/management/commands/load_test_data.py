@@ -12,6 +12,7 @@ class Command(BaseCommand):
         """Load Test Data from Fixtures."""
         fixture_files = [
             'portfolio_planner/fixtures/test_data/users.json',
+            'portfolio_planner/fixtures/test_data/bands.json',
         ]
 
         for fixture_file in fixture_files:
