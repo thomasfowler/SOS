@@ -18,7 +18,6 @@ class OpportunityForm(forms.ModelForm):
         """Metadata for the OpportunityForm."""
         model = Opportunity
         fields = [
-            'name',
             'description',
             'status',
             'brand',

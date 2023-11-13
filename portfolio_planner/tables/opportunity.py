@@ -19,7 +19,6 @@ class OpportunityTable(tables.Table):
 
         fields = (
             'id',
-            'name',
             'description',
             'status',
             'agency',

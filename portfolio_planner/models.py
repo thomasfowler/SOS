@@ -213,7 +213,6 @@ class Opportunity(TimeStampedModel, StatusModel):
     )
 
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=191, help_text='Name of the opportunity')
     description = models.TextField(blank=True, null=True, help_text='Description of the opportunity')
     status = StatusField(
         _('status'),

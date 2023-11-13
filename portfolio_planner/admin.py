@@ -95,7 +95,7 @@ class OpportunityPerformanceAdmin(nested_admin.NestedModelAdmin):
 
 @admin.register(Opportunity)
 class OpportunityAdmin(nested_admin.NestedModelAdmin):
-    list_display = ('id', 'name', 'status', 'brand', 'business_unit', 'product', 'fiscal_year', 'target', 'approved')
+    list_display = ('id', 'status', 'brand', 'business_unit', 'product', 'fiscal_year', 'target', 'approved')
     list_filter = ('status', 'brand', 'business_unit', 'product', 'fiscal_year', 'approved')
     search_fields = ('name', 'description')
     inlines = [OpportunityPerformanceInline]
