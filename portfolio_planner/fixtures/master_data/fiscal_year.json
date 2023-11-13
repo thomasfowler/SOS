@@ -1,0 +1,26 @@
+[
+{
+    "model": "portfolio_planner.fiscalyear",
+    "pk": 1,
+    "fields": {
+        "year": 2022,
+        "is_current": false
+    }
+},
+{
+    "model": "portfolio_planner.fiscalyear",
+    "pk": 2,
+    "fields": {
+        "year": 2023,
+        "is_current": false
+    }
+},
+{
+    "model": "portfolio_planner.fiscalyear",
+    "pk": 3,
+    "fields": {
+        "year": 2024,
+        "is_current": true
+    }
+}
+]
