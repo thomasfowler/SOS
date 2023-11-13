@@ -4,7 +4,7 @@ import nested_admin
 
 from .models import Agency
 from .models import BrandBusinessUnit
-from .models import Client
+from .models import Brand
 from .models import Product
 from .models import FiscalYear
 from .models import Opportunity
@@ -21,8 +21,8 @@ class AgencyAdmin(admin.ModelAdmin):
     ordering = ('-created',)
 
 
-@admin.register(Client)
-class ClientAdmin(admin.ModelAdmin):
+@admin.register(Brand)
+class BrandAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'status', 'user', 'agency', 'created', 'modified')
     list_filter = ('status', 'user', 'agency',)
     search_fields = ('name', 'description',)
@@ -32,11 +32,11 @@ class ClientAdmin(admin.ModelAdmin):
 
 @admin.register(BrandBusinessUnit)
 class BusinessUnitAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'status', 'user', 'client', 'created', 'modified')
-    list_filter = ('status', 'user', 'client',)
+    list_display = ('id', 'name', 'status', 'user', 'brand', 'created', 'modified')
+    list_filter = ('status', 'user', 'brand',)
     search_fields = ('name', 'description',)
     ordering = ('-created',)
-    raw_id_fields = ('user', 'client',)
+    raw_id_fields = ('user', 'brand',)
 
 
 @admin.register(Product)
@@ -83,8 +83,8 @@ class OpportunityPerformanceAdmin(nested_admin.NestedModelAdmin):
 
 @admin.register(Opportunity)
 class OpportunityAdmin(nested_admin.NestedModelAdmin):
-    list_display = ('id', 'name', 'status', 'agency', 'client', 'business_unit', 'product', 'fiscal_year', 'target', 'approved')
-    list_filter = ('status', 'agency', 'client', 'business_unit', 'product', 'fiscal_year', 'approved')
+    list_display = ('id', 'name', 'status', 'agency', 'brand', 'business_unit', 'product', 'fiscal_year', 'target', 'approved')
+    list_filter = ('status', 'agency', 'brand', 'business_unit', 'product', 'fiscal_year', 'approved')
     search_fields = ('name', 'description')
     inlines = [OpportunityPerformanceInline]
 

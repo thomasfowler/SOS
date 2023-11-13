@@ -23,7 +23,7 @@ class OpportunityTable(tables.Table):
             'description',
             'status',
             'agency',
-            'client',
+            'brand',
             'business_unit',
             'product',
             'target',

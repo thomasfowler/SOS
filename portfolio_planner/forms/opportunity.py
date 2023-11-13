@@ -14,7 +14,7 @@ class OpportunityForm(forms.ModelForm):
             'description',
             'status',
             'agency',
-            'client',
+            'brand',
             'business_unit',
             'product',
             'target',

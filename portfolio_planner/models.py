@@ -75,8 +75,8 @@ class Agency(TimeStampedModel, StatusModel):
         return self.name
 
 
-class Client(TimeStampedModel, StatusModel):
-    """Client model."""
+class Brand(TimeStampedModel, StatusModel):
+    """Brand model."""
 
     STATUS = Choices(
         'active',
@@ -85,14 +85,14 @@ class Client(TimeStampedModel, StatusModel):
 
     id = models.AutoField(primary_key=True)
     client_code = models.CharField(max_length=191, help_text='Internal Client Code - for reference to system of record')
-    name = models.CharField(max_length=191, help_text='Name of the client')
-    description = models.TextField(blank=True, null=True, help_text='Description of the client')
+    name = models.CharField(max_length=191, help_text='Name of the Brand')
+    description = models.TextField(blank=True, null=True, help_text='Description of the Brand')
     status = StatusField(
         _('status'),
         default='active',
-        help_text='Status of the client. One of active or disabled'
+        help_text='Status of the Brand. One of active or disabled'
     )
-    user = models.ForeignKey(User, related_name='clients', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='brands', on_delete=models.CASCADE)
     agency = models.ForeignKey(Agency, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
@@ -101,12 +101,12 @@ class Client(TimeStampedModel, StatusModel):
 
         super().save(*args, **kwargs)  # Call the "real" save() method
 
-        # If this is a new Client, create a default Business Unit related to it
+        # If this is a new Brand, create a default Business Unit related to it
         if is_new:
             BrandBusinessUnit.objects.create(
                 name='Default Business Unit',
                 description='Automatically generated default business unit',
-                client=self  # self is the Client instance
+                brand=self  # self is the Brand instance
             )
 
     def __str__(self):
@@ -131,20 +131,20 @@ class BrandBusinessUnit(TimeStampedModel, StatusModel):
         help_text='Status of the business unit. One of active or disabled'
     )
     user = models.ForeignKey(User, related_name='business_units', on_delete=models.CASCADE, null=True, blank=True)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         """Save the model.
 
-        If the user is not set, set it to the client's user.
+        If the user is not set, set it to the brand's user.
         """
         if self.user is None:
-            self.user = self.client.user
+            self.user = self.brand.user
         super().save(*args, **kwargs)
 
     def __str__(self):
         """Provide human readable representation."""
-        return f"{self.client.name} - {self.name}"
+        return f"{self.brand.name} - {self.name}"
 
 
 class Product(TimeStampedModel):
@@ -209,7 +209,7 @@ class Opportunity(TimeStampedModel, StatusModel):
         default='active',
         help_text='Status of the opportunity. One of active, disabled, expired, won, lost or abandoned'
     )
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     business_unit = models.ForeignKey(BrandBusinessUnit, null=True, blank=True, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     target = MoneyField(max_digits=14, decimal_places=2, default_currency='ZAR')
@@ -225,10 +225,10 @@ class Opportunity(TimeStampedModel, StatusModel):
     class Meta:
         """Meta class."""
 
-        # Make sure we can only have one opportunity per agency, client, business unit, product and fiscal year.
+        # Make sure we can only have one opportunity per agency, brand, business unit, product and fiscal year.
         unique_together = (
             'agency',
-            'client',
+            'brand',
             'business_unit',
             'product',
             'fiscal_year',
@@ -237,13 +237,13 @@ class Opportunity(TimeStampedModel, StatusModel):
         verbose_name_plural = 'Opportunities'
 
     def save(self, *args, **kwargs):
-        # Check that the Client is related to the Agency
-        if self.client.agency != self.agency:
-            raise IntegrityError("Client must belong to the selected Agency")
+        # Check that the Brand is related to the Agency
+        if self.brand.agency != self.agency:
+            raise IntegrityError("Brand must belong to the selected Agency")
 
-        # Check that the BusinessUnit is related to the Client
-        if self.business_unit.client != self.client:
-            raise IntegrityError("Business Unit must belong to the selected Client")
+        # Check that the BusinessUnit is related to the Brand
+        if self.business_unit.brand != self.brand:
+            raise IntegrityError("Business Unit must belong to the selected Brand")
 
         super().save(*args, **kwargs)
 
