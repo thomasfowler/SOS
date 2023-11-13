@@ -98,7 +98,13 @@ class Brand(TimeStampedModel, StatusModel):
         help_text='Status of the Brand. One of active or disabled'
     )
     user = models.ForeignKey(User, related_name='brands', on_delete=models.CASCADE)
-    agency = models.ForeignKey(Agency, on_delete=models.CASCADE)
+    agency = models.ForeignKey(
+        Agency,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        help_text='The Agency that the Brand is managed by.',
+    )
 
     def save(self, *args, **kwargs):
         """Custom save function"""
