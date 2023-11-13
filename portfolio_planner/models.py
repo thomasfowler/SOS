@@ -84,7 +84,12 @@ class Brand(TimeStampedModel, StatusModel):
     )
 
     id = models.AutoField(primary_key=True)
-    client_code = models.CharField(max_length=191, help_text='Internal Client Code - for reference to system of record')
+    client_code = models.CharField(
+        max_length=191,
+        help_text='Internal Client Code - for reference to system of record',
+        blank=True,
+        null=True
+    )
     name = models.CharField(max_length=191, help_text='Name of the Brand')
     description = models.TextField(blank=True, null=True, help_text='Description of the Brand')
     status = StatusField(
