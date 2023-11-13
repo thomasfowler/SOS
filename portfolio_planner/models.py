@@ -209,7 +209,6 @@ class Opportunity(TimeStampedModel, StatusModel):
         default='active',
         help_text='Status of the opportunity. One of active, disabled, expired, won, lost or abandoned'
     )
-    agency = models.ForeignKey(Agency, on_delete=models.CASCADE)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     business_unit = models.ForeignKey(BrandBusinessUnit, null=True, blank=True, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
