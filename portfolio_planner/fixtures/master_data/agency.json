@@ -1,0 +1,457 @@
+[
+{
+    "model": "portfolio_planner.agency",
+    "pk": 1,
+    "fields": {
+        "created": "2023-11-13T19:36:35.659Z",
+        "modified": "2023-11-13T19:36:35.659Z",
+        "status_changed": "2023-11-13T19:36:25Z",
+        "name": "Carat",
+        "description": "",
+        "status": "active",
+        "media_group": 1
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 2,
+    "fields": {
+        "created": "2023-11-13T19:36:46.435Z",
+        "modified": "2023-11-13T19:36:46.435Z",
+        "status_changed": "2023-11-13T19:36:35Z",
+        "name": "Dentsu Central Services",
+        "description": "",
+        "status": "active",
+        "media_group": 1
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 3,
+    "fields": {
+        "created": "2023-11-13T19:36:56.576Z",
+        "modified": "2023-11-13T19:36:56.576Z",
+        "status_changed": "2023-11-13T19:36:46Z",
+        "name": "iProspect",
+        "description": "",
+        "status": "active",
+        "media_group": 1
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 4,
+    "fields": {
+        "created": "2023-11-13T19:37:09.496Z",
+        "modified": "2023-11-13T19:37:09.496Z",
+        "status_changed": "2023-11-13T19:36:56Z",
+        "name": "Vizeum",
+        "description": "",
+        "status": "active",
+        "media_group": 1
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 5,
+    "fields": {
+        "created": "2023-11-13T19:37:20.456Z",
+        "modified": "2023-11-13T19:37:20.456Z",
+        "status_changed": "2023-11-13T19:37:14Z",
+        "name": "Mediashop",
+        "description": "",
+        "status": "active",
+        "media_group": 2
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 6,
+    "fields": {
+        "created": "2023-11-13T19:37:29.067Z",
+        "modified": "2023-11-13T19:37:29.067Z",
+        "status_changed": "2023-11-13T19:37:20Z",
+        "name": "Cadreon",
+        "description": "",
+        "status": "active",
+        "media_group": 2
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 7,
+    "fields": {
+        "created": "2023-11-13T19:37:36.570Z",
+        "modified": "2023-11-13T19:37:36.570Z",
+        "status_changed": "2023-11-13T19:37:29Z",
+        "name": "FCB",
+        "description": "",
+        "status": "active",
+        "media_group": 2
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 8,
+    "fields": {
+        "created": "2023-11-13T19:37:53.827Z",
+        "modified": "2023-11-13T19:37:53.827Z",
+        "status_changed": "2023-11-13T19:37:36Z",
+        "name": "Initiative Media",
+        "description": "",
+        "status": "active",
+        "media_group": 2
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 9,
+    "fields": {
+        "created": "2023-11-13T19:38:03.064Z",
+        "modified": "2023-11-13T19:38:03.064Z",
+        "status_changed": "2023-11-13T19:37:53Z",
+        "name": "IPG Media Brands",
+        "description": "",
+        "status": "active",
+        "media_group": 2
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 10,
+    "fields": {
+        "created": "2023-11-13T19:38:09.209Z",
+        "modified": "2023-11-13T19:38:09.209Z",
+        "status_changed": "2023-11-13T19:38:03Z",
+        "name": "Lucid",
+        "description": "",
+        "status": "active",
+        "media_group": 2
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 11,
+    "fields": {
+        "created": "2023-11-13T19:38:15.484Z",
+        "modified": "2023-11-13T19:38:15.484Z",
+        "status_changed": "2023-11-13T19:38:09Z",
+        "name": "McCann",
+        "description": "",
+        "status": "active",
+        "media_group": 2
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 12,
+    "fields": {
+        "created": "2023-11-13T19:38:21.543Z",
+        "modified": "2023-11-13T19:38:21.543Z",
+        "status_changed": "2023-11-13T19:38:15Z",
+        "name": "Meta Media",
+        "description": "",
+        "status": "active",
+        "media_group": 2
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 13,
+    "fields": {
+        "created": "2023-11-13T19:38:28.154Z",
+        "modified": "2023-11-13T19:38:28.154Z",
+        "status_changed": "2023-11-13T19:38:21Z",
+        "name": "JWT",
+        "description": "",
+        "status": "active",
+        "media_group": 2
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 14,
+    "fields": {
+        "created": "2023-11-13T19:38:35.298Z",
+        "modified": "2023-11-13T19:38:35.298Z",
+        "status_changed": "2023-11-13T19:38:28Z",
+        "name": "Grey Advertising",
+        "description": "",
+        "status": "active",
+        "media_group": 2
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 15,
+    "fields": {
+        "created": "2023-11-13T19:38:46.236Z",
+        "modified": "2023-11-13T19:38:46.236Z",
+        "status_changed": "2023-11-13T19:38:35Z",
+        "name": "OMD",
+        "description": "",
+        "status": "active",
+        "media_group": 3
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 16,
+    "fields": {
+        "created": "2023-11-13T19:39:12.045Z",
+        "modified": "2023-11-13T19:39:12.045Z",
+        "status_changed": "2023-11-13T19:38:46Z",
+        "name": "PHD",
+        "description": "",
+        "status": "active",
+        "media_group": 3
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 17,
+    "fields": {
+        "created": "2023-11-13T19:39:30.826Z",
+        "modified": "2023-11-13T19:39:30.826Z",
+        "status_changed": "2023-11-13T19:39:12Z",
+        "name": "Joe Public",
+        "description": "",
+        "status": "active",
+        "media_group": null
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 18,
+    "fields": {
+        "created": "2023-11-13T19:39:37.982Z",
+        "modified": "2023-11-13T19:39:37.982Z",
+        "status_changed": "2023-11-13T19:39:30Z",
+        "name": "Mediology",
+        "description": "",
+        "status": "active",
+        "media_group": null
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 19,
+    "fields": {
+        "created": "2023-11-13T19:39:42.377Z",
+        "modified": "2023-11-13T19:39:42.377Z",
+        "status_changed": "2023-11-13T19:39:38Z",
+        "name": "Havas",
+        "description": "",
+        "status": "active",
+        "media_group": null
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 20,
+    "fields": {
+        "created": "2023-11-13T19:39:47.957Z",
+        "modified": "2023-11-13T19:39:47.957Z",
+        "status_changed": "2023-11-13T19:39:42Z",
+        "name": "Brand Etal",
+        "description": "",
+        "status": "active",
+        "media_group": null
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 21,
+    "fields": {
+        "created": "2023-11-13T19:39:53.541Z",
+        "modified": "2023-11-13T19:39:53.541Z",
+        "status_changed": "2023-11-13T19:39:48Z",
+        "name": "Plan it Media",
+        "description": "",
+        "status": "active",
+        "media_group": null
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 22,
+    "fields": {
+        "created": "2023-11-13T19:39:59.506Z",
+        "modified": "2023-11-13T19:39:59.506Z",
+        "status_changed": "2023-11-13T19:39:53Z",
+        "name": "RMS Media",
+        "description": "",
+        "status": "active",
+        "media_group": null
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 23,
+    "fields": {
+        "created": "2023-11-13T19:40:06.442Z",
+        "modified": "2023-11-13T19:40:06.442Z",
+        "status_changed": "2023-11-13T19:39:59Z",
+        "name": "Starcom",
+        "description": "",
+        "status": "active",
+        "media_group": 5
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 24,
+    "fields": {
+        "created": "2023-11-13T19:40:12.967Z",
+        "modified": "2023-11-13T19:40:12.967Z",
+        "status_changed": "2023-11-13T19:40:06Z",
+        "name": "Zenith",
+        "description": "",
+        "status": "active",
+        "media_group": 5
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 25,
+    "fields": {
+        "created": "2023-11-13T19:40:21.593Z",
+        "modified": "2023-11-13T19:40:21.593Z",
+        "status_changed": "2023-11-13T19:40:13Z",
+        "name": "Publicis Media",
+        "description": "",
+        "status": "active",
+        "media_group": 5
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 26,
+    "fields": {
+        "created": "2023-11-13T19:40:28.093Z",
+        "modified": "2023-11-13T19:40:28.093Z",
+        "status_changed": "2023-11-13T19:40:21Z",
+        "name": "Spark",
+        "description": "",
+        "status": "active",
+        "media_group": 5
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 27,
+    "fields": {
+        "created": "2023-11-13T19:40:36.543Z",
+        "modified": "2023-11-13T19:40:36.543Z",
+        "status_changed": "2023-11-13T19:40:28Z",
+        "name": "Saachi & saachi",
+        "description": "",
+        "status": "active",
+        "media_group": 5
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 28,
+    "fields": {
+        "created": "2023-11-13T19:40:43.688Z",
+        "modified": "2023-11-13T19:40:43.688Z",
+        "status_changed": "2023-11-13T19:40:36Z",
+        "name": "Leo Burnett",
+        "description": "",
+        "status": "active",
+        "media_group": 5
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 29,
+    "fields": {
+        "created": "2023-11-13T19:40:50.292Z",
+        "modified": "2023-11-13T19:40:50.292Z",
+        "status_changed": "2023-11-13T19:40:43Z",
+        "name": "EssenceMediacom",
+        "description": "",
+        "status": "active",
+        "media_group": 4
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 30,
+    "fields": {
+        "created": "2023-11-13T19:40:58.465Z",
+        "modified": "2023-11-13T19:40:58.465Z",
+        "status_changed": "2023-11-13T19:40:50Z",
+        "name": "GroupM",
+        "description": "",
+        "status": "active",
+        "media_group": 4
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 31,
+    "fields": {
+        "created": "2023-11-13T19:41:07.353Z",
+        "modified": "2023-11-13T19:41:07.353Z",
+        "status_changed": "2023-11-13T19:40:58Z",
+        "name": "Mediacom",
+        "description": "",
+        "status": "active",
+        "media_group": 4
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 32,
+    "fields": {
+        "created": "2023-11-13T19:41:13.854Z",
+        "modified": "2023-11-13T19:41:13.854Z",
+        "status_changed": "2023-11-13T19:41:07Z",
+        "name": "Mindshare",
+        "description": "",
+        "status": "active",
+        "media_group": 4
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 33,
+    "fields": {
+        "created": "2023-11-13T19:41:21.115Z",
+        "modified": "2023-11-13T19:41:21.115Z",
+        "status_changed": "2023-11-13T19:41:13Z",
+        "name": "Wavemaker",
+        "description": "",
+        "status": "active",
+        "media_group": 4
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 34,
+    "fields": {
+        "created": "2023-11-13T19:41:27.063Z",
+        "modified": "2023-11-13T19:41:27.063Z",
+        "status_changed": "2023-11-13T19:41:21Z",
+        "name": "Yonder",
+        "description": "",
+        "status": "active",
+        "media_group": 4
+    }
+},
+{
+    "model": "portfolio_planner.agency",
+    "pk": 35,
+    "fields": {
+        "created": "2023-11-13T19:41:35.266Z",
+        "modified": "2023-11-13T19:41:35.266Z",
+        "status_changed": "2023-11-13T19:41:27Z",
+        "name": "Ogilvy",
+        "description": "",
+        "status": "active",
+        "media_group": 4
+    }
+}
+]
