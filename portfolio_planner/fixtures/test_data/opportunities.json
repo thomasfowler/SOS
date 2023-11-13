@@ -1,0 +1,135 @@
+[
+{
+    "model": "portfolio_planner.opportunity",
+    "pk": 2,
+    "fields": {
+        "created": "2023-11-13T21:05:26.413Z",
+        "modified": "2023-11-13T21:05:26.413Z",
+        "status_changed": "2023-11-13T21:03:27Z",
+        "description": "",
+        "status": "active",
+        "brand": 7,
+        "business_unit": 5,
+        "product": 3,
+        "target_currency": "ZAR",
+        "target": "100000.00",
+        "fiscal_year": 3,
+        "approved": false,
+        "approval_user": null
+    }
+},
+{
+    "model": "portfolio_planner.opportunity",
+    "pk": 3,
+    "fields": {
+        "created": "2023-11-13T21:06:11.264Z",
+        "modified": "2023-11-13T21:06:11.264Z",
+        "status_changed": "2023-11-13T21:05:26Z",
+        "description": "",
+        "status": "active",
+        "brand": 3,
+        "business_unit": 1,
+        "product": 1,
+        "target_currency": "ZAR",
+        "target": "600000.00",
+        "fiscal_year": 3,
+        "approved": false,
+        "approval_user": null
+    }
+},
+{
+    "model": "portfolio_planner.opportunity",
+    "pk": 4,
+    "fields": {
+        "created": "2023-11-13T21:06:53.061Z",
+        "modified": "2023-11-13T21:06:53.061Z",
+        "status_changed": "2023-11-13T21:06:47Z",
+        "description": "",
+        "status": "active",
+        "brand": 21,
+        "business_unit": 19,
+        "product": 1,
+        "target_currency": "ZAR",
+        "target": "550000.00",
+        "fiscal_year": 3,
+        "approved": false,
+        "approval_user": null
+    }
+},
+{
+    "model": "portfolio_planner.opportunity",
+    "pk": 5,
+    "fields": {
+        "created": "2023-11-13T21:07:52.867Z",
+        "modified": "2023-11-13T21:07:52.867Z",
+        "status_changed": "2023-11-13T21:07:44Z",
+        "description": "",
+        "status": "active",
+        "brand": 20,
+        "business_unit": 18,
+        "product": 1,
+        "target_currency": "ZAR",
+        "target": "120000.00",
+        "fiscal_year": 3,
+        "approved": false,
+        "approval_user": null
+    }
+},
+{
+    "model": "portfolio_planner.opportunity",
+    "pk": 6,
+    "fields": {
+        "created": "2023-11-13T21:08:16.857Z",
+        "modified": "2023-11-13T21:08:16.857Z",
+        "status_changed": "2023-11-13T21:07:52Z",
+        "description": "",
+        "status": "active",
+        "brand": 10,
+        "business_unit": 8,
+        "product": 1,
+        "target_currency": "ZAR",
+        "target": "360000.00",
+        "fiscal_year": 3,
+        "approved": false,
+        "approval_user": null
+    }
+},
+{
+    "model": "portfolio_planner.opportunity",
+    "pk": 7,
+    "fields": {
+        "created": "2023-11-13T21:08:47.453Z",
+        "modified": "2023-11-13T21:08:47.453Z",
+        "status_changed": "2023-11-13T21:08:42Z",
+        "description": "",
+        "status": "active",
+        "brand": 12,
+        "business_unit": 10,
+        "product": 6,
+        "target_currency": "ZAR",
+        "target": "250000.00",
+        "fiscal_year": 3,
+        "approved": false,
+        "approval_user": null
+    }
+},
+{
+    "model": "portfolio_planner.opportunity",
+    "pk": 8,
+    "fields": {
+        "created": "2023-11-13T21:09:26.029Z",
+        "modified": "2023-11-13T21:09:26.029Z",
+        "status_changed": "2023-11-13T21:08:47Z",
+        "description": "",
+        "status": "active",
+        "brand": 14,
+        "business_unit": 12,
+        "product": 1,
+        "target_currency": "ZAR",
+        "target": "1600000.00",
+        "fiscal_year": 3,
+        "approved": false,
+        "approval_user": null
+    }
+}
+]

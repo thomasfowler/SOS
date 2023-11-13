@@ -13,6 +13,7 @@ class Command(BaseCommand):
         fixture_files = [
             'portfolio_planner/fixtures/test_data/users.json',
             'portfolio_planner/fixtures/test_data/bands.json',
+            'portfolio_planner/fixtures/test_data/opportunities.json',
         ]
 
         for fixture_file in fixture_files:
