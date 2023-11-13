@@ -246,10 +246,6 @@ class Opportunity(TimeStampedModel, StatusModel):
         verbose_name_plural = 'Opportunities'
 
     def save(self, *args, **kwargs):
-        # Check that the Brand is related to the Agency
-        if self.brand.agency != self.agency:
-            raise IntegrityError("Brand must belong to the selected Agency")
-
         # Check that the BusinessUnit is related to the Brand
         if self.business_unit.brand != self.brand:
             raise IntegrityError("Business Unit must belong to the selected Brand")
@@ -258,7 +254,7 @@ class Opportunity(TimeStampedModel, StatusModel):
 
     def __str__(self):
         """Provide human readable representation."""
-        return self.name
+        return f'{self.brand.name} - {self.product.name} - {self.fiscal_year.year}'
 
 
 class OpportunityPerformance(models.Model):
