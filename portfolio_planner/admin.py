@@ -7,9 +7,19 @@ from .models import BrandBusinessUnit
 from .models import Brand
 from .models import Product
 from .models import FiscalYear
+from .models import MediaGroup
 from .models import Opportunity
 from .models import OpportunityPerformance
 from .models import PeriodPerformance
+
+
+@admin.register(MediaGroup)
+class MediaGroupAdmin(admin.ModelAdmin):
+    """Configuration of the Media Group model in the Admin UI."""
+    list_display = ('id', 'name', 'status', 'created', 'modified')
+    list_filter = ('status',)
+    search_fields = ('name', 'description',)
+    ordering = ('-created',)
 
 
 @admin.register(Agency)
