@@ -1,0 +1,62 @@
+[
+{
+    "model": "portfolio_planner.mediagroup",
+    "pk": 1,
+    "fields": {
+        "created": "2023-11-13T19:26:02.538Z",
+        "modified": "2023-11-13T19:26:02.538Z",
+        "status_changed": "2023-11-13T19:25:41Z",
+        "name": "Dentsu Aegis Network",
+        "description": "",
+        "status": "active"
+    }
+},
+{
+    "model": "portfolio_planner.mediagroup",
+    "pk": 2,
+    "fields": {
+        "created": "2023-11-13T19:29:00.630Z",
+        "modified": "2023-11-13T19:29:00.630Z",
+        "status_changed": "2023-11-13T19:26:06Z",
+        "name": "Inter Public Group (IPG)",
+        "description": "",
+        "status": "active"
+    }
+},
+{
+    "model": "portfolio_planner.mediagroup",
+    "pk": 3,
+    "fields": {
+        "created": "2023-11-13T19:29:12.205Z",
+        "modified": "2023-11-13T19:29:12.205Z",
+        "status_changed": "2023-11-13T19:29:08Z",
+        "name": "Omnicom Media Group",
+        "description": "",
+        "status": "active"
+    }
+},
+{
+    "model": "portfolio_planner.mediagroup",
+    "pk": 4,
+    "fields": {
+        "created": "2023-11-13T19:29:19.263Z",
+        "modified": "2023-11-13T19:29:19.263Z",
+        "status_changed": "2023-11-13T19:29:12Z",
+        "name": "WPP",
+        "description": "",
+        "status": "active"
+    }
+},
+{
+    "model": "portfolio_planner.mediagroup",
+    "pk": 5,
+    "fields": {
+        "created": "2023-11-13T19:29:28.421Z",
+        "modified": "2023-11-13T19:29:28.421Z",
+        "status_changed": "2023-11-13T19:29:19Z",
+        "name": "Publicis Media Group",
+        "description": "",
+        "status": "active"
+    }
+}
+]

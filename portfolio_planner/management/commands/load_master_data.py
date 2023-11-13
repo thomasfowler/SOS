@@ -14,9 +14,10 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         """Load Test Data from Fixtures."""
         fixture_files = [
-            'portfolio_planner/fixtures/master_data/fiscal_year.json'
+            'portfolio_planner/fixtures/master_data/fiscal_year.json',
+            'portfolio_planner/fixtures/master_data/media_group.json',
         ]
 
         for fixture_file in fixture_files:
-            print(f'Loading data from {fixture_file}')  # noqa: T201
+            print(f'Loading master data from {fixture_file}')  # noqa: T201
             call_command('loaddata', fixture_file)
