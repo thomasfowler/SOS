@@ -15,6 +15,34 @@ from model_utils.models import StatusModel
 from model_utils.models import TimeStampedModel
 
 
+class MediaGroup(TimeStampedModel, StatusModel):
+    """Media Group model.
+
+    This is the holding company / group / parent of an individual agency.
+    """
+
+    STATUS = Choices(
+        'active',
+        'disabled',
+    )
+
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=191, help_text='Name of the parent agency')
+    description = models.TextField(blank=True, null=True, help_text='Description of the parent agency')
+    status = StatusField(
+        _('status'),
+        default='active',
+        help_text='Status of the parent agency. One of active or disabled'
+    )
+
+    class Meta:
+        verbose_name_plural = 'Parent Agencies'
+
+    def __str__(self):
+        """Provide human readable representation."""
+        return self.name
+
+
 class Agency(TimeStampedModel, StatusModel):
     """Agency model."""
 
@@ -30,6 +58,13 @@ class Agency(TimeStampedModel, StatusModel):
         _('status'),
         default='active',
         help_text='Status of the agency. One of active or disabled'
+    )
+    media_group = models.ForeignKey(
+        MediaGroup,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        help_text='The parent agency if it exists'
     )
 
     class Meta:
