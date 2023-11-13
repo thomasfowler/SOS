@@ -63,6 +63,8 @@ class PeriodPerformanceAdmin(admin.ModelAdmin):
 
 
 # The next section deals with the Opportunity model and its related models.
+# We use nested_admin.NestedModelAdmin to display the related models in the
+# Opportunity admin page.
 class PeriodPerformanceInline(nested_admin.NestedTabularInline):
     model = PeriodPerformance
     extra = 1  # Number of empty rows displayed
@@ -77,7 +79,7 @@ class OpportunityPerformanceInline(nested_admin.NestedTabularInline):
 
 @admin.register(OpportunityPerformance)
 class OpportunityPerformanceAdmin(nested_admin.NestedModelAdmin):
-    list_display = ('opportunity', 'fiscal_year', 'total_revenue')  # Add fields that you find relevant here
+    list_display = ('opportunity', 'fiscal_year', 'total_revenue')
     inlines = [PeriodPerformanceInline]
 
 
