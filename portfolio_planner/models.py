@@ -227,7 +227,6 @@ class Opportunity(TimeStampedModel, StatusModel):
 
         # Make sure we can only have one opportunity per agency, brand, business unit, product and fiscal year.
         unique_together = (
-            'agency',
             'brand',
             'business_unit',
             'product',
