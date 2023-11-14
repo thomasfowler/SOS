@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     # 3rd Party Apps
     'django_use_email_as_username.apps.DjangoUseEmailAsUsernameConfig',
     'custom_user.apps.CustomUserConfig',
+    'rolepermissions',
     'django_bootstrap5',
     'widget_tweaks',
     'django_htmx',
