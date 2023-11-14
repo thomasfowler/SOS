@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     # Local Apps
     'portfolio_planner',
     # 3rd Party Apps
+    'django_use_email_as_username.apps.DjangoUseEmailAsUsernameConfig',
+    'custom_user.apps.CustomUserConfig',
     'django_bootstrap5',
     'widget_tweaks',
     'django_htmx',
@@ -123,6 +125,8 @@ FIXTURE_DIRS = (
     '/portfolio_planner/tests/fixtures/'
 )
 
+# Custom Auth User
+AUTH_USER_MODEL = 'custom_user.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
