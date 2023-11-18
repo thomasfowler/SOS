@@ -53,11 +53,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Local Apps
-    'portfolio_planner',
     # 3rd Party Apps
     'django_use_email_as_username.apps.DjangoUseEmailAsUsernameConfig',
-    'custom_user.apps.CustomUserConfig',
     'rolepermissions',
     'django_bootstrap5',
     'widget_tweaks',
@@ -65,6 +62,8 @@ INSTALLED_APPS = [
     'djmoney',
     'nested_admin',
     'django_tables2',
+    # Local Apps
+    'portfolio_planner',
 ]
 
 MIDDLEWARE = [
@@ -127,7 +126,7 @@ FIXTURE_DIRS = (
 )
 
 # Custom Auth User
-AUTH_USER_MODEL = 'custom_user.User'
+AUTH_USER_MODEL = 'portfolio_planner.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

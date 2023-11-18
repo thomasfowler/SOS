@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 import nested_admin
+from django_use_email_as_username.admin import BaseUserAdmin
 
 from .models import Agency
 from .models import BrandBusinessUnit
@@ -11,6 +12,11 @@ from .models import MediaGroup
 from .models import Opportunity
 from .models import OpportunityPerformance
 from .models import PeriodPerformance
+from .models import User
+
+
+# Custom User Admin based on django_use_email_as_username
+admin.site.register(User, BaseUserAdmin)
 
 
 @admin.register(MediaGroup)
