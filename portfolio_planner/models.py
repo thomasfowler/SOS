@@ -15,6 +15,23 @@ from model_utils.models import StatusModel
 from model_utils.models import TimeStampedModel
 
 
+class OrgBusinessUnit(TimeStampedModel, StatusModel):
+    """Organisation Business Unit model."""
+
+    STATUS = Choices(
+        'active',
+        'disabled',
+    )
+
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=191, help_text='Name of the business unit')
+    status = StatusField(
+        _('status'),
+        default='active',
+        help_text='Status of the business unit. One of active or disabled'
+    )
+
+
 class MediaGroup(TimeStampedModel, StatusModel):
     """Media Group model.
 
@@ -97,13 +114,18 @@ class Brand(TimeStampedModel, StatusModel):
         default='active',
         help_text='Status of the Brand. One of active or disabled'
     )
-    user = models.ForeignKey(User, related_name='brands', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='brands', on_delete=models.CASCADE)
     agency = models.ForeignKey(
         Agency,
         on_delete=models.CASCADE,
         blank=True,
         null=True,
         help_text='The Agency that the Brand is managed by.',
+    )
+    org_business_unit = models.ForeignKey(
+        OrgBusinessUnit,
+        on_delete=models.CASCADE,
+        help_text='The Organisation Business Unit that the Brand is managed by. Cannot be null.',
     )
 
     def save(self, *args, **kwargs):
@@ -141,7 +163,11 @@ class BrandBusinessUnit(TimeStampedModel, StatusModel):
         default='active',
         help_text='Status of the business unit. One of active or disabled'
     )
-    user = models.ForeignKey(User, related_name='business_units', on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='business_units',
+        on_delete=models.CASCADE,
+    )
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
@@ -226,7 +252,8 @@ class Opportunity(TimeStampedModel, StatusModel):
     fiscal_year = models.ForeignKey(FiscalYear, default=get_current_fiscal_year, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
     approval_user = models.ForeignKey(
-        User, related_name='approved_opportunities',
+        settings.AUTH_USER_MODEL,
+        related_name='approved_opportunities',
         on_delete=models.CASCADE,
         null=True,
         blank=True
