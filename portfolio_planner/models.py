@@ -14,49 +14,9 @@ from model_utils.models import StatusModel
 from model_utils.models import TimeStampedModel
 
 
-class OrgBusinessUnit(TimeStampedModel, StatusModel):
-    """Organisation Business Unit model."""
-
-    STATUS = Choices(
-        'active',
-        'disabled',
-    )
-
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=191, help_text='Name of the business unit')
-    status = StatusField(
-        _('status'),
-        default='active',
-        help_text='Status of the business unit. One of active or disabled'
-    )
-
-
-class CustomUserManager(BaseUserManager):
-    """Define a model manager for User model with no username field."""
-    def create_superuser(self, email, password=None, **extra_fields):
-        extra_fields.setdefault('business_unit', User.get_default_business_unit_id())
-        return super().create_superuser(email, password, **extra_fields)
-
-
 class User(BaseUser):
     """User model."""
-    objects = CustomUserManager()
-
-    business_unit = models.ManyToManyField(
-        OrgBusinessUnit,
-        on_delete=models.CASCADE,
-        related_name="users",
-        # default=lambda: User.get_default_business_unit_id(),
-    )
-
-    @staticmethod
-    def get_default_business_unit_id():
-        """Get the default business unit ID."""
-        default_unit, created = OrgBusinessUnit.objects.get_or_create(
-            name="Default Business Unit",
-            defaults={'status': 'active'}  # Add other default fields if necessary
-        )
-        return default_unit.id
+    objects = BaseUserManager()
 
 
 class MediaGroup(TimeStampedModel, StatusModel):
@@ -117,6 +77,23 @@ class Agency(TimeStampedModel, StatusModel):
     def __str__(self):
         """Provide human readable representation."""
         return self.name
+
+
+class OrgBusinessUnit(TimeStampedModel, StatusModel):
+    """Organisation Business Unit model."""
+
+    STATUS = Choices(
+        'active',
+        'disabled',
+    )
+
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=191, help_text='Name of the business unit')
+    status = StatusField(
+        _('status'),
+        default='active',
+        help_text='Status of the business unit. One of active or disabled'
+    )
 
 
 class Brand(TimeStampedModel, StatusModel):

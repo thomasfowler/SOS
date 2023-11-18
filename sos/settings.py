@@ -127,6 +127,7 @@ FIXTURE_DIRS = (
 
 # Custom Auth User
 AUTH_USER_MODEL = 'portfolio_planner.User'
+ROLEPERMISSIONS_MODULE = 'sos.roles'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
