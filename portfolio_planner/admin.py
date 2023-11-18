@@ -2,6 +2,7 @@ from django.contrib import admin
 
 import nested_admin
 from django_use_email_as_username.admin import BaseUserAdmin
+from rolepermissions.admin import RolePermissionsUserAdminMixin
 
 from .models import Agency
 from .models import BrandBusinessUnit
@@ -16,7 +17,12 @@ from .models import User
 
 
 # Custom User Admin based on django_use_email_as_username
-admin.site.register(User, BaseUserAdmin)
+# admin.site.register(User, BaseUserAdmin)
+@admin.register(User)
+class UserAdmin(RolePermissionsUserAdminMixin, BaseUserAdmin):
+    """Custom User Admin based on django_use_email_as_username as well as RolePermissionAdmin."""
+
+    list_display = ('email', 'first_name', 'last_name', 'is_staff', 'group_list')
 
 
 @admin.register(MediaGroup)

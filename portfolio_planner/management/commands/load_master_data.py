@@ -9,7 +9,7 @@ class Command(BaseCommand):
     Provides minimal data for running the Portfolio Planner.
     """
 
-    help = 'Loads minimum config data from fixtures'
+    help = 'Loads minimum config data from fixtures and synchronise roles to groups.'
 
     def handle(self, *args, **kwargs):
         """Load Test Data from Fixtures."""
@@ -20,6 +20,9 @@ class Command(BaseCommand):
             'portfolio_planner/fixtures/master_data/product.json',
             'portfolio_planner/fixtures/master_data/agency.json',
         ]
+
+        print('Synchronising roles to groups')
+        call_command('sync_roles')
 
         for fixture_file in fixture_files:
             print(f'Loading master data from {fixture_file}')  # noqa: T201

@@ -18,6 +18,9 @@ class User(BaseUser):
     """User model."""
     objects = BaseUserManager()
 
+    def group_list(self):
+        return "\n".join([g.name for g in self.groups.all()])
+
 
 class MediaGroup(TimeStampedModel, StatusModel):
     """Media Group model.

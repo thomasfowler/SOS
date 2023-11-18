@@ -4,14 +4,14 @@
     "pk": 1,
     "fields": {
         "password": "pbkdf2_sha256$600000$7uKYj69hhf0VOsgFoTO7gR$BcbX9TczDMBreq0u67yFW6W7GdxEYbGQ0o8n0BnNfd8=",
-        "last_login": "2023-11-13T12:31:16Z",
+        "last_login": "2023-11-18T15:21:22Z",
         "is_superuser": true,
         "first_name": "Thomas",
         "last_name": "Fowler",
-        "email": "thomas@dotmodus.com",
         "is_staff": true,
         "is_active": true,
         "date_joined": "2023-11-13T12:30:39Z",
+        "email": "thomas@dotmodus.com",
         "groups": [],
         "user_permissions": []
     }
@@ -25,12 +25,19 @@
         "is_superuser": false,
         "first_name": "Mandy",
         "last_name": "Petzer",
-        "email": "mandy@adreach.co.za",
         "is_staff": false,
         "is_active": true,
         "date_joined": "2023-11-13T19:48:10Z",
-        "groups": [],
-        "user_permissions": []
+        "email": "mandy@adreach.co.za",
+        "groups": [
+            1
+        ],
+        "user_permissions": [
+            65,
+            68,
+            66,
+            67
+        ]
     }
 },
 {
@@ -42,12 +49,19 @@
         "is_superuser": false,
         "first_name": "Angela",
         "last_name": "Lockett",
-        "email": "angela@adreach.co.za",
         "is_staff": false,
         "is_active": true,
         "date_joined": "2023-11-13T19:48:19Z",
-        "groups": [],
-        "user_permissions": []
+        "email": "angela@adreach.co.za",
+        "groups": [
+            1
+        ],
+        "user_permissions": [
+            65,
+            68,
+            66,
+            67
+        ]
     }
 },
 {
@@ -59,12 +73,21 @@
         "is_superuser": false,
         "first_name": "Keshia",
         "last_name": "Solomon",
-        "email": "keshia@adreach.co.za",
         "is_staff": false,
         "is_active": true,
         "date_joined": "2023-11-13T19:48:35Z",
-        "groups": [],
-        "user_permissions": []
+        "email": "keshia@adreach.co.za",
+        "groups": [
+            2
+        ],
+        "user_permissions": [
+            70,
+            65,
+            68,
+            66,
+            69,
+            67
+        ]
     }
 },
 {
@@ -76,12 +99,23 @@
         "is_superuser": false,
         "first_name": "Ryan",
         "last_name": "Hancock",
-        "email": "ryan@adreach.co.za",
         "is_staff": false,
         "is_active": true,
         "date_joined": "2023-11-13T19:48:51Z",
-        "groups": [],
-        "user_permissions": []
+        "email": "ryan@adreach.co.za",
+        "groups": [
+            3
+        ],
+        "user_permissions": [
+            71,
+            70,
+            65,
+            68,
+            66,
+            72,
+            69,
+            67
+        ]
     }
 },
 {
@@ -93,12 +127,19 @@
         "is_superuser": false,
         "first_name": "Shenya",
         "last_name": "Erdis",
-        "email": "shenya@adreach.co.za",
         "is_staff": false,
         "is_active": true,
         "date_joined": "2023-11-13T19:49:01Z",
-        "groups": [],
-        "user_permissions": []
+        "email": "shenya@adreach.co.za",
+        "groups": [
+            1
+        ],
+        "user_permissions": [
+            65,
+            68,
+            66,
+            67
+        ]
     }
 },
 {
@@ -110,12 +151,21 @@
         "is_superuser": false,
         "first_name": "Mercia",
         "last_name": "Muller",
-        "email": "mercia@adreach.co.za",
         "is_staff": false,
         "is_active": true,
         "date_joined": "2023-11-13T19:49:15Z",
-        "groups": [],
-        "user_permissions": []
+        "email": "mercia@adreach.co.za",
+        "groups": [
+            2
+        ],
+        "user_permissions": [
+            70,
+            65,
+            68,
+            66,
+            69,
+            67
+        ]
     }
 },
 {
@@ -127,12 +177,21 @@
         "is_superuser": false,
         "first_name": "Leisha",
         "last_name": "Henderson",
-        "email": "leisha@polead.co.za",
         "is_staff": false,
         "is_active": true,
         "date_joined": "2023-11-13T19:49:41Z",
-        "groups": [],
-        "user_permissions": []
+        "email": "leisha@polead.co.za",
+        "groups": [
+            2
+        ],
+        "user_permissions": [
+            70,
+            65,
+            68,
+            66,
+            69,
+            67
+        ]
     }
 },
 {
@@ -144,12 +203,19 @@
         "is_superuser": false,
         "first_name": "Leandra",
         "last_name": "Fourie",
-        "email": "leandra@adreach.co.za",
         "is_staff": false,
         "is_active": true,
         "date_joined": "2023-11-13T19:50:12Z",
-        "groups": [],
-        "user_permissions": []
+        "email": "leandra@adreach.co.za",
+        "groups": [
+            1
+        ],
+        "user_permissions": [
+            65,
+            68,
+            66,
+            67
+        ]
     }
 },
 {
@@ -161,12 +227,19 @@
         "is_superuser": false,
         "first_name": "Liza",
         "last_name": "Britz",
-        "email": "liza@adreach.co.za",
         "is_staff": false,
         "is_active": true,
         "date_joined": "2023-11-13T19:50:23Z",
-        "groups": [],
-        "user_permissions": []
+        "email": "liza@adreach.co.za",
+        "groups": [
+            1
+        ],
+        "user_permissions": [
+            65,
+            68,
+            66,
+            67
+        ]
     }
 },
 {
@@ -178,12 +251,21 @@
         "is_superuser": false,
         "first_name": "Nathan",
         "last_name": "Nichol",
-        "email": "nathan@adreach.co.za",
         "is_staff": false,
         "is_active": true,
         "date_joined": "2023-11-13T19:50:58Z",
-        "groups": [],
-        "user_permissions": []
+        "email": "nathan@adreach.co.za",
+        "groups": [
+            2
+        ],
+        "user_permissions": [
+            70,
+            65,
+            68,
+            66,
+            69,
+            67
+        ]
     }
 },
 {
@@ -195,12 +277,19 @@
         "is_superuser": false,
         "first_name": "Rachelle",
         "last_name": "Marshall",
-        "email": "rachelle@adreach.co.za",
         "is_staff": false,
         "is_active": true,
         "date_joined": "2023-11-13T19:51:10Z",
-        "groups": [],
-        "user_permissions": []
+        "email": "rachelle@adreach.co.za",
+        "groups": [
+            1
+        ],
+        "user_permissions": [
+            65,
+            68,
+            66,
+            67
+        ]
     }
 }
 ]
