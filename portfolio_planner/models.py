@@ -16,24 +16,6 @@ from model_utils.models import TimeStampedModel
 
 class User(BaseUser):
     """User model."""
-
-    # Define the role choices
-    ACCOUNT_MANAGER = 'AM'
-    BUSINESS_UNIT_MANAGER = 'BUM'
-    SALES_DIRECTOR = 'SD'
-    ROLE_CHOICES = (
-        (ACCOUNT_MANAGER, 'Account Manager'),
-        (BUSINESS_UNIT_MANAGER, 'Business Unit Manager'),
-        (SALES_DIRECTOR, 'Sales Director'),
-    )
-
-    # Add the role field
-    role = models.CharField(
-        max_length=3,
-        choices=ROLE_CHOICES,
-        default=ACCOUNT_MANAGER,
-    )
-
     objects = BaseUserManager()
 
 
