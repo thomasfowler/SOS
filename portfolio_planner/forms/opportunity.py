@@ -30,8 +30,11 @@ class OpportunityForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         """Initialize the OpportunityForm."""
         super(OpportunityForm, self).__init__(*args, **kwargs)
-        if self.instance and self.instance.brand:
-            self.fields['agency'].initial = self.instance.brand.agency
+        try:
+            if self.instance and self.instance.brand:
+                self.fields['agency'].initial = self.instance.brand.agency
+        except Brand.DoesNotExist:
+            pass
 
     def save(self, commit=True):
         """Save the Opportunity."""
