@@ -97,6 +97,12 @@ class OrgBusinessUnit(TimeStampedModel, StatusModel):
         default='active',
         help_text='Status of the business unit. One of active or disabled'
     )
+    business_unit_manager = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='org_business_units',
+        on_delete=models.CASCADE,
+        help_text='The user that manages the business unit. Cannot be null.',
+    )
 
 
 class Brand(TimeStampedModel, StatusModel):
