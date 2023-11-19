@@ -8,11 +8,13 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django_tables2 import SingleTableView
+from rolepermissions.checkers import has_role
 
 from portfolio_planner.models import Opportunity
 from portfolio_planner.common import HtmxHttpRequest
 from portfolio_planner.forms import OpportunityForm
 from portfolio_planner.tables import OpportunityTable
+from sos.roles import AccountManager, BusinessUnitHead, SalesDirector
 
 
 @method_decorator(login_required, name='dispatch')
@@ -37,6 +39,24 @@ class OpportunityListView(SingleTableView):
     model = Opportunity
     table_class = OpportunityTable
     template_name = "portfolio_planner/opportunity/opportunity_list.html"
+
+    def get_table_data(self):
+        """Get Table Data.
+
+        Filters opportunities based on role.
+
+        Account Managers can only see their owned opportunities.
+        Business Unit Heads can see all opportunities owned by their business unit.
+        Sales Directors can see all opportunities.
+        """
+        if has_role(self.request.user, AccountManager):
+            return Opportunity.objects.filter(brand__user=self.request.user)
+        elif has_role(self.request.user, BusinessUnitHead):
+            return Opportunity.objects.filter(brand__org_business_unit__business_unit_manager=self.request.user)
+        elif has_role(self.request.user, SalesDirector):
+            return Opportunity.objects.all()
+        else:
+            return Opportunity.objects.none()
 
 
 @login_required
