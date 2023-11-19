@@ -12,6 +12,7 @@ from .models import FiscalYear
 from .models import MediaGroup
 from .models import Opportunity
 from .models import OpportunityPerformance
+from .models import OrgBusinessUnit
 from .models import PeriodPerformance
 from .models import User
 
@@ -53,12 +54,19 @@ class BrandAdmin(admin.ModelAdmin):
 
 
 @admin.register(BrandBusinessUnit)
-class BusinessUnitAdmin(admin.ModelAdmin):
+class BrandBusinessUnitAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'status', 'user', 'brand', 'created', 'modified')
     list_filter = ('status', 'user', 'brand',)
     search_fields = ('name', 'description',)
     ordering = ('-created',)
     raw_id_fields = ('user', 'brand',)
+
+
+@admin.register(OrgBusinessUnit)
+class OrgBusinessUnitAdmin(admin.ModelAdmin):
+    list_display = ('name', 'status')
+    list_filter = ('status',)
+    search_fields = ('name',)
 
 
 @admin.register(Product)
