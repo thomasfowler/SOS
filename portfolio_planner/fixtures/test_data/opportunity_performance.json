@@ -1,0 +1,42 @@
+[
+{
+    "model": "portfolio_planner.opportunityperformance",
+    "pk": 1,
+    "fields": {
+        "opportunity": 8,
+        "fiscal_year": 2
+    }
+},
+{
+    "model": "portfolio_planner.opportunityperformance",
+    "pk": 2,
+    "fields": {
+        "opportunity": 7,
+        "fiscal_year": 2
+    }
+},
+{
+    "model": "portfolio_planner.opportunityperformance",
+    "pk": 3,
+    "fields": {
+        "opportunity": 5,
+        "fiscal_year": 2
+    }
+},
+{
+    "model": "portfolio_planner.opportunityperformance",
+    "pk": 4,
+    "fields": {
+        "opportunity": 4,
+        "fiscal_year": 2
+    }
+},
+{
+    "model": "portfolio_planner.opportunityperformance",
+    "pk": 5,
+    "fields": {
+        "opportunity": 2,
+        "fiscal_year": 2
+    }
+}
+]

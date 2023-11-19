@@ -1,0 +1,552 @@
+[
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 1,
+    "fields": {
+        "opportunity_performance": 1,
+        "period": 1,
+        "revenue_currency": "ZAR",
+        "revenue": "280332.17",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 2,
+    "fields": {
+        "opportunity_performance": 1,
+        "period": 2,
+        "revenue_currency": "ZAR",
+        "revenue": "15162.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 3,
+    "fields": {
+        "opportunity_performance": 1,
+        "period": 3,
+        "revenue_currency": "ZAR",
+        "revenue": "95024.44",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 4,
+    "fields": {
+        "opportunity_performance": 1,
+        "period": 4,
+        "revenue_currency": "ZAR",
+        "revenue": "93479.25",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 5,
+    "fields": {
+        "opportunity_performance": 1,
+        "period": 5,
+        "revenue_currency": "ZAR",
+        "revenue": "15363.99",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 6,
+    "fields": {
+        "opportunity_performance": 1,
+        "period": 6,
+        "revenue_currency": "ZAR",
+        "revenue": "187306.50",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 7,
+    "fields": {
+        "opportunity_performance": 1,
+        "period": 7,
+        "revenue_currency": "ZAR",
+        "revenue": "94944.25",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 8,
+    "fields": {
+        "opportunity_performance": 1,
+        "period": 8,
+        "revenue_currency": "ZAR",
+        "revenue": "179736.94",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 9,
+    "fields": {
+        "opportunity_performance": 1,
+        "period": 9,
+        "revenue_currency": "ZAR",
+        "revenue": "93692.25",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 10,
+    "fields": {
+        "opportunity_performance": 1,
+        "period": 10,
+        "revenue_currency": "ZAR",
+        "revenue": "179907.99",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 11,
+    "fields": {
+        "opportunity_performance": 1,
+        "period": 11,
+        "revenue_currency": "ZAR",
+        "revenue": "9699.50",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 12,
+    "fields": {
+        "opportunity_performance": 1,
+        "period": 12,
+        "revenue_currency": "ZAR",
+        "revenue": "99868.20",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 13,
+    "fields": {
+        "opportunity_performance": 2,
+        "period": 5,
+        "revenue_currency": "ZAR",
+        "revenue": "29058.40",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 14,
+    "fields": {
+        "opportunity_performance": 2,
+        "period": 6,
+        "revenue_currency": "ZAR",
+        "revenue": "124536.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 15,
+    "fields": {
+        "opportunity_performance": 2,
+        "period": 7,
+        "revenue_currency": "ZAR",
+        "revenue": "95477.59",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 16,
+    "fields": {
+        "opportunity_performance": 3,
+        "period": 1,
+        "revenue_currency": "ZAR",
+        "revenue": "5628.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 17,
+    "fields": {
+        "opportunity_performance": 3,
+        "period": 2,
+        "revenue_currency": "ZAR",
+        "revenue": "5628.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 18,
+    "fields": {
+        "opportunity_performance": 3,
+        "period": 3,
+        "revenue_currency": "ZAR",
+        "revenue": "5628.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 19,
+    "fields": {
+        "opportunity_performance": 3,
+        "period": 4,
+        "revenue_currency": "ZAR",
+        "revenue": "7148.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 20,
+    "fields": {
+        "opportunity_performance": 3,
+        "period": 5,
+        "revenue_currency": "ZAR",
+        "revenue": "8395.89",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 21,
+    "fields": {
+        "opportunity_performance": 3,
+        "period": 6,
+        "revenue_currency": "ZAR",
+        "revenue": "8452.50",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 22,
+    "fields": {
+        "opportunity_performance": 3,
+        "period": 7,
+        "revenue_currency": "ZAR",
+        "revenue": "8452.50",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 23,
+    "fields": {
+        "opportunity_performance": 3,
+        "period": 8,
+        "revenue_currency": "ZAR",
+        "revenue": "8452.50",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 24,
+    "fields": {
+        "opportunity_performance": 3,
+        "period": 9,
+        "revenue_currency": "ZAR",
+        "revenue": "8452.50",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 25,
+    "fields": {
+        "opportunity_performance": 3,
+        "period": 10,
+        "revenue_currency": "ZAR",
+        "revenue": "8357.49",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 26,
+    "fields": {
+        "opportunity_performance": 3,
+        "period": 11,
+        "revenue_currency": "ZAR",
+        "revenue": "8538.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 27,
+    "fields": {
+        "opportunity_performance": 3,
+        "period": 12,
+        "revenue_currency": "ZAR",
+        "revenue": "8538.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 28,
+    "fields": {
+        "opportunity_performance": 4,
+        "period": 1,
+        "revenue_currency": "ZAR",
+        "revenue": "53409.50",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 29,
+    "fields": {
+        "opportunity_performance": 4,
+        "period": 2,
+        "revenue_currency": "ZAR",
+        "revenue": "65133.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 30,
+    "fields": {
+        "opportunity_performance": 4,
+        "period": 3,
+        "revenue_currency": "ZAR",
+        "revenue": "78530.69",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 31,
+    "fields": {
+        "opportunity_performance": 4,
+        "period": 4,
+        "revenue_currency": "ZAR",
+        "revenue": "73517.40",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 32,
+    "fields": {
+        "opportunity_performance": 4,
+        "period": 5,
+        "revenue_currency": "ZAR",
+        "revenue": "76568.75",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 33,
+    "fields": {
+        "opportunity_performance": 4,
+        "period": 6,
+        "revenue_currency": "ZAR",
+        "revenue": "71788.50",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 34,
+    "fields": {
+        "opportunity_performance": 4,
+        "period": 7,
+        "revenue_currency": "ZAR",
+        "revenue": "841.50",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 35,
+    "fields": {
+        "opportunity_performance": 4,
+        "period": 8,
+        "revenue_currency": "ZAR",
+        "revenue": "11531.25",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 36,
+    "fields": {
+        "opportunity_performance": 4,
+        "period": 9,
+        "revenue_currency": "ZAR",
+        "revenue": "11531.25",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 37,
+    "fields": {
+        "opportunity_performance": 4,
+        "period": 10,
+        "revenue_currency": "ZAR",
+        "revenue": "11531.25",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 38,
+    "fields": {
+        "opportunity_performance": 4,
+        "period": 11,
+        "revenue_currency": "ZAR",
+        "revenue": "6154.50",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 39,
+    "fields": {
+        "opportunity_performance": 4,
+        "period": 12,
+        "revenue_currency": "ZAR",
+        "revenue": "8826.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 40,
+    "fields": {
+        "opportunity_performance": 5,
+        "period": 1,
+        "revenue_currency": "ZAR",
+        "revenue": "27568.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 41,
+    "fields": {
+        "opportunity_performance": 5,
+        "period": 2,
+        "revenue_currency": "ZAR",
+        "revenue": "27568.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 42,
+    "fields": {
+        "opportunity_performance": 5,
+        "period": 3,
+        "revenue_currency": "ZAR",
+        "revenue": "3792.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 43,
+    "fields": {
+        "opportunity_performance": 5,
+        "period": 4,
+        "revenue_currency": "ZAR",
+        "revenue": "3792.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 44,
+    "fields": {
+        "opportunity_performance": 5,
+        "period": 5,
+        "revenue_currency": "ZAR",
+        "revenue": "3792.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 45,
+    "fields": {
+        "opportunity_performance": 5,
+        "period": 6,
+        "revenue_currency": "ZAR",
+        "revenue": "1050.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 46,
+    "fields": {
+        "opportunity_performance": 5,
+        "period": 7,
+        "revenue_currency": "ZAR",
+        "revenue": "1050.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 47,
+    "fields": {
+        "opportunity_performance": 5,
+        "period": 8,
+        "revenue_currency": "ZAR",
+        "revenue": "1050.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 48,
+    "fields": {
+        "opportunity_performance": 5,
+        "period": 9,
+        "revenue_currency": "ZAR",
+        "revenue": "1050.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 49,
+    "fields": {
+        "opportunity_performance": 5,
+        "period": 10,
+        "revenue_currency": "ZAR",
+        "revenue": "1000.00",
+        "fiscal_year": 3
+    }
+},
+{
+    "model": "portfolio_planner.periodperformance",
+    "pk": 50,
+    "fields": {
+        "opportunity_performance": 5,
+        "period": 11,
+        "revenue_currency": "ZAR",
+        "revenue": "1000.00",
+        "fiscal_year": 3
+    }
+}
+]

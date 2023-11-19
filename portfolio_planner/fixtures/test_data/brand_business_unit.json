@@ -60,13 +60,13 @@
     "pk": 5,
     "fields": {
         "created": "2023-11-18T14:57:15.322Z",
-        "modified": "2023-11-18T14:57:15.322Z",
+        "modified": "2023-11-19T12:19:06.366Z",
         "status_changed": "2023-11-18T14:55:39Z",
         "name": "Default Business Unit",
         "description": "",
         "status": "active",
         "user": 1,
-        "brand": 6
+        "brand": 7
     }
 },
 {
@@ -265,5 +265,4 @@
         "brand": 21
     }
 }
-
 ]

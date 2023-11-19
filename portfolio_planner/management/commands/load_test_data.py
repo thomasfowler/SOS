@@ -15,6 +15,8 @@ class Command(BaseCommand):
             'portfolio_planner/fixtures/test_data/brands.json',
             'portfolio_planner/fixtures/test_data/brand_business_unit.json',
             'portfolio_planner/fixtures/test_data/opportunities.json',
+            'portfolio_planner/fixtures/test_data/opportunity_performance.json',
+            'portfolio_planner/fixtures/test_data/period_performance.json',
         ]
 
         for fixture_file in fixture_files:
