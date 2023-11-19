@@ -2,6 +2,7 @@ from datetime import date
 
 from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db import IntegrityError
 from django.db.models import Sum
@@ -12,6 +13,9 @@ from model_utils import Choices
 from model_utils.fields import StatusField
 from model_utils.models import StatusModel
 from model_utils.models import TimeStampedModel
+from rolepermissions.checkers import has_role
+
+from sos.roles import AccountManager, BusinessUnitHead, SalesDirector
 
 
 class User(BaseUser):
@@ -103,6 +107,13 @@ class OrgBusinessUnit(TimeStampedModel, StatusModel):
         on_delete=models.CASCADE,
         help_text='The user that manages the business unit. Cannot be null.',
     )
+
+    def save(self, *args, **kwargs):
+        """Save the model."""
+        if not (has_role(self.business_unit_manager, BusinessUnitHead) or
+                has_role(self.business_unit_manager, SalesDirector)):
+            raise ValidationError("Assigned user must have the BusinessUnitHead role.")
+        super(OrgBusinessUnit, self).save(*args, **kwargs)
 
 
 class Brand(TimeStampedModel, StatusModel):

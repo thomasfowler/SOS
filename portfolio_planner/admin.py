@@ -64,9 +64,9 @@ class BrandBusinessUnitAdmin(admin.ModelAdmin):
 
 @admin.register(OrgBusinessUnit)
 class OrgBusinessUnitAdmin(admin.ModelAdmin):
-    list_display = ('name', 'status')
-    list_filter = ('status',)
-    search_fields = ('name',)
+    list_display = ('name', 'status', 'business_unit_manager')
+    list_filter = ('status', 'business_unit_manager')
+    search_fields = ('name', 'business_unit_manager')
 
 
 @admin.register(Product)
