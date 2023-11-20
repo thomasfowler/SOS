@@ -1,0 +1,6 @@
+<select name="brand" class="form-control" hx-get={% url 'filtered_business_units' %} hx-trigger="change" hx-target="#business-unit-select">
+        <option value="">---------</option>
+    {% for brand in brands %}
+        <option value="{{ brand.pk }}">{{ brand.name }}</option>
+    {% endfor %}
+</select>

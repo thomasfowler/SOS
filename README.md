@@ -10,3 +10,4 @@ TODO:
 2. Related to the item abve, we should also show the user what the historic performance was
     for that *brand*... That is to say, rolled up for the brands
 3. Performance history needs to link, I think, to the brand, not the opportunity...? Maybe?
+4. Add / edit opportunity needs some form validation. Disable the drop downs until correct things selected etc

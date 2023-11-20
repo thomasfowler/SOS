@@ -13,6 +13,8 @@ from portfolio_planner.views.opportunity import add_opportunity
 from portfolio_planner.views.opportunity import OpportunityListView
 from portfolio_planner.views.opportunity import edit_opportunity
 from portfolio_planner.views.opportunity import remove_opportunity
+from portfolio_planner.views.opportunity import filtered_brands
+from portfolio_planner.views.opportunity import filtered_business_units
 
 urlpatterns = [
     # Auth
@@ -29,6 +31,8 @@ urlpatterns = [
     path('opportunities/add/', add_opportunity, name='add_opportunity'),
     path('opportunities/<int:opportunity_id>/edit/', edit_opportunity, name='edit_opportunity'),
     path('opportunities/<int:opportunity_id>/remove/', remove_opportunity, name='remove_opportunity'),
+    path('opportunities/filtered-brands/', filtered_brands, name='filtered_brands'),
+    path('opportunities/filtered-bus/', filtered_business_units, name='filtered_business_units'),
     # Healthcheck
     path('health/', health_check_view, name='health_check'),
 ]

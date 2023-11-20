@@ -30,17 +30,25 @@
                     <legend>Associations</legend>
                     <div class="mb-3">
                         <label for="{{ form.agency.id_for_label }}" class="form-label">Agency</label>
-                        {% render_field form.agency class="form-control" %}
+                        {% url 'filtered_brands' as brands_url %}
+                        {% render_field form.agency class="form-control" hx-get=brands_url hx-trigger="change" hx-target="#brand-select" %}
                         <div class="invalid-feedback">{{ form.agency.errors|first }}</div>
                     </div>
                     <div class="mb-3">
                         <label for="{{ form.brand.id_for_label }}" class="form-label">Brand</label>
-                        {% render_field form.brand class="form-control" %}
+                        <div id="brand-select">
+                            {% url 'filtered_business_units' as bu_url %}
+                            {% render_field form.brand class="form-control" hx-get=bu_url hx-trigger="change" hx-target="#business-unit-select" %}
+                        </div>
                         <div class="invalid-feedback">{{ form.brand.errors|first }}</div>
                     </div>
                     <div class="mb-3">
                         <label for="{{ form.business_unit.id_for_label }}" class="form-label">Business Unit</label>
-                        {% render_field form.business_unit class="form-control" %}
+                        <div id="business-unit-select">
+                            <select name="business_unit" class="form-control">
+                                <option value="">---------</option>
+                            </select>
+                        </div>
                         <div class="invalid-feedback">{{ form.business_unit.errors|first }}</div>
                     </div>
                     <div class="mb-3">

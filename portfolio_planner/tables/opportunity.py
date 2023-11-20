@@ -8,7 +8,7 @@ class OpportunityTable(tables.Table):
     """Opportunity Table."""
 
     buttons = tables.TemplateColumn(
-        template_name="portfolio_planner/opportunity/components/buttons.html",
+        template_name="portfolio_planner/opportunity/partials/buttons.html",
         verbose_name=_("Actions"),
         orderable=False,
     )

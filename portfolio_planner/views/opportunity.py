@@ -1,7 +1,7 @@
 import json
 
 from django.http import HttpResponse
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_GET
 from django.views.decorators.http import require_http_methods
 from django.views.generic import TemplateView
 from django.shortcuts import render
@@ -10,6 +10,8 @@ from django.contrib.auth.decorators import login_required
 from django_tables2 import SingleTableView
 from rolepermissions.checkers import has_role
 
+from portfolio_planner.models import Brand
+from portfolio_planner.models import BrandBusinessUnit
 from portfolio_planner.models import Opportunity
 from portfolio_planner.common import HtmxHttpRequest
 from portfolio_planner.forms import OpportunityForm
@@ -126,4 +128,52 @@ def remove_opportunity(request: HtmxHttpRequest, opportunity_id: int) -> HttpRes
                 }
             )
         }
+    )
+
+
+@login_required
+@require_GET
+def filtered_brands(request: HtmxHttpRequest) -> HttpResponse:
+    """Get brands for a given agency."""
+    agency_id = request.GET.get('agency')
+
+    # Try filter for agency_id. But if we dont have one, just supply all the brands
+    if agency_id:
+        brands = Brand.objects.filter(agency_id=agency_id)
+    else:
+        brands = Brand.objects.all()
+
+    context = {
+        'brands': brands
+    }
+
+    return render(
+        request,
+        'portfolio_planner/opportunity/partials/brand_dropdown.html',
+        context
+    )
+
+
+@login_required
+@require_GET
+def filtered_business_units(request: HtmxHttpRequest) -> HttpResponse:
+    """Get business units for a given brand."""
+
+    brand_id = request.GET.get('brand')
+
+    # Unlike with brands, we need to be careful about brand BUs.
+    # We should only return if we get a match to ensure we have referential integrity
+    if brand_id:
+        business_units = BrandBusinessUnit.objects.filter(brand_id=brand_id)
+    else:
+        business_units = BrandBusinessUnit.objects.none()
+
+    context = {
+        'business_units': business_units
+    }
+
+    return render(
+        request,
+        'portfolio_planner/opportunity/partials/business_unit_dropdown.html',
+        context
     )
