@@ -303,9 +303,17 @@ class OpportunityQuerySet(models.QuerySet):
                     opportunity=OuterRef('pk'),
                     fiscal_year=fiscal_year
                 ).annotate(
-                    quarterly_revenue=Coalesce(Sum('periods__revenue', filter=Q(periods__period__in=periods),
-                                                   output_field=DecimalField(max_digits=14, decimal_places=2)),
-                                               zero_value)
+                    quarterly_revenue=Coalesce(Sum(
+                        'periods__revenue',
+                        filter=Q(periods__period__in=periods),
+                        output_field=MoneyField(
+                            max_digits=14,
+                            decimal_places=2,
+                            default_currency='ZAR'
+                        )
+                    ),
+                        zero_value
+                    )
                 ).values('quarterly_revenue')[:1]
             )
 
