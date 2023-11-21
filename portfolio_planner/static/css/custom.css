@@ -1,74 +1,128 @@
 /* custom.css */
 
+/* Fonts*/
+
+/* Define the Ubuntu font */
+@font-face {
+    font-family: 'Ubuntu';
+    src: url('../fonts/Ubuntu-Regular.woff2') format('woff2'),
+         url('../fonts/Ubuntu-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Define the Poppins font */
+@font-face {
+    font-family: 'Poppins';
+    src: url('../fonts/Poppins-Regular.woff2') format('woff2'),
+         url('../fonts/Poppins-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Apply the Ubuntu font to all headers (h1, h2, h3, h4, h5, h6) */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+/* Apply the Poppins font to all paragraph elements */
+p {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Page */
+.page-container {
+    max-width: 90%;
+}
+
 /* Navbar*/
-header {
-    background-color: #f5f5f5;
-    padding: 15px 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* A subtle shadow */
+.navbar-container {
+    background: url("../images/navbar-background-1.png") no-repeat center center;
+    background-color: white;
+    background-size: 600px;
+    background-position: left center;
+    border-bottom: #fafafa 1px solid;
 }
 
-header h1 {
-    text-align: center;  /* Center align the title */
-    margin-bottom: 10px;
+.navbar {
+    position: relative; /* Ensure the navbar is positioned */
+    max-width: 90%;
+    margin: auto;
+    padding: 10px 0; /* Remove padding if you want the nav items to extend to the edges */
 }
 
-.nav {
-    display: flex;  /* Flex layout for alignment */
-    justify-content: center;  /* Center align nav items */
-    gap: 15px;  /* Spacing between nav items */
+.navbar-light .navbar-nav .nav-link {
+    color: #6b6b6b; /* This will be the color of your nav items */
+}
+
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #000;
+    background-color: #e9ecef; /* Color for active or hovered nav items */
 }
 
 .nav-item {
-    list-style-type: none;  /* Removes bullet points */
+    list-style-type: none; /* Removes bullet points */
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Nav Links */
 .nav-link {
-    color: #6b6b6b;  /* Nav item text color */
-    text-decoration: none;  /* Removes underlines */
-    padding: 5px 10px;  /* Paddings for clickable area and visual balance */
-    border-radius: 5px;  /* Rounded corners for aesthetics */
-    transition: background-color 0.3s;  /* Smooth transition for hover effect */
+    letter-spacing: 0.1pc !important;
+    padding: 0 4px !important;
+    text-transform: uppercase;
+    color: black !important;
 }
 
 .nav-link:hover {
-    background-color: #e9ecef;  /* Lighter shade for hover effect */
-    color: #a5d52d;  /* Darker text for contrast */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Shadow for the hover effect */
+    background: #c3fd48 !important;
 }
 
-.nav-pills .nav-link.active {
-    background-color: #e9ecef; /* Same light shade for active link */
-    color: #090909;  /* Darker text for contrast */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Shadow for the active link */
+.nav-link.active {
+    border-bottom: solid 2px black;
+    margin-bottom: -2px;
+}
+
+.nav-link.active:hover {
+    border-bottom: solid 2px black;
+    margin-bottom: -2px;
+    background: none !important;
+}
+
+
+/* Adjustments for the logout link and user greeting */
+.navbar-text {
+    margin-left: 15px; /* Spacing between text and avatar */
+    margin-right: 5px; /* Spacing between text and badge */
 }
 
 /*Footer*/
-#footer-logo {
-    max-width: 50px;
-    max-height: 50px;
-    display: block; /* Makes the image a block element */
-    margin: 10px auto; /* Horizontally centers the block element */
-}
 
 footer {
-    padding: 20px 0;
-    background-color: #f5f5f5;
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* A subtle shadow */
+    position: fixed;    /* Fixed positioning */
+    left: 0;            /* Align to the left edge */
+    bottom: 0;          /* Align to the bottom edge */
+    width: 100%;        /* Span the full width of the viewport */
+    background-color: #333; /* Background color */
+    color: white;       /* Text color */
+    text-align: center; /* Center the text */
+    padding: 10px 0;    /* Padding for aesthetic spacing */
+    z-index: 1000;      /* Ensure it's on top of other elements */
 }
 
-footer p {
-    margin-bottom: 0;
-    font-size: 0.9em;
-    line-height: 1.5; /* Adjust line-height for better spacing */
-    font-weight: 500; /* Optional: Make the text a bit bolder */
+.footer-container {
+    max-width: 90%;
 }
 
-/* To center the logo and copyright notice within their respective divs */
-footer .col-3, footer .col-9 {
-    display: flex;
-    align-items: center; /* Vertical centering */
-    justify-content: center; /* Horizontal centering */
+.footer-logo {
+    text-align: left;
+}
+
+.footer-text {
+    text-align: right;
 }
 
 /*Body*/
