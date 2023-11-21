@@ -15,6 +15,8 @@ def role_based_opportunities(user: settings.AUTH_USER_MODEL) -> QuerySet:
     Account Managers can only see their owned opportunities.
     Business Unit Heads can see all opportunities owned by their business unit.
     Sales Directors can see all opportunities.
+
+    Includes revenue data for the previous fiscal year.
     """
     extra_filters = {}
 

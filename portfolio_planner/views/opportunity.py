@@ -1,5 +1,6 @@
 import json
 
+from django.db.models import Sum, Avg
 from django.http import HttpResponse
 from django.views.decorators.http import require_POST, require_GET
 from django.views.decorators.http import require_http_methods
@@ -19,7 +20,6 @@ from portfolio_planner.models import convert_to_money
 from portfolio_planner.common import HtmxHttpRequest
 from portfolio_planner.forms import OpportunityForm
 from portfolio_planner.tables import OpportunityTable
-from sos.roles import AccountManager, BusinessUnitHead, SalesDirector
 
 
 @method_decorator(login_required, name='dispatch')
@@ -35,6 +35,17 @@ class PortfolioPlannerView(TemplateView):
         """
         context = super().get_context_data(**kwargs)
         context['current_params'] = self.request.GET.urlencode()
+
+        # Let's calculate some summary stats for the portfolio planner
+
+        opportunities = role_based_opportunities(self.request.user)
+
+        context['total_forecasted_revenue'] = convert_to_money(opportunities.aggregate(Sum('target'))['target__sum'])
+        context['total_revenue_last_fiscal'] = convert_to_money(opportunities.aggregate(Sum('total_revenue'))['total_revenue__sum'])
+        context['deal_count'] = opportunities.count()
+        context['avg_deal_size'] = convert_to_money(opportunities.aggregate(Avg('target'))['target__avg'])
+        context['avg_deal_last_fiscal'] = convert_to_money(opportunities.aggregate(Avg('total_revenue'))['total_revenue__avg'])
+
         return context
 
 

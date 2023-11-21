@@ -37,13 +37,8 @@
                                 <li class="list-group-item"><i class="bi bi-clock"></i> <a href="#">Pending Approvals</a></li>
                             </ul>
 
-                            <h4>Summary Stats</h4>
-                            <ul>
-                                <!-- TODO: Placeholder for stats -->
-                                <li>Total Revenue: $XXXX</li>
-                                <li>Deals Closed: XX</li>
-                                <li>Avg Deal Size: $XXXX</li>
-                            </ul>
+                            {% block sidebar_stats %}
+                            {% endblock %}
                         {% endblock %}
                     {% endif %}
                 </aside>
