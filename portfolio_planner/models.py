@@ -272,7 +272,7 @@ class OpportunityQuerySet(models.QuerySet):
     """
 
     @understands_money
-    def with_revenue(self, fiscal_year: FiscalYear, extra_filters=None):
+    def with_revenue(self, fiscal_year: FiscalYear):
         """Add revenue data to the queryset.
 
         Provides the following fields:
