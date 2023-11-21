@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django_tables2 import SingleTableView
 from rolepermissions.checkers import has_role
 
+from .helpers.opportunities import role_based_opportunities
 from portfolio_planner.models import Brand
 from portfolio_planner.models import BrandBusinessUnit
 from portfolio_planner.models import FiscalYear
@@ -47,35 +48,9 @@ class OpportunityListView(SingleTableView):
     def get_table_data(self):
         """Get Table Data.
 
-        Filters opportunities based on role.
-
-        Account Managers can only see their owned opportunities.
-        Business Unit Heads can see all opportunities owned by their business unit.
-        Sales Directors can see all opportunities.
+        Using helper function, return Opportunities queryset based on Role.
         """
-        extra_filters = {}
-        user = self.request.user
-
-        if has_role(self.request.user, AccountManager):
-            extra_filters = {'brand__user': user}
-        elif has_role(self.request.user, BusinessUnitHead):
-            extra_filters = {'brand__org_business_unit__business_unit_manager': user}
-        elif has_role(self.request.user, SalesDirector):
-            pass  # No extra filter for SalesDirector, they see all opportunities
-        else:
-            return Opportunity.objects.none()  # If none of the roles apply, return no data
-
-        # We want revenue from the previous fiscal year
-        current_fiscal_year = FiscalYear.objects.get(is_current=True)
-        last_fiscal_year = FiscalYear.objects.get(year=current_fiscal_year.year - 1)
-        queryset = Opportunity.objects.with_revenue(last_fiscal_year, extra_filters).with_agency()
-
-        # Convert revenue to Money object
-        # For some reason, we cannot get the queryset to return a Money type object. So we are converting it here.
-        for opp in queryset:
-            opp.total_revenue = convert_to_money(opp.total_revenue)
-
-        return queryset
+        return role_based_opportunities(self.request.user)
 
 
 @login_required
