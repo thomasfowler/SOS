@@ -83,10 +83,13 @@
     </div>
 
     <!-- Brands Table -->
-    <div class="card mb-4 performance-table">
+    <div class="card mb-4 performance-table" >
         <div class="card-header">Brands Summary</div>
         <div class="card-body">
-            <!-- Table content here -->
+            {# We use the dashboard_action url and give the named action to get to the right url. We then pass in the URL params from the original request in order filter the table #}
+            <div id="brand-table-container" hx-get="{% url 'dashboard_action' action='brand_table' %}?{{ request.GET.urlencode }}" hx-trigger="load">
+                <!-- Brand Table content here - rendered via HTMX -->
+            </div>
         </div>
     </div>
 
