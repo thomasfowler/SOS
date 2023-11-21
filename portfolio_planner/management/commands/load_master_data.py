@@ -14,6 +14,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         """Load Test Data from Fixtures."""
         fixture_files = [
+            'portfolio_planner/fixtures/master_data/users.json',
             'portfolio_planner/fixtures/master_data/org_business_unit.json',
             'portfolio_planner/fixtures/master_data/fiscal_year.json',
             'portfolio_planner/fixtures/master_data/media_group.json',
