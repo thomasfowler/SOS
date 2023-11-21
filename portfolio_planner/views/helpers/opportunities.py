@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db.models import QuerySet
+from django.db.models import Sum
 from rolepermissions.checkers import has_role
 
 from portfolio_planner.models import convert_to_money
@@ -45,3 +46,22 @@ def role_based_opportunities(user: settings.AUTH_USER_MODEL) -> QuerySet:
         opp.total_revenue = convert_to_money(opp.total_revenue)
 
     return queryset
+
+
+def categorise_opportunities(opportunities: QuerySet) -> QuerySet:
+    # TODO: This is supposed to be at the brand level, not the opportunity level
+    #   Leaving this here for short term reference.
+    current_fiscal_year = FiscalYear.objects.get(is_current=True)
+    last_fiscal_year = FiscalYear.objects.get(year=current_fiscal_year.year - 1)
+
+    all_open_opportunities = Opportunity.objects.filter(
+        status__in=['active', 'won', 'lost'], fiscal_year=current_fiscal_year
+    )
+
+    revenue_last_fiscal = all_open_opportunities.aggregate(Sum('total_revenue'))['total_revenue__sum']
+
+    for opp in opportunities:
+        if opp.target / revenue_last_fiscal >= 0.3:
+            opp.grow_status = 'Game Changer'
+        elif (opp.target - opp.total_revenue) / opp.total_revenue >= 0.1:
+            opp.grow_status = 'Real Opportunity'
