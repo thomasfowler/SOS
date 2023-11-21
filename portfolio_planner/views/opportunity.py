@@ -75,7 +75,7 @@ def add_opportunity(request: HtmxHttpRequest) -> HttpResponse:
                     'HX-Trigger': json.dumps(
                         {
                             "opportunityListChanged": None,
-                            "showMessage": f'{opportunity.name} created successfully.'
+                            "showMessage": f'{opportunity.brand.name} {opportunity.id} opportunity created successfully.'
                         }
                     )
                 }
@@ -101,7 +101,7 @@ def edit_opportunity(request: HtmxHttpRequest, opportunity_id: int) -> HttpRespo
                     'HX-Trigger': json.dumps(
                         {
                             "opportunityListChanged": None,
-                            "showMessage": f'{opportunity.name} updated successfully.'
+                            "showMessage": f'{opportunity.brand.name} {opportunity.id} opportunity updated successfully.'
                         }
                     )
                 }
@@ -124,7 +124,7 @@ def remove_opportunity(request: HtmxHttpRequest, opportunity_id: int) -> HttpRes
             'HX-Trigger': json.dumps(
                 {
                     "opportunityListChanged": None,
-                    "showMessage": f'{opportunity.name} deleted successfully.'
+                    "showMessage": f'{opportunity.brand.name} opportunity {opportunity.id} deleted successfully.'
                 }
             )
         }
