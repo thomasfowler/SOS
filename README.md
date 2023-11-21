@@ -11,3 +11,4 @@ TODO:
     for that *brand*... That is to say, rolled up for the brands
 3. Performance history needs to link, I think, to the brand, not the opportunity...? Maybe?
 4. Add / edit opportunity needs some form validation. Disable the drop downs until correct things selected etc
+5. For opportunities, we probably need to track who created the opportunity, and who last updated it

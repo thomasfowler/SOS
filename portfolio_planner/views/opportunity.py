@@ -12,7 +12,9 @@ from rolepermissions.checkers import has_role
 
 from portfolio_planner.models import Brand
 from portfolio_planner.models import BrandBusinessUnit
+from portfolio_planner.models import FiscalYear
 from portfolio_planner.models import Opportunity
+from portfolio_planner.models import convert_to_money
 from portfolio_planner.common import HtmxHttpRequest
 from portfolio_planner.forms import OpportunityForm
 from portfolio_planner.tables import OpportunityTable
@@ -51,14 +53,29 @@ class OpportunityListView(SingleTableView):
         Business Unit Heads can see all opportunities owned by their business unit.
         Sales Directors can see all opportunities.
         """
+        extra_filters = {}
+        user = self.request.user
+
         if has_role(self.request.user, AccountManager):
-            return Opportunity.objects.filter(brand__user=self.request.user)
+            extra_filters = {'brand__user': user}
         elif has_role(self.request.user, BusinessUnitHead):
-            return Opportunity.objects.filter(brand__org_business_unit__business_unit_manager=self.request.user)
+            extra_filters = {'brand__org_business_unit__business_unit_manager': user}
         elif has_role(self.request.user, SalesDirector):
-            return Opportunity.objects.all()
+            pass  # No extra filter for SalesDirector, they see all opportunities
         else:
-            return Opportunity.objects.none()
+            return Opportunity.objects.none()  # If none of the roles apply, return no data
+
+        # We want revenue from the previous fiscal year
+        current_fiscal_year = FiscalYear.objects.get(is_current=True)
+        last_fiscal_year = FiscalYear.objects.get(year=current_fiscal_year.year - 1)
+        queryset = Opportunity.objects.with_revenue(last_fiscal_year, extra_filters).with_agency()
+
+        # Convert revenue to Money object
+        # For some reason, we cannot get the queryset to return a Money type object. So we are converting it here.
+        for opp in queryset:
+            opp.total_revenue = convert_to_money(opp.total_revenue)
+
+        return queryset
 
 
 @login_required
