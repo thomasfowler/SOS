@@ -1,21 +1,25 @@
 from datetime import date
+from decimal import Decimal
 
 from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.db import IntegrityError
-from django.db.models import Sum
+from django.db.models import Subquery, OuterRef, Sum, Value, Q, DecimalField
+from django.db.models.functions import Coalesce
 from django.utils.translation import gettext_lazy as _
 from django_use_email_as_username.models import BaseUser, BaseUserManager
+from djmoney.money import Money
 from djmoney.models.fields import MoneyField
+from djmoney.models.managers import understands_money
 from model_utils import Choices
 from model_utils.fields import StatusField
 from model_utils.models import StatusModel
 from model_utils.models import TimeStampedModel
 from rolepermissions.checkers import has_role
 
-from sos.roles import AccountManager, BusinessUnitHead, SalesDirector
+from sos.roles import BusinessUnitHead, SalesDirector
 
 
 class User(BaseUser):
@@ -250,6 +254,86 @@ def get_current_fiscal_year():
     return FiscalYear.objects.get(is_current=True).id
 
 
+def convert_to_money(value: Decimal, currency: str = 'ZAR') -> Money:
+    """Convert the value to a money object."""
+
+    # Assuming a uniform currency for simplicity
+    # TODO: Add support for multiple currencies
+    if value is not None and not isinstance(value, Money):
+        return Money(Decimal(str(value)), currency)
+
+    return value
+
+
+class OpportunityQuerySet(models.QuerySet):
+    """Opportunity QuerySet.
+
+    Provides a method to annotate opportunities with other data such as revenue and agency information.
+    """
+
+    @understands_money
+    def with_revenue(self, fiscal_year: FiscalYear):
+        """Add revenue data to the queryset.
+
+        Provides the following fields:
+        - total_revenue: Sum all revenue for the opportunity
+        - q1_revenue: Revenue in periods 1, 2 and 3
+        - q2_revenue: Revenue in periods 4, 5 and 6
+        - q3_revenue: Revenue in periods 7, 8 and 9
+        - q4_revenue: Revenue in periods 10, 11 and 12
+        - revenue_fiscal_year: The fiscal year that the revenue data is for
+
+        TODO: We need to add in multi-currency support. Essentially, we need to annotate the currency type of the opp
+            performance history and then allow for this
+            We should also allow for the aggregation of multiple currencies into a single currency using an exchange
+            rate table
+        """
+        zero_value = Value(Decimal('0.00'), output_field=DecimalField(max_digits=14, decimal_places=2))
+
+        def quarterly_revenue_subquery(quarter):
+            periods = {
+                1: [1, 2, 3],
+                2: [4, 5, 6],
+                3: [7, 8, 9],
+                4: [10, 11, 12]
+            }.get(quarter, [])
+
+            return Subquery(
+                OpportunityPerformance.objects.filter(
+                    opportunity=OuterRef('pk'),
+                    fiscal_year=fiscal_year
+                ).annotate(
+                    quarterly_revenue=Coalesce(Sum(
+                        'periods__revenue',
+                        filter=Q(periods__period__in=periods),
+                        output_field=MoneyField(
+                            max_digits=14,
+                            decimal_places=2,
+                            default_currency='ZAR'
+                        )
+                    ),
+                        zero_value
+                    )
+                ).values('quarterly_revenue')[:1]
+            )
+
+        return self.annotate(
+            total_revenue=Coalesce(Sum('opportunityperformance__periods__revenue',
+                                       output_field=DecimalField(max_digits=14, decimal_places=2)), zero_value),
+            q1_revenue=quarterly_revenue_subquery(1),
+            q2_revenue=quarterly_revenue_subquery(2),
+            q3_revenue=quarterly_revenue_subquery(3),
+            q4_revenue=quarterly_revenue_subquery(4),
+            revenue_fiscal_year=Value(fiscal_year.year, output_field=models.IntegerField()),
+        )
+
+    def with_agency(self):
+        """Add agency to the queryset."""
+        return self.select_related('brand__agency').annotate(
+            agency_name=models.F('brand__agency__name')
+        )
+
+
 class Opportunity(TimeStampedModel, StatusModel):
     """Opportunity model."""
 
@@ -282,6 +366,9 @@ class Opportunity(TimeStampedModel, StatusModel):
         null=True,
         blank=True
     )
+
+    # Add extra fields to the model re revenue performance
+    objects = OpportunityQuerySet.as_manager()
 
     class Meta:
         """Meta class."""
@@ -384,6 +471,3 @@ class PeriodPerformance(models.Model):
 
     def __str__(self):
         return f"{self.opportunity_performance} - Period {self.period} - {self.revenue}"
-
-
-

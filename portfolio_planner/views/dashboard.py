@@ -6,10 +6,21 @@ from django.views.generic import TemplateView
 from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_GET
 from django.contrib.auth.decorators import login_required
+from django_tables2 import RequestConfig
+from rolepermissions.checkers import has_role
+
+from portfolio_planner.models import Brand
+from portfolio_planner.tables import BrandTable
+from sos.roles import AccountManager, BusinessUnitHead, SalesDirector
 
 
 @method_decorator(login_required, name='dispatch')
 class DashboardView(TemplateView):
+    """Dashboard View.
+
+    A note to the developer. You MUST update the dispatch method when you add further functions you want to route to.
+    It's not magic. If you don't update the dispatch method, HTMX just end up in a loop re-rendering the entire template.
+    """
     template_name = 'dashboard/dashboard.html'
 
     def dispatch(self, request, *args, **kwargs):
@@ -19,6 +30,9 @@ class DashboardView(TemplateView):
             return self.actual_vs_forecast(request, *args, **kwargs)
         elif action == 'grow_status':
             return self.grow_status(request, *args, **kwargs)
+        elif action == 'brand_table':
+            # Pass the current_params to the brand_table method
+            return self.brand_table(request,*args, **kwargs)
 
         return super().dispatch(request, *args, **kwargs)
 
@@ -101,3 +115,37 @@ class DashboardView(TemplateView):
         }
 
         return render(request, 'dashboard/components/grow_status.html', {'data': json.dumps(chart_data)})
+
+    @method_decorator(require_GET)
+    def brand_table(self, request, *args, **kwargs) -> HttpResponse:
+        """Brand Table."""
+
+        user = request.user
+
+        filters = {
+            'status': 'active'
+        }
+
+        if has_role(user, AccountManager):
+            filters['user'] = user
+        elif has_role(user, BusinessUnitHead):
+            filters['org_business_unit__business_unit_manager'] = user
+        elif has_role(user, SalesDirector):
+            pass  # No extra filter for SalesDirector, they see all opportunities
+        else:
+            return Brand.objects.none()  # If none of the roles apply, return no data
+
+        queryset = Brand.objects.filter(**filters)
+
+        # Initialize the table with the queryset
+        table = BrandTable(queryset)
+
+        # Apply sorting
+        RequestConfig(request, paginate={'per_page': 10}).configure(table)
+
+        # Include the URL parameters in the context for the template
+        context = {
+            'table': table,
+        }
+
+        return render(request, 'dashboard/components/brand_table.html', context)

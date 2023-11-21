@@ -7,14 +7,6 @@
 {% block content %}
 <div class="container mt-4 dashboard-container">
 
-    <!-- Performance Table -->
-    <div class="card mb-4 performance-table">
-        <div class="card-header">Performance</div>
-        <div class="card-body">
-            <!-- Table content here -->
-        </div>
-    </div>
-
     <!-- ACTUAL vs FORECAST vs BUDGET Bar Graph -->
     <div class="card mb-4 forecast-bar-graph">
         <div class="card-header">ACTUAL vs FORECAST vs BUDGET</div>
@@ -58,25 +50,49 @@
         </div>
     </div>
 
-    <!-- Sales Time Left & Required Sales -->
-    <div class="row mb-4 sales-section">
-        <div class="col-md-6 sales-time-left">
-            <!-- Sales Time Left content here -->
+    <!-- Sales Time Left & Required Sales in one row -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Sales Time Remaining</div>
+                <div class="card-body"></div>
+            </div>
         </div>
-        <div class="col-md-6 required-sales">
-            <!-- Required Sales content here -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Required Sales</div>
+                <div class="card-body"></div>
+            </div>
         </div>
     </div>
 
-    <!-- # Deals Pie Chart & Closing Ratios -->
-    <div class="row mb-4 deals-section">
-        <div class="col-md-6 deals-pie-chart">
-            <!-- # Deals pie chart content here -->
+    <!-- # Deals Pie Chart & Closing Ratios in the next row -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Deals</div>
+                <div class="card-body"></div>
+            </div>
         </div>
-        <div class="col-md-6 closing-ratios">
-            <!-- Closing Ratios content here -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Closing Ratios</div>
+                <div class="card-body"></div>
+            </div>
         </div>
     </div>
+
+    <!-- Brands Table -->
+    <div class="card mb-4 performance-table" >
+        <div class="card-header">Brands Summary</div>
+        <div class="card-body">
+            {# We use the dashboard_action url and give the named action to get to the right url. We then pass in the URL params from the original request in order filter the table #}
+            <div id="brand-table-container" hx-get="{% url 'dashboard_action' action='brand_table' %}?{{ request.GET.urlencode }}" hx-trigger="load">
+                <!-- Brand Table content here - rendered via HTMX -->
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <script src="{% static 'js/charts.js' %}" type="text/javascript"></script>

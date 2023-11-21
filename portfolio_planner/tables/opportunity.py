@@ -21,12 +21,13 @@ class OpportunityTable(tables.Table):
             'id',
             'description',
             'status',
-            'agency',
+            'agency_name',
             'brand',
             'business_unit',
             'product',
             'target',
             'fiscal_year',
+            'total_revenue',
             'approved',
             'buttons'
         )
