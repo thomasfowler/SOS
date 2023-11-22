@@ -362,14 +362,68 @@ aside h4:first-child {
     background: #292b26;
 }
 
+.sos-table th {
+    white-space: nowrap;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.sos-table thead a {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.08pc !important;
+    text-transform: uppercase;
+}
+
 .sos-table th a {
     text-decoration: none !important;
     color: white;
     white-space: nowrap;
 }
 
+.sos-table td {
+    white-space: nowrap;
+    padding-left: 15px;
+    padding-right: 15px;
+    vertical-align: middle;
+}
+
+th.asc::after, th.desc::after {
+    content: "";
+    display: inline-block;
+    margin-left: 5px;
+    color: #c4fc48;
+    font-size: 12px;
+}
+
+th.asc {
+    background: #484a48;
+}
+
+th.desc {
+    background: #484a48;
+}
+
+th.asc::after {
+    content: "▲";
+}
+
+th.desc::after {
+    content: "▼";
+}
+
 /* Backgrounds */
 .bg-sos {
     background: #C3FC47;
     color:black;
+}
+
+.btn-sos {
+    background: #C3FC47;
+    color:black;
+}
+
+.btn-sos:hover {
+    background: #7caf00;
+    color:white;
 }

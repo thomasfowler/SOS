@@ -12,7 +12,9 @@
         <div hx-trigger="load, opportunityListChanged from:body" hx-get="{% url 'opportunity_list' %}?{{ current_params }}" hx-target="this" >
         </div>
 
-        <button hx-get="{% url 'add_opportunity' %}" hx-target="#dialog" class="btn btn-primary">
+        <hr>
+
+        <button hx-get="{% url 'add_opportunity' %}" hx-target="#dialog" class="mt-3 btn btn-sos">
           Add an opportunity
         </button>
     </div>
