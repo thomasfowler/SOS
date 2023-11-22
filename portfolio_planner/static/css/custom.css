@@ -13,8 +13,8 @@ body {
 /* Define the Ubuntu font */
 @font-face {
     font-family: 'Ubuntu';
-    src: url('../fonts/Ubuntu-Regular.woff2') format('woff2'),
-         url('../fonts/Ubuntu-Regular.woff') format('woff');
+    src: url('../fonts/Ubuntu/Ubuntu-Regular.woff2') format('woff2'),
+         url('../fonts/Ubuntu/Ubuntu-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -22,8 +22,8 @@ body {
 /* Define the Poppins font */
 @font-face {
     font-family: 'Poppins';
-    src: url('../fonts/Poppins-Regular.woff2') format('woff2'),
-         url('../fonts/Poppins-Regular.woff') format('woff');
+    src: url('../fonts/Poppins/Poppins-Regular.woff2') format('woff2'),
+         url('../fonts/Poppins/Poppins-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
