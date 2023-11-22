@@ -1,31 +1,67 @@
-{% extends 'base.html' %}
+{% extends 'minimal_base.html' %}
 
 {% load static %}
 
 {% block title %}{% endblock %}
 
 {% block content %}
-    <div class="container h-100 login-container">
-        <div class="row justify-content-center align-items-center h-100">
-            <div class="col-md-4">
-                <div class="text-center mb-4 mt-4">
-                    <img src="{% static 'images/black_rectangle_sos_logo_322.png' %}" alt="Logo" width="275">
-                </div>
-                <form method="post" id="login-form">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for="{{ form.username.id_for_label }}">Username</label>
-                        <input type="text" class="form-control" id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" required>
-                    </div>
-                    <div class="form-group mt-3">
-                        <label for="{{ form.password.id_for_label }}">Password</label>
-                        <input type="password" class="form-control" id="{{ form.password.id_for_label }}" name="{{ form.password.name }}" required>
-                    </div>
-                    <div class="mt-4">
-                        <button class="btn btn-primary btn-block" type="submit">Login</button>
-                    </div>
-                </form>
+<div class="login-container row">
+    <div class="col-4 login-image-col"></div>
+    <div class="col-8 login-form-col text-left py-4">
+        <div class="w-100 mb-3" style="text-align:right">
+            <img src="{% static 'images/black_rectangle_sos_logo.png' %}" alt="Logo" width="210">
+        </div>
+        <form method="post" id="login-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Email address</label>
+                <input type="text" class="form-control" id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" required>
             </div>
+            <div class="form-group mt-3">
+                <label>Password</label>
+                <a href="" class="forgot-password">Forgot password</a>
+                <input type="password" class="form-control" id="{{ form.password.id_for_label }}" name="{{ form.password.name }}" required>
+            </div>
+            <div class="checkbox mt-4 mb-3">
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">Remember me for 30 days</label>
+            </div>
+            <button type="submit" class="login-button">SIGN IN</button>
+        </form>
+        <div class="register-now">
+            Don’t have an account? <a href="">Register now</a>
         </div>
     </div>
+</div>
+
+<!--    <div class="container h-100 login-container">-->
+<!--        <div class="row justify-content-center align-items-center h-100">-->
+<!--            <div class="col-5">-->
+<!--                <form method="post" id="login-form">-->
+<!--                    <div class="text-center mb-4 mt-4">-->
+<!--                    <img src="{% static 'images/primary_circle_sos_logo_250.png' %}" alt="Logo" width="60">-->
+<!--                    </div>-->
+<!--                    <div class="text-center mb-4 mt-4">-->
+<!--                        <img src="{% static 'images/black_rectangle_sos_logo_322.png' %}" alt="Logo" width="200">-->
+<!--                    </div>-->
+<!--                    {% csrf_token %}-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="{{ form.username.id_for_label }}">Username</label>-->
+<!--                        <input type="text" class="form-control" id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group mt-3">-->
+<!--                        <label for="{{ form.password.id_for_label }}">Password</label>-->
+<!--                        <input type="password" class="form-control" id="{{ form.password.id_for_label }}" name="{{ form.password.name }}" required>-->
+<!--                        <p class="forgot-password-prompt">Forgot Password</p>-->
+<!--                    </div>-->
+<!--                    <div class="mt-4">-->
+<!--                        <button class="btn btn-primary btn-block" type="submit">Login</button>-->
+<!--                    </div>-->
+<!--                    <div class="mt-4">-->
+<!--                    <p class="registration-prompt">Don't have an SoS Account? <strong>Register here</strong></p>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 {% endblock %}

@@ -33,7 +33,7 @@ class OpportunityTable(tables.Table):
         )
 
         attrs = {
-            'class': 'table table-striped table-hover',
+            'class': 'table table-striped table-hover sos-table',
             'thead': {
                 'class': 'thead-light'
             }

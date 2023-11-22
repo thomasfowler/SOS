@@ -6,7 +6,7 @@
 {% block title %}Opportunity Portfolio Planner{% endblock %}
 
 {% block content %}
-    <div class="container my-5">
+    <div class="container-fluid">
 
         {# Load the Table via HTMX #}
         <div hx-trigger="load, opportunityListChanged from:body" hx-get="{% url 'opportunity_list' %}?{{ current_params }}" hx-target="this" >
@@ -23,16 +23,4 @@
 
     {# Custom JS #}
     <script src="{% static "js/dialog.js" %}"></script>
-{% endblock %}
-
-{% block sidebar_stats %}
-<h4>Summary Stats</h4>
-<ul>
-    <!-- TODO: Placeholder for stats -->
-    <li>Total Forecasted Revenue: {{ total_forecasted_revenue }}</li>
-    <li>Total Revenue Last Fiscal: {{ total_revenue_last_fiscal }}</li>
-    <li>Deals Closed: {{ deal_count }}</li>
-    <li>Avg Forecasted Deal Size: {{ avg_deal_size }}</li>
-    <li>Avg Deal Size Last Fiscal: {{ avg_deal_last_fiscal }}</li>
-</ul>
 {% endblock %}

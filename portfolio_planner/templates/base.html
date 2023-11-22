@@ -4,7 +4,7 @@
 {% load django_bootstrap5 %}
 
 {% block bootstrap5_content %}
-<div class="container-fluid p-0">
+<div class="container-fluid p-0 main-page-container">
     <div class="navbar-container">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
@@ -43,51 +43,80 @@
         </nav>
     </div>
 
-    <div class="container-fluid pt-5 page-container">
-
-        <div class="row">
-                <div class="col-9">
-                    <main>
-                        {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
-                        {% block content %}(no content){% endblock %}
-                    </main>
+    <div class="quick-bar">
+        <div class="row w-100 align-items-center">
+            <div class="col-6 d-flex quick-bar-links">
+                <div class="w-100">
+                    <button class="w-100 btn btn-light">New Opportunity</button>
                 </div>
-
-                <div class="col-3 mt-2">
-                    <aside>
-                        {% if user.is_authenticated %}
-                            {% block sidebar %}
-                                <!-- Default Sidebar Content -->
-                                <h4>Quick Links</h4>
-                                <ul class="list-group">
-                                    <li class="list-group-item"><i class="bi bi-plus-circle"></i> <a href="#">New Opportunity</a></li>
-                                    <li class="list-group-item"><i class="bi bi-briefcase"></i> <a href="#">My Opportunities</a></li>
-                                    <li class="list-group-item"><i class="bi bi-clock"></i> <a href="#">Pending Approvals</a></li>
-                                </ul>
-
-                                {% block sidebar_stats %}
-                                {% endblock %}
-                            {% endblock %}
-                        {% endif %}
-                    </aside>
+                <div class="w-100">
+                    <button class="w-100 btn btn-light">My Opportunities <span class="badge bg-sos">10</span></button>
+                </div>
+                <div class="w-100">
+                    <button class="w-100 btn btn-light">Pending Approval <span class="badge bg-sos">4</span></button>
                 </div>
             </div>
-
-            <footer class="mt-5">
-                <div class="container-fluid footer-container">
-                    <div class="row align-items-center">
-                        <div class="col-3 footer-logo">
-                            <img src="{% static 'images/primary_circle_sos_logo_250.png' %}" width="60" alt="Science of Sales Logo" id="footer-logo">
-                        </div>
-                        <div class="col-9">
-                            <!-- Copyright -->
-                            {% now "Y" as current_year %}
-                            <p class="m-0 footer-text">&copy; {{ current_year }} Science of Sales (Pty) Ltd. All Rights Reserved.</p>
-                        </div>
-                    </div>
+            <div class="col-6 quick-bar-stats">
+                <div class="d-flex justify-content-around">
+                    <span class="badge rounded-pill bg-sos">Total Revenue:<span class="stat-value">$XXX</span></span>
+                    <span class="badge rounded-pill bg-sos">Deals Closed:<span class="stat-value">$XXX</span></span>
+                    <span class="badge rounded-pill bg-sos">Avg Deal Size:<span class="stat-value">$XXX</span></span>
                 </div>
-            </footer>
-
+            </div>
         </div>
     </div>
+
+    <div class="container-fluid page-container">
+    <div class="row">
+        <div class="col-12">
+            <main>
+                {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+                {% block content %}(no content){% endblock %}
+            </main>
+        </div>
+
+        <!--                <div class="col-3 mt-2">-->
+        <!--                    <aside>-->
+        <!--                        {% if user.is_authenticated %}-->
+        <!--                            {% block sidebar %}-->
+        <!--                                &lt;!&ndash; Default Sidebar Content &ndash;&gt;-->
+        <!--                                <h4>Quick Links</h4>-->
+        <!--                                <ul class="list-group">-->
+        <!--                                    <li class="list-group-item"><i class="bi bi-plus-circle"></i> <a href="#">New Opportunity</a></li>-->
+        <!--                                    <li class="list-group-item"><i class="bi bi-briefcase"></i> <a href="#">My Opportunities</a></li>-->
+        <!--                                    <li class="list-group-item"><i class="bi bi-clock"></i> <a href="#">Pending Approvals</a></li>-->
+        <!--                                </ul>-->
+
+        <!--                                <h4>Summary Stats</h4>-->
+        <!--                                <ul>-->
+        <!--                                    &lt;!&ndash; TODO: Placeholder for stats &ndash;&gt;-->
+        <!--                                    <li>Total Revenue: $XXXX</li>-->
+        <!--                                    <li>Deals Closed: XX</li>-->
+        <!--                                    <li>Avg Deal Size: $XXXX</li>-->
+        <!--                                </ul>-->
+        <!--                            {% endblock %}-->
+        <!--                        {% endif %}-->
+        <!--                    </aside>-->
+        <!--                </div>-->
+    </div>
+    </div>
+
+</div>
+
+<footer class="mt-5">
+    <div class="container-fluid footer-container">
+        <div class="row align-items-center">
+            <div class="col-3 footer-logo">
+                <img src="{% static 'images/primary_circle_sos_logo_250.png' %}" width="60" alt="Science of Sales Logo"
+                     id="footer-logo">
+            </div>
+            <div class="col-9">
+                <!-- Copyright -->
+                {% now "Y" as current_year %}
+                <p class="m-0 footer-text">&copy; {{ current_year }} Science of Sales (Pty) Ltd. All Rights
+                    Reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
 {% endblock %}

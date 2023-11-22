@@ -1,12 +1,20 @@
 /* custom.css */
 
+body {
+    min-height: 100vh !important;
+}
+
+.main-page-container {
+    min-height: 100vh !important;
+}
+
 /* Fonts*/
 
 /* Define the Ubuntu font */
 @font-face {
     font-family: 'Ubuntu';
-    src: url('../fonts/Ubuntu/Ubuntu-Regular.woff2') format('woff2'),
-         url('../fonts/Ubuntu/Ubuntu-Regular.woff') format('woff');
+    src: url('../fonts/Ubuntu-Regular.woff2') format('woff2'),
+         url('../fonts/Ubuntu-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -14,8 +22,8 @@
 /* Define the Poppins font */
 @font-face {
     font-family: 'Poppins';
-    src: url('../fonts/Poppins/Poppins-Regular.woff2') format('woff2'),
-         url('../fonts/Poppins/Poppins-Regular.woff') format('woff');
+    src: url('../fonts/Poppins-Regular.woff2') format('woff2'),
+         url('../fonts/Poppins-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -32,7 +40,37 @@ p {
 
 /* Page */
 .page-container {
-    max-width: 90%;
+    max-width: 99%;
+}
+
+/* Quick Bar*/
+.quick-bar {
+    margin-bottom: 2em;
+    background: #292b26;
+}
+
+.quick-bar-links button {
+    padding: 10px 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 0.05pc !important;
+    font-size: 12px;
+}
+
+.quick-bar-links button:hover {
+    background: #484a48;
+    color: white;
+}
+
+.quick-bar-stats .badge {
+    font-size: 14px;
+}
+
+.stat-value {
+    font-weight: 400;
 }
 
 /* Navbar*/
@@ -99,10 +137,149 @@ p {
     margin-right: 5px; /* Spacing between text and badge */
 }
 
+/*Cards*/
+
+.card {
+    border: none;
+    border-radius: 0 !important;
+}
+
+.card-header {
+    border-bottom: solid 2px #292b26 !important;
+    background: #f8f9fa;
+    text-align: center;
+    border-radius: 0 !important;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.1pc !important;
+}
+
+/*Login Page*/
+
+.login-page {
+    height: 100vh !important;
+    padding-top: 10vh;
+    background: url("../images/navbar-background-1.png") no-repeat center center;
+    background-color: white;
+    background-size: 2000px;
+    background-position: center;
+    border-bottom: #fafafa 1px solid;
+}
+
+.login-image-col {
+    background: url("../images/login-image.jpg") no-repeat center center;
+    background-size: cover;
+    border-radium: 10px 0 0 10px !important;
+}
+
+.login-container {
+  max-width: 800px;
+  margin: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+.forgot-password {
+  position: absolute;
+  text-decoration: none;
+  color: black;
+  right: 0px;
+  top: 0;
+  font-size: 0.9em;
+}
+
+.forgot-password:hover {
+  color: #7CAF00;
+}
+
+.checkbox input {
+  margin-right: 5px;
+}
+
+.login-container button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+}
+
+.divider {
+  position: relative;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.divider:before,
+.divider:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: #000;
+}
+
+.divider:before {
+  left: 0;
+}
+
+.divider:after {
+  right: 0;
+}
+
+.divider span {
+  background: #fff;
+  padding: 0 10px;
+}
+
+.login-button {
+  font-weight: 500
+}
+
+.login-button:hover {
+   background: #c3fd48;
+   color: black;
+   transition: 0.2s;
+}
+
+.register-now {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9em;
+}
+
+.register-now a {
+  color: #000;
+}
+
+/* Add any other styles as needed */
+
+
 /*Footer*/
 
 footer {
-    position: fixed;    /* Fixed positioning */
     left: 0;            /* Align to the left edge */
     bottom: 0;          /* Align to the bottom edge */
     width: 100%;        /* Span the full width of the viewport */
@@ -133,9 +310,11 @@ body {
 /*Login*/
 #login-form {
     background: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form-col {
+    background: white;
+    padding: 40px;
 }
 
 /*Sidebar*/
@@ -176,4 +355,21 @@ aside li {
 
 aside h4:first-child {
     margin-top: 0;  /* Remove margin from the first header */
+}
+
+/* Tables */
+.sos-table thead {
+    background: #292b26;
+}
+
+.sos-table th a {
+    text-decoration: none !important;
+    color: white;
+    white-space: nowrap;
+}
+
+/* Backgrounds */
+.bg-sos {
+    background: #C3FC47;
+    color:black;
 }
