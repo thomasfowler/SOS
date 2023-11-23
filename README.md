@@ -12,3 +12,12 @@ TODO:
 3. Performance history needs to link, I think, to the brand, not the opportunity...? Maybe?
 4. Add / edit opportunity needs some form validation. Disable the drop downs until correct things selected etc
 5. For opportunities, we probably need to track who created the opportunity, and who last updated it
+
+
+### Notes from meeting
+
+If not account manager, on opportunities show the rep
+
+Add opportunity - if agency is null, then you can only choose a brand that is not associated with an agency
+
+Create opportunity - if sales director or bu manager, you can create an opp for another user

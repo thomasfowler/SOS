@@ -25,7 +25,7 @@ def role_based_opportunities(user: settings.AUTH_USER_MODEL) -> QuerySet:
     last_fiscal_year = FiscalYear.objects.get(year=current_fiscal_year.year - 1)
 
     filters = {
-        'status__in': ['active', 'won', 'lost'],
+        'status__in': ['active', 'won'],
         'fiscal_year': current_fiscal_year
     }
 

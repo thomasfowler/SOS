@@ -14,10 +14,13 @@ class BrandTable(tables.Table):
         fields = (
             'id',
             'name',
+            'grow_bucket',
+            'total_target',
+            'total_revenue_last_fiscal',
             'status',
             'user',
             'agency',
-            'org_business_unit',
+            'org_business_unit.name',
 
         )
 
