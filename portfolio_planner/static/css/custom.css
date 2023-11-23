@@ -155,10 +155,36 @@ p {
 }
 
 /*Login Page*/
+#heroVideo {
+    filter: grayscale(100%) brightness(30%);
+    position: absolute;
+    width: 54em;
+    left: -20em;
+}
+
+.video-container {
+    position: relative;
+    overflow: hidden;
+    /* Set explicit dimensions if necessary, e.g., width and height */
+}
+
+.login-image-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2; /* Ensures the image is above the video */
+}
+
+.login-logo {
+    display: block; /* Removes default inline spacing */
+    max-width: 100%; /* Ensures the image doesn't overflow its container */
+    height: auto; /* Maintains the aspect ratio of the image */
+}
 
 .login-page {
     height: 100vh !important;
-    padding-top: 10vh;
+    padding-top: 14vh;
     background: url("../images/navbar-background-1.png") no-repeat center center;
     background-color: white;
     background-size: 2000px;
@@ -167,9 +193,7 @@ p {
 }
 
 .login-image-col {
-    background: url("../images/login-image.jpg") no-repeat center center;
-    background-size: cover;
-    border-radium: 10px 0 0 10px !important;
+    border-radius: 10px 0 0 10px !important;
 }
 
 .login-container {
@@ -392,7 +416,7 @@ th.asc::after, th.desc::after {
     content: "";
     display: inline-block;
     margin-left: 5px;
-    color: #c4fc48;
+    color: #99d800;
     font-size: 12px;
 }
 
@@ -414,16 +438,15 @@ th.desc::after {
 
 /* Backgrounds */
 .bg-sos {
-    background: #C3FC47;
+    background: #99d800;
     color:black;
 }
 
 .btn-sos {
-    background: #C3FC47;
+    background: #99d800;
     color:black;
 }
 
 .btn-sos:hover {
-    background: #7caf00;
-    color:white;
+    background: #c3fd48;
 }

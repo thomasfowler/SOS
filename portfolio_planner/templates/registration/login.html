@@ -5,30 +5,37 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-<div class="login-container row">
-    <div class="col-4 login-image-col"></div>
+<div class="login-container row animate__animated animate__fadeIn">
+    <div class="col-4 login-image-col video-container">
+        <div class="login-image-container">
+            <img class="login-logo animate__animated animate__fadeIn animate__delay-2s" src="{% static 'images/primary_circle_sos_logo_250.png' %}" alt="Logo" width="210">
+        </div>
+        <video autoplay muted loop id="heroVideo">
+            <source src="{% static 'images/loop-video.mp4' %}" type="video/mp4">
+        </video>
+    </div>
     <div class="col-8 login-form-col text-left py-4">
-        <div class="w-100 mb-3" style="text-align:right">
+        <div class="w-100 mb-3 animate__animated animate__fadeInUp animate__delay-0.5s" style="text-align:right">
             <img src="{% static 'images/black_rectangle_sos_logo.png' %}" alt="Logo" width="210">
         </div>
         <form method="post" id="login-form">
             {% csrf_token %}
-            <div class="form-group">
+            <div class="form-group animate__animated animate__fadeIn animate__delay-1s">
                 <label>Email address</label>
                 <input type="text" class="form-control" id="{{ form.username.id_for_label }}" name="{{ form.username.name }}" required>
             </div>
-            <div class="form-group mt-3">
+            <div class="form-group mt-3 animate__animated animate__fadeIn animate__delay-1s">
                 <label>Password</label>
                 <a href="" class="forgot-password">Forgot password</a>
                 <input type="password" class="form-control" id="{{ form.password.id_for_label }}" name="{{ form.password.name }}" required>
             </div>
-            <div class="checkbox mt-4 mb-3">
+            <div class="checkbox mt-4 mb-3 animate__animated animate__fadeIn animate__delay-1s">
                 <input type="checkbox" id="remember" name="remember">
                 <label for="remember">Remember me for 30 days</label>
             </div>
-            <button type="submit" class="login-button">SIGN IN</button>
+            <button type="submit" class="login-button animate__animated animate__fadeIn animate__delay-1s">SIGN IN</button>
         </form>
-        <div class="register-now">
+        <div class="register-now animate__animated animate__fadeIn animate__delay-1s">
             Don’t have an account? <a href="">Register now</a>
         </div>
     </div>
