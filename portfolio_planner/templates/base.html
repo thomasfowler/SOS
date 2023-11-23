@@ -58,9 +58,8 @@
             </div>
             <div class="col-6 quick-bar-stats">
                 <div class="d-flex justify-content-around">
-                    <span class="badge rounded-pill bg-sos">Total Revenue:<span class="stat-value">$XXX</span></span>
-                    <span class="badge rounded-pill bg-sos">Deals Closed:<span class="stat-value">$XXX</span></span>
-                    <span class="badge rounded-pill bg-sos">Avg Deal Size:<span class="stat-value">$XXX</span></span>
+                    {% block sidebar_stats %}
+                    {% endblock %}
                 </div>
             </div>
         </div>
@@ -74,30 +73,6 @@
                 {% block content %}(no content){% endblock %}
             </main>
         </div>
-
-        <!--                <div class="col-3 mt-2">-->
-        <!--                    <aside>-->
-        <!--                        {% if user.is_authenticated %}-->
-        <!--                            {% block sidebar %}-->
-        <!--                                &lt;!&ndash; Default Sidebar Content &ndash;&gt;-->
-        <!--                                <h4>Quick Links</h4>-->
-        <!--                                <ul class="list-group">-->
-        <!--                                    <li class="list-group-item"><i class="bi bi-plus-circle"></i> <a href="#">New Opportunity</a></li>-->
-        <!--                                    <li class="list-group-item"><i class="bi bi-briefcase"></i> <a href="#">My Opportunities</a></li>-->
-        <!--                                    <li class="list-group-item"><i class="bi bi-clock"></i> <a href="#">Pending Approvals</a></li>-->
-        <!--                                </ul>-->
-
-        <!--                                <h4>Summary Stats</h4>-->
-        <!--                                <ul>-->
-        <!--                                    &lt;!&ndash; TODO: Placeholder for stats &ndash;&gt;-->
-        <!--                                    <li>Total Revenue: $XXXX</li>-->
-        <!--                                    <li>Deals Closed: XX</li>-->
-        <!--                                    <li>Avg Deal Size: $XXXX</li>-->
-        <!--                                </ul>-->
-        <!--                            {% endblock %}-->
-        <!--                        {% endif %}-->
-        <!--                    </aside>-->
-        <!--                </div>-->
     </div>
     </div>
 

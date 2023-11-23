@@ -26,3 +26,10 @@
     {# Custom JS #}
     <script src="{% static "js/dialog.js" %}"></script>
 {% endblock %}
+
+{# Planner Summary Stats #}
+{% block sidebar_stats %}
+<span class="badge rounded-pill bg-sos">Revenue (Forecasted): <span class="stat-value">{{ total_forecasted_revenue }}</span></span>
+<span class="badge rounded-pill bg-sos">Revenue (Last Fiscal): <span class="stat-value">{{ total_revenue_last_fiscal }}</span></span>
+<span class="badge rounded-pill bg-sos">Avg Deal Size: <span class="stat-value">{{ avg_deal_size }}</span></span>
+{% endblock %}
