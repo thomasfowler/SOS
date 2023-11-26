@@ -7,45 +7,50 @@
 {% block content %}
 <div class="container-fluid mt-4 dashboard-container px-0">
 
-    <!-- ACTUAL vs FORECAST vs BUDGET Bar Graph -->
-    <div class="card mb-4 forecast-bar-graph">
-        <div class="card-header">ACTUAL vs FORECAST vs BUDGET</div>
-        <div class="card-body">
-            <select id="periodFilter" name="period" hx-get="actual_vs_forecast/" hx-trigger="change" hx-swap="innerHTML" hx-target="#actual-forecast-budget-chart-container" hx-vals="javascript:{period: document.getElementById('periodFilter').value, region: document.getElementById('regionFilter').value, includeArchived: document.getElementById('includeArchivedFilter').checked}">
-                <option value="quarterly">Quarterly</option>
-                <option value="monthly">Monthly</option>
-            </select>
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <!-- ACTUAL vs FORECAST vs BUDGET Bar Graph -->
+            <div class="card mb-4 forecast-bar-graph">
+                <div class="card-header">ACTUAL vs FORECAST vs BUDGET</div>
+                <div class="card-body">
+                    <select id="periodFilter" name="period" hx-get="actual_vs_forecast/" hx-trigger="change" hx-swap="innerHTML" hx-target="#actual-forecast-budget-chart-container" hx-vals="javascript:{period: document.getElementById('periodFilter').value, region: document.getElementById('regionFilter').value, includeArchived: document.getElementById('includeArchivedFilter').checked}">
+                        <option value="quarterly">Quarterly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
 
-            <select id="regionFilter" name="region" hx-get="actual_vs_forecast/" hx-trigger="change" hx-swap="innerHTML" hx-target="#actual-forecast-budget-chart-container" hx-vals="javascript:{period: document.getElementById('periodFilter').value, region: document.getElementById('regionFilter').value, includeArchived: document.getElementById('includeArchivedFilter').checked}">
-                <option disabled selected value> -- select an option -- </option>
-                <option value="north">North</option>
-                <option value="south">South</option>
-                <!-- ... other regions ... -->
-            </select>
+                    <select id="regionFilter" name="region" hx-get="actual_vs_forecast/" hx-trigger="change" hx-swap="innerHTML" hx-target="#actual-forecast-budget-chart-container" hx-vals="javascript:{period: document.getElementById('periodFilter').value, region: document.getElementById('regionFilter').value, includeArchived: document.getElementById('includeArchivedFilter').checked}">
+                        <option disabled selected value> -- select an option -- </option>
+                        <option value="north">North</option>
+                        <option value="south">South</option>
+                        <!-- ... other regions ... -->
+                    </select>
 
-            <input type="checkbox" id="includeArchivedFilter" name="includeArchived" hx-get="actual_vs_forecast/" hx-trigger="change" hx-swap="innerHTML" hx-target="#actual-forecast-budget-chart-container" hx-vals="javascript:{period: document.getElementById('periodFilter').value, region: document.getElementById('regionFilter').value, includeArchived: document.getElementById('includeArchivedFilter').checked}" value="true"> Include Archived
+                    <input type="checkbox" id="includeArchivedFilter" name="includeArchived" hx-get="actual_vs_forecast/" hx-trigger="change" hx-swap="innerHTML" hx-target="#actual-forecast-budget-chart-container" hx-vals="javascript:{period: document.getElementById('periodFilter').value, region: document.getElementById('regionFilter').value, includeArchived: document.getElementById('includeArchivedFilter').checked}" value="true"> Include Archived
 
-            <div id="actual-forecast-budget-chart-container" hx-get="actual_vs_forecast/" hx-trigger="load">
-                <!-- Bar graph content here - rendered via HTMX -->
+                    <div id="actual-forecast-budget-chart-container" hx-get="actual_vs_forecast/" hx-trigger="load">
+                        <!-- Bar graph content here - rendered via HTMX -->
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="col-md-6">
+            <!-- G.R.O.W. Status Tracker -->
+            <div class="card mb-4 grow-status-tracker">
+                <div class="card-header">G.R.O.W. Status Tracker</div>
+                <div class="card-body">
+                    <select id="periodFilter" name="period" hx-get="grow_status/" hx-trigger="change" hx-swap="innerHTML" hx-target="#grow-status-chart-container" hx-vals="{period: $period.val}">
+                        <option value="annual">Annual</option>
+                        <option value="q1">Quarter 1</option>
+                        <option value="q2">Quarter 2</option>
+                        <option value="q3">Quarter 3</option>
+                        <option value="q4">Quarter 4</option>
+                        <option value="current_month">Current Month</option>
+                    </select>
 
-    <!-- G.R.O.W. Status Tracker -->
-    <div class="card mb-4 grow-status-tracker">
-        <div class="card-header">G.R.O.W. Status Tracker</div>
-        <div class="card-body">
-            <select id="periodFilter" name="period" hx-get="grow_status/" hx-trigger="change" hx-swap="innerHTML" hx-target="#grow-status-chart-container" hx-vals="{period: $period.val}">
-                <option value="annual">Annual</option>
-                <option value="q1">Quarter 1</option>
-                <option value="q2">Quarter 2</option>
-                <option value="q3">Quarter 3</option>
-                <option value="q4">Quarter 4</option>
-                <option value="current_month">Current Month</option>
-            </select>
-
-            <div id="grow-status-chart-container" hx-get="grow_status/" hx-trigger="load">
-                <!-- Bar graph content here - rendered via HTMX -->
+                    <div id="grow-status-chart-container" hx-get="grow_status/" hx-trigger="load">
+                        <!-- Bar graph content here - rendered via HTMX -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -85,12 +90,12 @@
     <!-- Brands Table -->
     <div class="card mb-4 performance-table" >
         <div class="card-header">Brands Summary</div>
-        <div class="card-body">
+
             {# We use the dashboard_action url and give the named action to get to the right url. We then pass in the URL params from the original request in order filter the table #}
             <div id="brand-table-container" hx-get="{% url 'dashboard_action' action='brand_table' %}?{{ request.GET.urlencode }}" hx-trigger="load">
                 <!-- Brand Table content here - rendered via HTMX -->
             </div>
-        </div>
+
     </div>
 
 </div>

@@ -154,6 +154,14 @@ p {
     letter-spacing: 0.1pc !important;
 }
 
+/*Logout Page*/
+.logged-out-message {
+    background: #efffcd;
+    padding: 20px;
+    border: solid 2px #c3fd48;
+    color: #658f0d;
+}
+
 /*Login Page*/
 #heroVideo {
     filter: grayscale(100%) brightness(30%);
@@ -449,4 +457,19 @@ th.desc::after {
 
 .btn-sos:hover {
     background: #c3fd48;
+}
+
+/* Modals */
+
+.sos-header {
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 0.1pc !important;
+    background: #282B25;
+}
+
+.disabled-section {
+   opacity: 0.5;
+   pointer-events: none;
+   user-select: none;
 }
