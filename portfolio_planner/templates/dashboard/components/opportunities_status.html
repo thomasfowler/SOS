@@ -1,0 +1,44 @@
+<!-- your_template.html -->
+<canvas id="opportunityStatusChart"></canvas>
+<script>
+    (function() {
+        const data = {
+            labels: {{ labels|safe }},
+            datasets: [{
+                data: {{ data|safe }},
+                backgroundColor: [
+                    // Define color for each slice here
+                    'rgba(255, 99, 132, 0.2)',
+                    // ... other colors for each status
+                ],
+                borderColor: [
+                    // Define border color for each slice here
+                    'rgba(255, 99, 132, 1)',
+                    // ... other border colors for each status
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const config = {
+            type: 'pie',
+            data: data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: false,
+                    }
+                }
+            }
+        };
+
+        // Draw the chart
+        const ctx = document.getElementById('opportunityStatusChart').getContext('2d');
+        new Chart(ctx, config);
+    })();
+</script>

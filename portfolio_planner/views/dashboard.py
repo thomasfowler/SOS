@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 
 from django.conf import settings
+from django.db.models import Count
 from django.db.models import Sum
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -131,6 +132,8 @@ class DashboardView(TemplateView):
             return self.brand_table(request,*args, **kwargs)
         elif action == 'time_remaining':
             return self.time_remaining(request, *args, **kwargs)
+        elif action == 'opportunities_status':
+            return self.opportunities_status(request, *args, **kwargs)
 
         # Just run this function if we don't have an action. This renders the base template for the dashboard
         return super().dispatch(request, *args, **kwargs)
@@ -272,3 +275,21 @@ class DashboardView(TemplateView):
         }
 
         return render(request, 'dashboard/components/time_remaining.html', context)
+
+    @method_decorator(require_GET)
+    def opportunities_status(self, request, *args, **kwargs) -> HttpResponse:
+        """Opportunities Status Chart."""
+        queryset = Opportunity.objects.filter(brand__in=self.queryset)
+        status_counts = queryset.values('status').annotate(count=Count('status')).order_by()
+
+        # Prepare data for the pie chart
+        labels = [status['status'] for status in status_counts]
+        data = [status['count'] for status in status_counts]
+
+        # Pass the data to the template
+        context = {
+            'labels': labels,
+            'data': data,
+        }
+
+        return render(request, 'dashboard/components/opportunities_status.html', context)

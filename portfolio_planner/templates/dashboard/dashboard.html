@@ -80,7 +80,11 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">Opportunities</div>
-                <div class="card-body"></div>
+                    <div class="card-body d-flex justify-content-center align-items-center p-2" style="height: auto;">
+                        <div id="opportunities-chart-container" hx-get="opportunities_status/" hx-trigger="load">
+                            <!-- Pie graphs content here - rendered via HTMX -->
+                        </div>
+                    </div>
             </div>
         </div>
         <div class="col-md-6">
