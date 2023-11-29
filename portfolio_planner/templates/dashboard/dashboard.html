@@ -40,11 +40,12 @@
                 <div class="card-body">
                     <select id="periodFilter" name="period" hx-get="grow_status/" hx-trigger="change" hx-swap="innerHTML" hx-target="#grow-status-chart-container" hx-vals="{period: $period.val}">
                         <option value="annual">Annual</option>
-                        <option value="q1">Quarter 1</option>
-                        <option value="q2">Quarter 2</option>
-                        <option value="q3">Quarter 3</option>
-                        <option value="q4">Quarter 4</option>
-                        <option value="current_month">Current Month</option>
+{# Removing these for now as we cannot support anything other than annual #}
+{#                <option value="q1">Quarter 1</option>#}
+{#                <option value="q2">Quarter 2</option>#}
+{#                <option value="q3">Quarter 3</option>#}
+{#                <option value="q4">Quarter 4</option>#}
+{#                <option value="current_month">Current Month</option>#}
                     </select>
 
                     <div id="grow-status-chart-container" hx-get="grow_status/" hx-trigger="load">
