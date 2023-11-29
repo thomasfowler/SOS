@@ -57,10 +57,10 @@ class DashboardView(TemplateView):
         else:
             return Brand.objects.none()  # If none of the roles apply, return no data TODO: This is a bug. We shoulnt be doing a early return. We need to set a filter that results in a none return of brand objects.
 
-        self.queryset = Brand.objects.filter(**filters)
+        queryset = Brand.objects.filter(**filters)
 
         # Next, figure out the details we need allocate the brand into one of the G.R.O.W. buckets
-        self.sum_target_values = Opportunity.objects.filter(brand__in=self.queryset).aggregate(
+        self.sum_target_values = Opportunity.objects.filter(brand__in=queryset).aggregate(
             total_target=Sum('target')
         )
 
@@ -83,7 +83,7 @@ class DashboardView(TemplateView):
         self.wish_revenue_last_fiscal = convert_to_money(0)
 
         # Loop through the opportunities and figure out if they are in a G.R.O.W. bucket
-        for brand in self.queryset:
+        for brand in queryset:
             # Get the sum target for all brand opportunities
             target = Opportunity.objects.filter(brand=brand).aggregate(total_target=Sum('target'))['total_target']
 
@@ -120,11 +120,14 @@ class DashboardView(TemplateView):
             brand.total_target = convert_to_money(target) if target is not None else convert_to_money(0)
             brand.total_revenue_last_fiscal = convert_to_money(revenue_last_fiscal) if revenue_last_fiscal is not None else convert_to_money(0)
 
+        # Set the queryset as an attribute of the view
+        self.queryset = queryset
+
         # Route the request to the appropriate method
         action = kwargs.get('action')
 
-        if action == 'actual_vs_forecast':
-            return self.actual_vs_forecast(request, *args, **kwargs)
+        if action == 'top_brands':
+            return self.top_brands(request, *args, **kwargs)
         elif action == 'grow_status':
             return self.grow_status(request, *args, **kwargs)
         elif action == 'brand_table':
@@ -139,34 +142,34 @@ class DashboardView(TemplateView):
         return super().dispatch(request, *args, **kwargs)
 
     @method_decorator(require_GET)
-    def actual_vs_forecast(self, request, *args, **kwargs) -> HttpResponse:
-        period = request.GET.get('period', 'quarterly')
+    def top_brands(self, request, *args, **kwargs) -> HttpResponse:
+        # Get the number of brands to display from the request, default to 5
+        number_brands = int(request.GET.get('number', 5))
 
-        # Dummy data. In reality, you'd fetch this based on the filter_type
-        monthly_data = {
-            'labels': ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-            'datasets': [
-                {'label': 'Actual', 'data': [12, 19, 3, 5, 2]},
-                {'label': 'Forecast', 'data': [7, 11, 5, 8, 3]},
-                {'label': 'Budget', 'data': [15, 13, 10, 9, 6]}
-            ]
+        # Calculate the sum of target values for opportunities per brand
+        brand_targets = (
+            Opportunity.objects.filter(brand__in=self.queryset)
+            .values('brand__name')  # Assuming the brand has a 'name' field to display
+            .annotate(total_target=Sum('target'))
+            .order_by('-total_target')[:number_brands]
+        )
+
+        # Get the total for the top 'n' brands
+        top_brands_total = sum(item['total_target'] for item in brand_targets)
+
+        # Calculate the 'other' category total
+        other_total = self.sum_target_values['total_target'] - top_brands_total
+
+        # Prepare the data for the pie chart
+        labels = [item['brand__name'] for item in brand_targets] + ['Other']
+        data = [item['total_target'] for item in brand_targets] + [other_total]
+
+        context = {
+            'labels': labels,
+            'data': json.dumps(data, use_decimal=True),
         }
 
-        quarterly_data = {
-            'labels': ['Quarter 1', 'Quarter 2', 'Quarter 3', 'Quarter 4'],
-            'datasets': [
-                {'label': 'Actual', 'data': [12, 19, 3, 5]},
-                {'label': 'Forecast', 'data': [7, 11, 8, 3]},
-                {'label': 'Budget', 'data': [13, 10, 9, 6]}
-            ]
-        }
-
-        if period == 'monthly':
-            chart_data = monthly_data
-        else:
-            chart_data = quarterly_data
-
-        return render(request, 'dashboard/components/actual_vs_forecast.html', {'data': json.dumps(chart_data)})
+        return render(request, 'dashboard/components/top_brands.html', context)
 
     @method_decorator(require_GET)
     def grow_status(self, request, *args, **kwargs) -> HttpResponse:
@@ -216,10 +219,10 @@ class DashboardView(TemplateView):
         """Brand Table."""
 
         # Initialize the table with the queryset
-        table = BrandTable(self.queryset)
+        table = BrandTable(self.queryset.order_by('name'))
 
         # Apply sorting
-        RequestConfig(request, paginate={'per_page': 10}).configure(table)
+        RequestConfig(request, paginate={'per_page': 20}).configure(table)
 
         # Include the URL parameters in the context for the template
         context = {
