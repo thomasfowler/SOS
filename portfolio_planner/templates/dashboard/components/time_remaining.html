@@ -1,0 +1,121 @@
+<canvas id="fiscalYearProgress"></canvas>
+<script>
+    (function() {
+        // Data from view
+        const remainingMonths = {{ remaining_months|safe }};
+        const remainingWeeks = {{ remaining_weeks|safe }};
+        const remainingDays = {{ remaining_days_adjusted|safe }};
+
+        const elapsedMonths = {{ elapsed_months|safe }};
+        const elapsedWeeks = {{ elapsed_weeks|safe }};
+        const elapsedDays = {{ elapsed_days|safe }};
+
+        const remainingDaysPercentage = {{ remaining_days_percentage|safe }};
+        const remainingWeeksPercentage = {{ remaining_weeks_percentage|safe }};
+        const remainingMonthsPercentage = {{ remaining_months_percentage|safe }};
+
+        const elapsedDaysPercentage = {{ elapsed_days_percentage|safe }};
+        const elapsedWeeksPercentage = {{ elapsed_weeks_percentage|safe }};
+        const elapsedMonthsPercentage = {{ elapsed_months_percentage|safe }};
+
+        // Prepare data for the chart with two entries for each time unit: elapsed and remaining
+        const chartData = {
+            labels: ['Months', 'Weeks', 'Days'],
+            datasets: [
+                {
+                    label: 'Elapsed Time',
+                    data: [elapsedDaysPercentage, elapsedWeeksPercentage, elapsedMonthsPercentage],
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Remaining Time',
+                    data: [remainingDaysPercentage, remainingWeeksPercentage, remainingMonthsPercentage],
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        // Chart configuration
+        const config = {
+            type: 'bar',
+            data: chartData,
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                    },
+                    title: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed.x !== null) {
+                                    label += context.parsed.x + '%';
+                                }
+                                return label;
+                            }
+                        }
+                    },
+                    datalabels: {
+                        align: 'center',
+                        anchor: 'center',
+                        formatter: function(value, context) {
+                            // Data values for remaining and elapsed times
+                            const dataValues = {
+                                'Months': {
+                                    remaining: remainingMonths,
+                                    elapsed: elapsedMonths
+                                },
+                                'Weeks': {
+                                    remaining: remainingWeeks,
+                                    elapsed: elapsedWeeks
+                                },
+                                'Days': {
+                                    remaining: remainingDays,
+                                    elapsed: elapsedDays
+                                }
+                            };
+
+                            // Determine the type (remaining or elapsed) based on the dataset index
+                            const type = context.datasetIndex === 0 ? 'elapsed' : 'remaining';
+
+                            // Get the correct label and value based on the bar segment
+                            const label = context.chart.data.labels[context.dataIndex];
+                            const valueToDisplay = dataValues[label][type];
+
+                            // Return the value with the appropriate suffix
+                            return valueToDisplay + ' ' + label;
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true,
+                        max: 100, // Set the maximum value to 100 to indicate percentage
+                    },
+                    y: {
+                        stacked: true
+                    }
+                }
+            },
+            plugins: [ChartDataLabels] // Ensure that this plugin is loaded
+        };
+
+        // Draw the chart
+        const ctx = document.getElementById('fiscalYearProgress').getContext('2d');
+        new Chart(ctx, config);
+    })();
+</script>

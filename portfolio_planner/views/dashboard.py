@@ -1,5 +1,6 @@
-import simplejson as json
+from datetime import datetime, timedelta
 
+from django.conf import settings
 from django.db.models import Sum
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -9,6 +10,7 @@ from django.views.decorators.http import require_GET
 from django.contrib.auth.decorators import login_required
 from django_tables2 import RequestConfig
 from rolepermissions.checkers import has_role
+import simplejson as json
 
 from portfolio_planner.models import convert_to_money
 from portfolio_planner.models import Brand
@@ -127,7 +129,10 @@ class DashboardView(TemplateView):
         elif action == 'brand_table':
             # Pass the current_params to the brand_table method
             return self.brand_table(request,*args, **kwargs)
+        elif action == 'time_remaining':
+            return self.time_remaining(request, *args, **kwargs)
 
+        # Just run this function if we don't have an action. This renders the base template for the dashboard
         return super().dispatch(request, *args, **kwargs)
 
     @method_decorator(require_GET)
@@ -219,3 +224,51 @@ class DashboardView(TemplateView):
         }
 
         return render(request, 'dashboard/components/brand_table.html', context)
+
+    @method_decorator(require_GET)
+    def time_remaining(self, request, *args, **kwargs) -> HttpResponse:
+        """Time Remaining Chart."""
+
+        # Get today's date
+        today = datetime.now()
+
+        # Determine the end of the current fiscal year
+        fiscal_year_end_year = today.year if today.month < settings.FISCAL_YEAR_START_MONTH else today.year + 1
+        fiscal_year_end_date = datetime(fiscal_year_end_year, settings.FISCAL_YEAR_START_MONTH - 1, 28)
+
+        # Calculate remaining time
+        remaining = fiscal_year_end_date - today
+        remaining_days = remaining.days
+        remaining_weeks = remaining_days // 7
+        remaining_months = (fiscal_year_end_date.year - today.year) * 12 + fiscal_year_end_date.month - today.month
+
+        # Adjust for current week (assuming 5 working days per week)
+        remaining_days_adjusted = remaining_days + (5 - today.weekday() if today.weekday() < 5 else 0)
+
+        # Now, lets provide these as percentages of the total time as well as the elapsed time. And round them to
+        # full values
+        remaining_days_percentage = round(remaining_days_adjusted / 240 * 100)  # 240 working days in a year
+        remaining_weeks_percentage = round(remaining_weeks / 52 * 100)
+        remaining_months_percentage = round(remaining_months / 12 * 100)
+
+        elapsed_days_percentage = 100 - remaining_days_percentage
+        elapsed_weeks_percentage = 100 - remaining_weeks_percentage
+        elapsed_months_percentage = 100 - remaining_months_percentage
+
+        context = {
+            'remaining_days': remaining_days,
+            'remaining_weeks': remaining_weeks,
+            'remaining_months': remaining_months,
+            'elapsed_days': 240 - remaining_days_adjusted,
+            'elapsed_weeks': 52 - remaining_weeks,
+            'elapsed_months': 12 - remaining_months,
+            'remaining_days_adjusted': remaining_days_adjusted,
+            'remaining_days_percentage': remaining_days_percentage,
+            'remaining_weeks_percentage': remaining_weeks_percentage,
+            'remaining_months_percentage': remaining_months_percentage,
+            'elapsed_days_percentage': elapsed_days_percentage,
+            'elapsed_weeks_percentage': elapsed_weeks_percentage,
+            'elapsed_months_percentage': elapsed_months_percentage,
+        }
+
+        return render(request, 'dashboard/components/time_remaining.html', context)

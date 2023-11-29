@@ -61,6 +61,9 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">Sales Time Remaining</div>
+                    <div id="time-remaining-chart-container" hx-get="time_remaining/" hx-trigger="load">
+                        <!-- Bar graphs content here - rendered via HTMX -->
+                    </div>
                 <div class="card-body"></div>
             </div>
         </div>
@@ -76,7 +79,7 @@
     <div class="row mb-4">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Deals</div>
+                <div class="card-header">Opportunities</div>
                 <div class="card-body"></div>
             </div>
         </div>
