@@ -1,9 +1,28 @@
-{% extends 'base.html' %}
+{% extends 'minimal_base.html' %}
+
+{% load static %}
 
 {% block title %}Logged Out{% endblock %}
 
 {% block content %}
-    <div class="alert alert-success mt-4" role="alert">
-        You've been logged out. <a href="{% url 'login' %}">Log in again</a>
+<div class="login-container row animate__animated animate__fadeIn">
+    <div class="col-4 login-image-col video-container">
+        <div class="login-image-container">
+            <img class="login-logo" src="{% static 'images/primary_circle_sos_logo_250.png' %}" alt="Logo" width="210">
+        </div>
+        <video autoplay muted loop id="heroVideo">
+            <source src="{% static 'images/loop-video.mp4' %}" type="video/mp4">
+        </video>
     </div>
+    <div class="col-8 login-form-col text-left py-4">
+        <div class="w-100 mb-3" style="text-align:right">
+            <img src="{% static 'images/black_rectangle_sos_logo.png' %}" alt="Logo" width="210">
+        </div>
+        <div class="mt-5 mb-3 text-center">
+            <h5 class="mb-5 logged-out-message">You have been successfully logged out.</h5>
+            <a class="btn login-button" href="{% url 'login' %}">BACK TO LOGIN</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
+

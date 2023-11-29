@@ -1,5 +1,5 @@
 <select name="business_unit" class="form-control">
-        <option value="">---------</option>
+        <option value="">Select a business unit</option>
     {% for bu in business_units %}
         <option value="{{ bu.pk }}">{{ bu.brand.name }} - {{ bu.name }}</option>
     {% endfor %}

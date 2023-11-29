@@ -25,7 +25,7 @@ class BrandTable(tables.Table):
         )
 
         attrs = {
-            'class': 'table table-striped table-hover',
+            'class': 'table table-striped table-hover sos-table table-sm',
             'thead': {
                 'class': 'thead-light'
             }
