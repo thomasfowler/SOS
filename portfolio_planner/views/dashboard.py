@@ -1,4 +1,4 @@
-import json
+import simplejson as json
 
 from django.db.models import Sum
 from django.shortcuts import render
@@ -52,7 +52,7 @@ class DashboardView(TemplateView):
         elif has_role(user, SalesDirector):
             pass  # No extra filter for SalesDirector, they see all opportunities
         else:
-            return Brand.objects.none()  # If none of the roles apply, return no data
+            return Brand.objects.none()  # If none of the roles apply, return no data TODO: This is a bug. We shoulnt be doing a early return. We need to set a filter that results in a none return of brand objects.
 
         self.queryset = Brand.objects.filter(**filters)
 
@@ -62,11 +62,22 @@ class DashboardView(TemplateView):
         )
 
         # Get current fiscal year so that we can get all the opportunities for the previous fiscal year
-        current_fiscal_year = FiscalYear.objects.get(is_current=True)
-        last_fiscal_year = FiscalYear.objects.get(year=current_fiscal_year.year - 1)
+        self.current_fiscal_year = FiscalYear.objects.get(is_current=True)
+        self.last_fiscal_year = FiscalYear.objects.get(year=self.current_fiscal_year.year - 1)
 
         all_revenue_last_fiscal = Opportunity.objects.filter(status__in=['active', 'won']).with_revenue(
-            fiscal_year=last_fiscal_year).aggregate(_revenue_last_fiscal=Sum('total_revenue'))['_revenue_last_fiscal']
+            fiscal_year=self.last_fiscal_year).aggregate(_revenue_last_fiscal=Sum('total_revenue'))['_revenue_last_fiscal']
+
+        # Set some default values for the G.R.O.W. buckets. We will add to these in the brand loop below
+        self.game_changer_target = convert_to_money(0)
+        self.real_opportunity_target = convert_to_money(0)
+        self.open_target = convert_to_money(0)
+        self.wish_target = convert_to_money(0)
+
+        self.game_changer_revenue_last_fiscal = convert_to_money(0)
+        self.real_opportunity_revenue_last_fiscal = convert_to_money(0)
+        self.open_revenue_last_fiscal = convert_to_money(0)
+        self.wish_revenue_last_fiscal = convert_to_money(0)
 
         # Loop through the opportunities and figure out if they are in a G.R.O.W. bucket
         for brand in self.queryset:
@@ -76,18 +87,31 @@ class DashboardView(TemplateView):
             # Get the revenue for all brand opportunities in the previous fiscal year
             # Note, total revenue needs to be annotated on the queryset so that we can use it in the aggregate
             revenue_last_fiscal = Opportunity.objects.filter(brand=brand, status__in=['active', 'won']).with_revenue(
-                fiscal_year=last_fiscal_year).aggregate(_revenue_last_fiscal=Sum('total_revenue'))[
+                fiscal_year=self.last_fiscal_year).aggregate(_revenue_last_fiscal=Sum('total_revenue'))[
                 '_revenue_last_fiscal']
 
             if target is not None and all_revenue_last_fiscal != 0 and target / all_revenue_last_fiscal >= 0.3:
                 brand.grow_bucket = 'Game Changer'
+                self.game_changer_target += convert_to_money(target)
+                self.game_changer_revenue_last_fiscal += convert_to_money(revenue_last_fiscal)
             elif target is not None and revenue_last_fiscal != 0 and (
                     target - revenue_last_fiscal) / revenue_last_fiscal >= 0.1:
                 brand.grow_bucket = 'Real Opportunity'
+                self.real_opportunity_target += convert_to_money(target)
+                self.real_opportunity_revenue_last_fiscal += convert_to_money(revenue_last_fiscal)
             elif revenue_last_fiscal is not None and revenue_last_fiscal > 0:
                 brand.grow_bucket = 'Open'
+                self.open_target += convert_to_money(target)
+                self.open_revenue_last_fiscal += convert_to_money(revenue_last_fiscal)
             else:
                 brand.grow_bucket = 'Wish'
+                # Check for None values and set to 0
+                if target is None:
+                    target = 0
+                self.wish_target += convert_to_money(target)
+                if revenue_last_fiscal is None:
+                    revenue_last_fiscal = 0
+                self.wish_revenue_last_fiscal += convert_to_money(revenue_last_fiscal)
 
             # Now append the financial data to the brand
             brand.total_target = convert_to_money(target) if target is not None else convert_to_money(0)
@@ -138,38 +162,30 @@ class DashboardView(TemplateView):
 
     @method_decorator(require_GET)
     def grow_status(self, request, *args, **kwargs) -> HttpResponse:
+        """Grow Status Chart.
+
+        Period selection supports value one of period, q1, q2, q3, q4, current_month
+        TODO: Have temporarily removed quarterly options until data model supports it
+        """
         period = request.GET.get('period', 'annual')
 
         # Dummy Grow Data
         if period == 'annual':
             datasets = [
-                {'label': 'Budget', 'data': [100, 200, 300, 400]},
-                {'label': 'Actual', 'data': [110, 210, 290, 390]}
-            ]
-        elif period == 'q1':
-            datasets = [
-                {'label': 'Budget', 'data': [22, 45, 33, 50]},
-                {'label': 'Actual', 'data': [20, 43, 35, 52]}
-            ]
-        elif period == 'q2':
-            datasets = [
-                {'label': 'Budget', 'data': [30, 48, 35, 47]},
-                {'label': 'Actual', 'data': [29, 50, 33, 45]}
-            ]
-        elif period == 'q3':
-            datasets = [
-                {'label': 'Budget', 'data': [28, 49, 33, 45]},
-                {'label': 'Actual', 'data': [27, 50, 31, 43]}
-            ]
-        elif period == 'q4':
-            datasets = [
-                {'label': 'Budget', 'data': [20, 58, 40, 48]},
-                {'label': 'Actual', 'data': [24, 60, 38, 45]}
-            ]
-        elif period == 'current_month':
-            datasets = [
-                {'label': 'Budget', 'data': [5, 10, 8, 9]},
-                {'label': 'Actual', 'data': [4, 11, 7, 8]}
+                {'label': 'Target', 'data': [
+                    self.game_changer_target.amount,
+                    self.real_opportunity_target.amount,
+                    self.open_target.amount,
+                    self.wish_target.amount
+                ]
+                 },
+                {'label': 'Last Fiscal', 'data': [
+                    self.game_changer_revenue_last_fiscal.amount,
+                    self.real_opportunity_revenue_last_fiscal.amount,
+                    self.open_revenue_last_fiscal.amount,
+                    self.wish_revenue_last_fiscal.amount
+                ]
+                 }
             ]
         else:
             datasets = []
@@ -183,8 +199,9 @@ class DashboardView(TemplateView):
             ],
             'datasets': datasets
         }
+        data = json.dumps(chart_data, use_decimal=True)
 
-        return render(request, 'dashboard/components/grow_status.html', {'data': json.dumps(chart_data)})
+        return render(request, 'dashboard/components/grow_status.html', {'data': data})
 
     @method_decorator(require_GET)
     def brand_table(self, request, *args, **kwargs) -> HttpResponse:

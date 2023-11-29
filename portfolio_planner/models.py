@@ -116,7 +116,7 @@ class OrgBusinessUnit(TimeStampedModel, StatusModel):
         """Save the model."""
         if not (has_role(self.business_unit_manager, BusinessUnitHead) or
                 has_role(self.business_unit_manager, SalesDirector)):
-            raise ValidationError("Assigned user must have the BusinessUnitHead role.")
+            raise ValidationError("Assigned user must have the BusinessUnitHead or SalesDirector role.")
         super(OrgBusinessUnit, self).save(*args, **kwargs)
 
 

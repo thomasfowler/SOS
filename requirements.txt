@@ -12,4 +12,5 @@ django-widget-tweaks~=1.5.0
 environs[django]~=9.5.0
 google-cloud-storage~=2.13.0
 psycopg2-binary~=2.9.7
+simplejson~=3.19.2
 Werkzeug~=3.0.1
