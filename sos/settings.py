@@ -205,6 +205,7 @@ CURRENCIES = (
 
 # Login behaviour
 LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/login/'
 
 # Custom Application Settings
 
