@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load djmoney %}
+{% load render_table from django_tables2 %}
+{% load permission_tags %}
+
+{% block title %}Science of Sales - Portfolio Planner{% endblock %}
+
+{% block content %}
+    <div class="row mb-4 mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Total Opportunities</div>
+                <div class="card-body">
+                    <!-- Total Opportunities Content -->
+                    Count: {{ opportunities_count }}
+                    Target: {{ opportunities_sum }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Total Revenue</div>
+                <div class="card-body">
+                    <!-- Total Revenue Content -->
+                    Last Fiscal: {{ revenue_last_fiscal }}
+                    This Fiscal: {{ revenue_this_fiscal }}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Deals Closed this Month</div>
+                <div class="card-body">
+                    Won: {{ won_this_month_count }}
+                    Lost: {{ lost_this_month_count }}
+                    Abandoned: {{ abandoned_this_month_count }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-4 mt-4">
+        <div class="col-md-6">
+            <div class="card-header">Unapproved Opportunities</div>
+            Count: {{ unapproved_count }}
+            Target: {{ unapproved_sum }}
+            <div class="card-body"></div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-header">Approved Opportunities</div>
+            Count: {{ approved_count }}
+            Target: {{ approved_sum }}
+            <div class="card-body"></div>
+        </div>
+    </div>
+
+    {% if user|has_role:'sales_director,business_unit_head' %}
+        <div class="card mb-4">
+            <div class="card-header">Pending Approvals - Fiscal {{ current_fiscal_year }}</div>
+            <div class="card-body">
+                <div class="container-fluid">
+                    {% render_table table %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

@@ -10,7 +10,6 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_GET
 from django.contrib.auth.decorators import login_required
 from django_tables2 import RequestConfig
-from rolepermissions.checkers import has_role
 import simplejson as json
 
 from portfolio_planner.models import convert_to_money
@@ -18,7 +17,7 @@ from portfolio_planner.models import Brand
 from portfolio_planner.models import FiscalYear
 from portfolio_planner.models import Opportunity
 from portfolio_planner.tables import BrandTable
-from sos.roles import AccountManager, BusinessUnitHead, SalesDirector
+from .helpers.brands import get_brand_role_filters
 
 
 @method_decorator(login_required, name='dispatch')
@@ -42,25 +41,12 @@ class DashboardView(TemplateView):
         Because the entire dashboard uses the same Brand roles based query, we can just use the same queryset for all.
         """
         # Perform the role based Brands query
-        user = request.user
+        filters = get_brand_role_filters(request.user)
 
-        filters = {
-            'status': 'active'
-        }
-
-        if has_role(user, AccountManager):
-            filters['user'] = user
-        elif has_role(user, BusinessUnitHead):
-            filters['org_business_unit__business_unit_manager'] = user
-        elif has_role(user, SalesDirector):
-            pass  # No extra filter for SalesDirector, they see all opportunities
-        else:
-            return Brand.objects.none()  # If none of the roles apply, return no data TODO: This is a bug. We shoulnt be doing a early return. We need to set a filter that results in a none return of brand objects.
-
-        queryset = Brand.objects.filter(**filters)
+        self.queryset = Brand.objects.filter(**filters)
 
         # Next, figure out the details we need allocate the brand into one of the G.R.O.W. buckets
-        self.sum_target_values = Opportunity.objects.filter(brand__in=queryset).aggregate(
+        self.sum_target_values = Opportunity.objects.filter(brand__in=self.queryset).aggregate(
             total_target=Sum('target')
         )
 
@@ -83,7 +69,7 @@ class DashboardView(TemplateView):
         self.wish_revenue_last_fiscal = convert_to_money(0)
 
         # Loop through the opportunities and figure out if they are in a G.R.O.W. bucket
-        for brand in queryset:
+        for brand in self.queryset:
             # Get the sum target for all brand opportunities
             target = Opportunity.objects.filter(brand=brand).aggregate(total_target=Sum('target'))['total_target']
 
@@ -92,6 +78,9 @@ class DashboardView(TemplateView):
             revenue_last_fiscal = Opportunity.objects.filter(brand=brand, status__in=['active', 'won']).with_revenue(
                 fiscal_year=self.last_fiscal_year).aggregate(_revenue_last_fiscal=Sum('total_revenue'))[
                 '_revenue_last_fiscal']
+
+            # Guard for revenue_last_fiscal being None
+            revenue_last_fiscal = 0 if revenue_last_fiscal is None else revenue_last_fiscal
 
             if target is not None and all_revenue_last_fiscal != 0 and target / all_revenue_last_fiscal >= 0.3:
                 brand.grow_bucket = 'Game Changer'
@@ -112,16 +101,11 @@ class DashboardView(TemplateView):
                 if target is None:
                     target = 0
                 self.wish_target += convert_to_money(target)
-                if revenue_last_fiscal is None:
-                    revenue_last_fiscal = 0
                 self.wish_revenue_last_fiscal += convert_to_money(revenue_last_fiscal)
 
             # Now append the financial data to the brand
             brand.total_target = convert_to_money(target) if target is not None else convert_to_money(0)
             brand.total_revenue_last_fiscal = convert_to_money(revenue_last_fiscal) if revenue_last_fiscal is not None else convert_to_money(0)
-
-        # Set the queryset as an attribute of the view
-        self.queryset = queryset
 
         # Route the request to the appropriate method
         action = kwargs.get('action')
@@ -219,7 +203,7 @@ class DashboardView(TemplateView):
         """Brand Table."""
 
         # Initialize the table with the queryset
-        table = BrandTable(self.queryset.order_by('name'))
+        table = BrandTable(self.queryset)
 
         # Apply sorting
         RequestConfig(request, paginate={'per_page': 20}).configure(table)

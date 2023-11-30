@@ -19,14 +19,47 @@ class OpportunityTable(tables.Table):
 
         fields = (
             'id',
-            'description',
             'status',
             'agency_name',
             'brand',
-            'business_unit',
             'product',
             'target',
             'fiscal_year',
+            'total_revenue',
+            'approved',
+            'buttons'
+        )
+
+        attrs = {
+            'class': 'table table-striped table-hover sos-table table-sm',
+            'thead': {
+                'class': 'thead-light'
+            }
+        }
+
+
+class OpportunityApprovalsTable(tables.Table):
+    """Opportunity Approvals Table."""
+
+    buttons = tables.TemplateColumn(
+        template_name="home/partials/approvals_buttons.html",
+        verbose_name=_("Actions"),
+        orderable=False,
+    )
+
+    class Meta:
+        model = Opportunity
+        template_name = "django_tables2/bootstrap5-responsive.html"
+
+        fields = (
+            'id',
+            'brand.user.first_name',
+            'brand.user.last_name',
+            'status',
+            'agency_name',
+            'brand',
+            'product',
+            'target',
             'total_revenue',
             'approved',
             'buttons'

@@ -1,0 +1,9 @@
+{% if record.approved is False %}
+<div class="row">
+    <div class="col">
+        <button class="btn btn-sos btn-sm" hx-post="{% url 'approve_opportunity' opportunity_id=record.id %}">Approve</button>
+    </div>
+</div>
+{% endif %}
+{# TODO: Add in unapproved button #}
+{# TODO: Add a view button to render the full opportunity #}

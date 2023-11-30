@@ -180,3 +180,24 @@ def filtered_business_units(request: HtmxHttpRequest) -> HttpResponse:
         'portfolio_planner/opportunity/partials/business_unit_dropdown.html',
         context
     )
+
+
+@login_required
+@require_POST
+def approve_opportunity(request, opportunity_id: int) -> HttpResponse:
+    opportunity = Opportunity.objects.get(pk=opportunity_id)
+    opportunity.approved = True
+    opportunity.approval_user = request.user
+    opportunity.save()
+
+    return HttpResponse(
+        status=204,
+        headers={
+            'HX-Trigger': json.dumps(
+                {
+                    "opportunityListChanged": None,
+                    "showMessage": f'{opportunity.brand.name} opportunity {opportunity.id} deleted successfully.'
+                }
+            )
+        }
+    )

@@ -353,12 +353,18 @@ class Opportunity(TimeStampedModel, StatusModel):
         default='active',
         help_text='Status of the opportunity. One of active, disabled, expired, won, lost or abandoned'
     )
+    won_date = models.DateField(blank=True, null=True, help_text='Date the opportunity was won')
+    lost_date = models.DateField(blank=True, null=True, help_text='Date the opportunity was lost')
+    abandoned_date = models.DateField(blank=True, null=True, help_text='Date the opportunity was abandoned')
+    disabled_date = models.DateField(blank=True, null=True, help_text='Date the opportunity was disabled')
+    expired_date = models.DateField(blank=True, null=True, help_text='Date the opportunity expired')
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     business_unit = models.ForeignKey(BrandBusinessUnit, null=True, blank=True, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     target = MoneyField(max_digits=14, decimal_places=2, default_currency='ZAR')
     fiscal_year = models.ForeignKey(FiscalYear, default=get_current_fiscal_year, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
+    approved_date = models.DateField(blank=True, null=True)
     approval_user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='approved_opportunities',
@@ -387,6 +393,25 @@ class Opportunity(TimeStampedModel, StatusModel):
         # Check that the BusinessUnit is related to the Brand
         if self.business_unit.brand != self.brand:
             raise IntegrityError("Business Unit must belong to the selected Brand")
+
+        # Set status tracking fields
+        if self.pk is not None:
+            original = Opportunity.objects.get(pk=self.pk)
+            if self.status != original.status:
+                if self.status == 'won' and not self.won_date:
+                    self.won_date = date.today()
+                elif self.status == 'lost' and not self.lost_date:
+                    self.lost_date = date.today()
+                elif self.status == 'abandoned' and not self.abandoned_date:
+                    self.abandoned_date = date.today()
+                elif self.status == 'disabled' and not self.disabled_date:
+                    self.disabled_date = date.today()
+                elif self.status == 'expired' and not self.expired_date:
+                    self.expired_date = date.today()
+
+        # Set the approval date
+        if self.approved and not self.approved_date:
+            self.approved_date = date.today()
 
         super().save(*args, **kwargs)
 
