@@ -151,6 +151,7 @@ class DashboardView(TemplateView):
         context = {
             'labels': labels,
             'data': json.dumps(data, use_decimal=True),
+            'number_brands': number_brands,
         }
 
         return render(request, 'dashboard/components/top_brands.html', context)

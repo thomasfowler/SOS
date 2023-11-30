@@ -33,7 +33,8 @@ if CLOUDRUN_SERVICE_URL and CUSTOM_DOMAIN:
     # Because we are using Firebase Hosting for our custom domain, it strips the cookie (which is dumb).
     # See docs here: https://firebase.google.com/docs/hosting/manage-cache#using_cookies
     # So we need the session cookie to be __session instead of the default sessionid
-    SESSION_COOKIE_NAME = '__session'
+    # TODO: Check if we actually need this once deployed. Might not
+    # SESSION_COOKIE_NAME = '__session'
 else:
     ALLOWED_HOSTS = ['*']
     CSRF_TRUSTED_ORIGINS = [

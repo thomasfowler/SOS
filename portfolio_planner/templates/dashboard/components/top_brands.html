@@ -1,4 +1,4 @@
-<canvas id="topBrandsByTargetChart"></canvas>
+<canvas id="topBrandsByTargetChart" style="position: relative; height:40vh; width:100%"></canvas>
 <script>
     (function() {
         // Debugging lines: Log the data to the console
@@ -37,7 +37,7 @@
             data: data,
             options: {
                 responsive: true,
-                maintainAspectRatio: true,
+                maintainAspectRatio: false,
                 layout: {
                     padding: {
                         left: 0,
@@ -48,7 +48,7 @@
                 },
                 plugins: {
                     legend: {
-                        position: 'top',
+                        position: 'left',
                         labels: {
                             boxWidth: 20,
                             padding: 20
