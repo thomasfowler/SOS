@@ -55,7 +55,8 @@ class DashboardView(TemplateView):
         self.last_fiscal_year = FiscalYear.objects.get(year=self.current_fiscal_year.year - 1)
 
         all_revenue_last_fiscal = Opportunity.objects.filter(status__in=['active', 'won']).with_revenue(
-            fiscal_year=self.last_fiscal_year).aggregate(_revenue_last_fiscal=Sum('total_revenue'))['_revenue_last_fiscal']
+            fiscal_year=self.last_fiscal_year).aggregate(_revenue_last_fiscal=Sum('total_revenue'))[
+            '_revenue_last_fiscal']
 
         # Set some default values for the G.R.O.W. buckets. We will add to these in the brand loop below
         self.game_changer_target = convert_to_money(0)
@@ -105,7 +106,8 @@ class DashboardView(TemplateView):
 
             # Now append the financial data to the brand
             brand.total_target = convert_to_money(target) if target is not None else convert_to_money(0)
-            brand.total_revenue_last_fiscal = convert_to_money(revenue_last_fiscal) if revenue_last_fiscal is not None else convert_to_money(0)
+            brand.total_revenue_last_fiscal = convert_to_money(
+                revenue_last_fiscal) if revenue_last_fiscal is not None else convert_to_money(0)
 
         # Route the request to the appropriate method
         action = kwargs.get('action')
@@ -116,7 +118,7 @@ class DashboardView(TemplateView):
             return self.grow_status(request, *args, **kwargs)
         elif action == 'brand_table':
             # Pass the current_params to the brand_table method
-            return self.brand_table(request,*args, **kwargs)
+            return self.brand_table(request, *args, **kwargs)
         elif action == 'time_remaining':
             return self.time_remaining(request, *args, **kwargs)
         elif action == 'opportunities_status':
@@ -167,20 +169,50 @@ class DashboardView(TemplateView):
         # Dummy Grow Data
         if period == 'annual':
             datasets = [
-                {'label': 'Target', 'data': [
-                    self.game_changer_target.amount,
-                    self.real_opportunity_target.amount,
-                    self.open_target.amount,
-                    self.wish_target.amount
-                ]
-                 },
-                {'label': 'Last Fiscal', 'data': [
-                    self.game_changer_revenue_last_fiscal.amount,
-                    self.real_opportunity_revenue_last_fiscal.amount,
-                    self.open_revenue_last_fiscal.amount,
-                    self.wish_revenue_last_fiscal.amount
-                ]
-                 }
+                {
+                    'label': 'Target',
+                    'data': [
+                        self.game_changer_target.amount,
+                        self.real_opportunity_target.amount,
+                        self.open_target.amount,
+                        self.wish_target.amount
+                    ],
+                    'backgroundColor': [
+                        'rgba(154, 216, 0, 0.2)',
+                        'rgba(154, 216, 0, 0.2)',
+                        'rgba(154, 216, 0, 0.2)',
+                        'rgba(154, 216, 0, 0.2)'
+                    ],
+                    'borderColor': [
+                        'rgba(154, 216, 0, 1)',
+                        'rgba(154, 216, 0, 1)',
+                        'rgba(154, 216, 0, 1)',
+                        'rgba(154, 216, 0, 1)'
+                    ],
+                    'borderWidth': '1'
+                },
+                {
+                    'label': 'Last Fiscal',
+                    'data': [
+                        self.game_changer_revenue_last_fiscal.amount,
+                        self.real_opportunity_revenue_last_fiscal.amount,
+                        self.open_revenue_last_fiscal.amount,
+                        self.wish_revenue_last_fiscal.amount
+                    ],
+                    'backgroundColor': [
+                        'rgba(128, 128, 128, 0.2)',
+                        'rgba(128, 128, 128, 0.2)',
+                        'rgba(128, 128, 128, 0.2)',
+                        'rgba(128, 128, 128, 0.2)'
+                    ],
+                    'borderColor': [
+                        'rgba(128, 128, 128, 1)',
+                        'rgba(128, 128, 128, 1)',
+                        'rgba(128, 128, 128, 1)',
+                        'rgba(128, 128, 128, 1)'
+                    ],
+                    'borderWidth': '1'
+                }
             ]
         else:
             datasets = []

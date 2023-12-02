@@ -29,7 +29,7 @@
 
 {# Planner Summary Stats #}
 {% block sidebar_stats %}
-<span class="badge rounded-pill bg-sos">Revenue (Forecasted): <span class="stat-value">{{ total_forecasted_revenue }}</span></span>
-<span class="badge rounded-pill bg-sos">Revenue (Last Fiscal): <span class="stat-value">{{ total_revenue_last_fiscal }}</span></span>
-<span class="badge rounded-pill bg-sos">Avg Deal Size: <span class="stat-value">{{ avg_deal_size }}</span></span>
+<span class="badge bg-sos"><p class="stat-value">{{ total_forecasted_revenue }}</p><p class="quick-link-stat-unit">Forecasted This Fiscal</p></span>
+<span class="badge bg-sos"><p class="stat-value">{{ total_revenue_last_fiscal }}</p><p class="quick-link-stat-unit">Total Last Fiscal</p></span>
+<span class="badge bg-sos"><p class="stat-value">{{ avg_deal_size }}</p><p class="quick-link-stat-unit">Avg Deal Size</p></span>
 {% endblock %}

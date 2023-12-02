@@ -11,7 +11,7 @@
         <div class="col-md-6 d-flex">
             <!-- Top Brands Pie Chart -->
             <div class="card mb-4 top-brands-pie-chart w-100">
-                <div class="card-header">ACTUAL vs FORECAST vs BUDGET
+                <div class="card-header">Top Brands
                     <select id="brandNumberFilter" name="number" hx-get="top_brands/" hx-trigger="change" hx-swap="innerHTML" hx-target="#top-brands-budget-chart-container" hx-vals="{number: $number.val}">
                         <option value="3">Top Three</option>
                         <option value="5" selected>Top Five</option>
@@ -19,7 +19,7 @@
                     </select>
                 </div>
                 <div class="card-body d-flex justify-content-center align-items-center" style="height: auto;">
-                    <div id="top-brands-budget-chart-container" hx-get="top_brands/" hx-trigger="load" >
+                    <div id="top-brands-budget-chart-container" hx-get="top_brands/" hx-trigger="load" style="width:100%;">
                         <!-- Bar graph content here - rendered via HTMX -->
                     </div>
                 </div>
@@ -63,7 +63,7 @@
             <div class="card w-100">
                 <div class="card-header">Opportunities</div>
                     <div class="card-body d-flex justify-content-center align-items-center p-2" style="height: auto;">
-                        <div id="opportunities-chart-container" hx-get="opportunities_status/" hx-trigger="load">
+                        <div id="opportunities-chart-container" hx-get="opportunities_status/" hx-trigger="load" style="width:100%;">
                             <!-- Pie graphs content here - rendered via HTMX -->
                         </div>
                     </div>

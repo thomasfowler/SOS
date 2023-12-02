@@ -7,55 +7,103 @@
 {% block title %}Science of Sales - Portfolio Planner{% endblock %}
 
 {% block content %}
-    <div class="row mb-4 mt-4">
+    <div class="row mb-4 mt-3">
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">Total Opportunities</div>
+                <div class="card-header">Opportunities</div>
                 <div class="card-body">
-                    <!-- Total Opportunities Content -->
-                    Count: {{ opportunities_count }}
-                    Target: {{ opportunities_sum }}
+                    <div class="row text-center">
+                        <div class="col metric">
+                            <h2 class="metric-amount">{{ opportunities_count }}</h2>
+                            <h5 class="metric-details">Total</h5>
+                        </div>
+                        <div class="col metric">
+                            <h2 class="metric-amount">{{ opportunities_sum }}</h2>
+                            <h5 class="metric-details">Revenue</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">Total Revenue</div>
+                <div class="card-header">Revenue</div>
                 <div class="card-body">
                     <!-- Total Revenue Content -->
-                    Last Fiscal: {{ revenue_last_fiscal }}
-                    This Fiscal: {{ revenue_this_fiscal }}
+                    <div class="row text-center">
+                        <div class="col metric">
+                            <h2 class="metric-amount">{{ revenue_last_fiscal }}</h2>
+                            <h5 class="metric-details">Last Fiscal</h5>
+                        </div>
+                        <div class="col metric">
+                            <h2 class="metric-amount">{{ revenue_this_fiscal }}</h2>
+                            <h5 class="metric-details">This Fiscal</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">Deals Closed this Month</div>
+                <div class="card-header">Deals this Month</div>
                 <div class="card-body">
-                    Won: {{ won_this_month_count }}
-                    Lost: {{ lost_this_month_count }}
-                    Abandoned: {{ abandoned_this_month_count }}
+                    <div class="row text-center">
+                        <div class="col metric">
+                            <h2 class="metric-amount">{{ won_this_month_count }}</h2>
+                            <h5 class="metric-details">Won</h5>
+                        </div>
+                        <div class="col metric">
+                            <h2 class="metric-amount">{{ lost_this_month_count }}</h2>
+                            <h5 class="metric-details">Lost</h5>
+                        </div>
+                        <div class="col metric">
+                            <h2 class="metric-amount">{{ abandoned_this_month_count }}</h2>
+                            <h5 class="metric-details">Abandoned</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row mb-4 mt-4">
+    <div class="row mb-4 mt-5">
         <div class="col-md-6">
-            <div class="card-header">Unapproved Opportunities</div>
-            Count: {{ unapproved_count }}
-            Target: {{ unapproved_sum }}
-            <div class="card-body"></div>
+            <div class="card">
+                <div class="card-header">Approved Opportunities</div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col metric">
+                            <h2 class="metric-amount">{{ approved_count }}</h2>
+                            <h5 class="metric-details">Approved Opps.</h5>
+                        </div>
+                        <div class="col metric">
+                            <h2 class="metric-amount">{{ approved_sum }}</h2>
+                            <h5 class="metric-details">Approved Revenue</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-md-6">
-            <div class="card-header">Approved Opportunities</div>
-            Count: {{ approved_count }}
-            Target: {{ approved_sum }}
-            <div class="card-body"></div>
+            <div class="card">
+                <div class="card-header">Unapproved Opportunities</div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col metric">
+                            <h2 class="metric-amount">{{ unapproved_count }}</h2>
+                            <h5 class="metric-details">Unapproved Opps.</h5>
+                        </div>
+                        <div class="col metric">
+                            <h2 class="metric-amount">{{ unapproved_sum }}</h2>
+                            <h5 class="metric-details">Unapproved Revenue</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     {% if user|has_role:'sales_director,business_unit_head' %}
-        <div class="card mb-4">
+        <div class="card mb-4 mt-5">
             <div class="card-header">Pending Approvals - Fiscal {{ current_fiscal_year }}</div>
             <div class="card-body">
                 <div class="container-fluid">
