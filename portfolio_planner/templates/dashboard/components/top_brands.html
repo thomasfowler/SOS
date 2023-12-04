@@ -1,10 +1,6 @@
 <canvas id="topBrandsByTargetChart"></canvas>
 <script>
     (function() {
-        // Debugging lines: Log the data to the console
-        console.log("Labels:", {{ labels|safe }});
-        console.log("Data:", {{ data|safe }});
-
         const data = {
             labels: {{ labels|safe }},
             datasets: [{
