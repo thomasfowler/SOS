@@ -42,7 +42,27 @@ gcloud builds submit --config cloudmigrate.yaml \
     --substitutions _INSTANCE_NAME=sos,_REGION=europe-west1, _SERVICE_NAME=adreach-sos-prod, _SECRET_SETTINGS_NAME=adreach_sos_settings
 ```
 
-This will build with substitutions for AdReach
+This will build with substitutions for AdReach instance.
+
+## Data Import
+
+### Syncing Groups
+
+In order to sync the groups, you need to run the following command:
+
+```bash
+python manage.py sync_roles
+```
+
+This syncs groups defined in the roles.py file to the DB. This *MUST* be completed as an initial step, before importing
+users.
+
+### Import Commands
+
+There are a number of commands, one per mode, that can be run to import data into the database.
+
+TODO: List the commands here
+
 
 # TODO:
 
