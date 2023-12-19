@@ -119,6 +119,10 @@ class OrgBusinessUnit(TimeStampedModel, StatusModel):
             raise ValidationError("Assigned user must have the BusinessUnitHead or SalesDirector role.")
         super(OrgBusinessUnit, self).save(*args, **kwargs)
 
+    def __str__(self):
+        """Provide human readable representation."""
+        return self.name
+
 
 class Brand(TimeStampedModel, StatusModel):
     """Brand model."""
