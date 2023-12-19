@@ -42,7 +42,7 @@ class MediaGroup(TimeStampedModel, StatusModel):
     )
 
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=191, help_text='Name of the parent agency')
+    name = models.CharField(max_length=191, help_text='Name of the parent agency', unique=True)
     description = models.TextField(blank=True, null=True, help_text='Description of the parent agency')
     status = StatusField(
         _('status'),
@@ -67,7 +67,7 @@ class Agency(TimeStampedModel, StatusModel):
     )
 
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=191, help_text='Name of the agency')
+    name = models.CharField(max_length=191, help_text='Name of the agency', unique=True)
     description = models.TextField(blank=True, null=True, help_text='Description of the agency')
     status = StatusField(
         _('status'),
@@ -99,7 +99,7 @@ class OrgBusinessUnit(TimeStampedModel, StatusModel):
     )
 
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=191, help_text='Name of the business unit')
+    name = models.CharField(max_length=191, help_text='Name of the business unit', unique=True)
     status = StatusField(
         _('status'),
         default='active',
@@ -135,7 +135,7 @@ class Brand(TimeStampedModel, StatusModel):
         blank=True,
         null=True
     )
-    name = models.CharField(max_length=191, help_text='Name of the Brand')
+    name = models.CharField(max_length=191, help_text='Name of the Brand', unique=True)
     description = models.TextField(blank=True, null=True, help_text='Description of the Brand')
     status = StatusField(
         _('status'),
@@ -207,7 +207,7 @@ class Product(TimeStampedModel):
     )
 
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=191, help_text='Name of the product')
+    name = models.CharField(max_length=191, help_text='Name of the product', unique=True)
     description = models.TextField(blank=True, null=True, help_text='Description of the product')
     status = StatusField(
         _('status'),
