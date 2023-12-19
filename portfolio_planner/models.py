@@ -156,20 +156,6 @@ class Brand(TimeStampedModel, StatusModel):
         help_text='The Organisation Business Unit that the Brand is managed by. Cannot be null.',
     )
 
-    def save(self, *args, **kwargs):
-        """Custom save function"""
-        is_new = self.pk is None
-
-        super().save(*args, **kwargs)  # Call the "real" save() method
-
-        # If this is a new Brand, create a default Business Unit related to it
-        if is_new:
-            BrandBusinessUnit.objects.create(
-                name='Default Business Unit',
-                description='Automatically generated default business unit',
-                brand=self  # self is the Brand instance
-            )
-
     def __str__(self):
         """Provide human readable representation."""
         return self.name
