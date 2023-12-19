@@ -38,7 +38,7 @@ class MediaGroupAdmin(admin.ModelAdmin):
 @admin.register(Agency)
 class AgencyAdmin(admin.ModelAdmin):
     """Configuration of the Agency model in the Admin UI."""
-    list_display = ('id', 'name', 'status', 'created', 'modified')
+    list_display = ('id', 'name', 'media_group', 'status', 'created', 'modified')
     list_filter = ('status',)
     search_fields = ('name', 'description',)
     ordering = ('-created',)
