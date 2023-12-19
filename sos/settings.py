@@ -1,13 +1,44 @@
 """Django settings for sos project."""
+import io
 import os
 from pathlib import Path
 from urllib.parse import urlparse
 
-from environs import Env
+import environ
+from google.cloud import secretmanager
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Environs Config
-env = Env()
-env.read_env()
+env = environ.Env()
+env_file = os.path.join(BASE_DIR, ".env")
+
+if os.path.isfile(env_file):
+    # Use a local secret file, if provided
+    print(f'Found .env file: {env_file}')
+    env.read_env(env_file)
+elif os.environ.get("GOOGLE_CLOUD_PROJECT", None):
+    # Pull secrets from Secret Manager
+    # This block of code is typically only used during the build phase so we can easily pull secrets into
+    # the build images. During a typical Cloud Run deployment, we prefer to use normal environment variables
+    # provided by secret manager.
+    print(f'Using Google Cloud')
+    project_id = os.environ.get("GOOGLE_CLOUD_PROJECT")
+
+    client = secretmanager.SecretManagerServiceClient()
+    settings_name = os.environ.get("SETTINGS_NAME")
+
+    if not settings_name:
+        raise ValueError("SETTINGS_NAME environment variable not set")
+
+    print(f'Attempting to use secret from secret manager {settings_name}')
+    name = f"projects/{project_id}/secrets/{settings_name}/versions/latest"
+    payload = client.access_secret_version(name=name).payload.data.decode("UTF-8")
+
+    env.read_env(io.StringIO(payload))
+else:
+    print("No local .env or GOOGLE_CLOUD_PROJECT detected. Proceeding to use environment variables")
 
 # Determine the Environment Config
 
@@ -16,25 +47,25 @@ ADMIN_ENABLED = env.bool('ADMIN_ENABLED', False)
 IS_LOCAL = env.bool('IS_LOCAL', False)
 SECRET_KEY = env.str('SECRET_KEY')
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
 # CloudRun Suggested config including CSRF_TRUSTED_ORIGINS
 # Note the CLOUDRUN_SERVICE_URL is not automatically set. It's a manual env var on Cloud Run based on what is generated.
 CLOUDRUN_SERVICE_URL = env.str('CLOUDRUN_SERVICE_URL', None)
 CUSTOM_DOMAIN = env.str('CUSTOM_DOMAIN', None)
 if CLOUDRUN_SERVICE_URL and CUSTOM_DOMAIN:
     # Add the CloudRun host
-    ALLOWED_HOSTS = [urlparse(CLOUDRUN_SERVICE_URL).netloc]
+    print(f'Using CLOUDRUN_SERVICE_URL: {CLOUDRUN_SERVICE_URL}')
+    print(f'Using CUSTOM_DOMAIN: {CUSTOM_DOMAIN}')
+    ALLOWED_HOSTS = [
+        urlparse(CLOUDRUN_SERVICE_URL).netloc,
+        urlparse(CUSTOM_DOMAIN).netloc
+    ]
     CSRF_COOKIE_SECURE = True
-    CSRF_TRUSTED_ORIGINS = [CLOUDRUN_SERVICE_URL, CUSTOM_DOMAIN]
+    CSRF_TRUSTED_ORIGINS = [
+        CLOUDRUN_SERVICE_URL,
+        CUSTOM_DOMAIN
+    ]
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    # Because we are using Firebase Hosting for our custom domain, it strips the cookie (which is dumb).
-    # See docs here: https://firebase.google.com/docs/hosting/manage-cache#using_cookies
-    # So we need the session cookie to be __session instead of the default sessionid
-    # TODO: Check if we actually need this once deployed. Might not
-    # SESSION_COOKIE_NAME = '__session'
 else:
     ALLOWED_HOSTS = ['*']
     CSRF_TRUSTED_ORIGINS = [
@@ -103,15 +134,25 @@ WSGI_APPLICATION = 'sos.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env.str('DJANGO_DB_DATABASE'),
-        'USER': env.str('DJANGO_DB_USERNAME'),
-        'PASSWORD': env.str('DJANGO_DB_PASSWORD'),
-        'HOST': env.str('DJANGO_DB_HOST', 'localhost'),
+if IS_LOCAL:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': env.str('DJANGO_DB_DATABASE'),
+            'USER': env.str('DJANGO_DB_USERNAME'),
+            'PASSWORD': env.str('DJANGO_DB_PASSWORD'),
+            'HOST': env.str('DJANGO_DB_HOST', 'localhost'),
+        }
     }
-}
+else:
+    # This usues the environs DB string parser to parse the DB string from the env var
+    # See the docs for an explanation.
+    DATABASES = {"default": env.db()}
+
+    # If the flag as been set, configure to use proxy
+    if os.getenv("USE_CLOUD_SQL_AUTH_PROXY", None):
+        DATABASES["default"]["HOST"] = "127.0.0.1"
+        DATABASES["default"]["PORT"] = 5432
 
 port = env.str('DJANGO_DB_PORT', '5432')
 
