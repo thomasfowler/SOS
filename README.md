@@ -59,9 +59,20 @@ users.
 
 ### Import Commands
 
-There are a number of commands, one per mode, that can be run to import data into the database.
+There are a number of commands, one per mode, that can be run to import data into the database. They must be run in the
+order provided below:
 
-TODO: List the commands here
+1. Users: `python manage.py import_users data_prep/source_data/epic/users.csv`
+2. Organisation Business Units: `python manage.py import_org_business_units data_prep/source_data/epic/org_bus_units.csv`
+3. Media Groups: `python manage.py import_media_groups data_prep/source_data/epic/media_groups.csv`
+4. Products: `python manage.py import_products data_prep/source_data/epic/products.csv`
+5. Agencies: `python manage.py import_agencies data_prep/source_data/epic/agencies.csv`
+6. Brands: `python manage.py import_brands data_prep/source_data/epic/brands.csv`
+7. Brand Business Units: `python manage.py import_brand_business_units data_prep/source_data/epic/brand_bus.csv`
+8. Opportunities: `python  manage.py import_opportunities data_prep/source_data/epic/opportunities.csv`
+9. Performance History: `python manage.py import_performance_history data_prep/source_data/epic/performance_history.csv`
+
+Obviously adjust the paths for the CSV source files you are importing.
 
 
 # TODO:
