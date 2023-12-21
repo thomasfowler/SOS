@@ -46,10 +46,29 @@ steps:
         "--no-input",
       ]
 
+  - id: "deploy cloud run"
+    name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args: [
+        'run',
+        'deploy',
+        '${_SERVICE_NAME}',
+        '--platform',
+        'managed',
+        '--region',
+        '${_REGION}',
+        '--image',
+        'gcr.io/${PROJECT_ID}/${_SERVICE_NAME}',
+        '--add-cloudsql-instances',
+        '${PROJECT_ID}:${_REGION}:${_INSTANCE_NAME}',
+        '--allow-unauthenticated',
+    ]
+
+images:
+  - gcr.io/${PROJECT_ID}/${_SERVICE_NAME}
+
 substitutions:
   _INSTANCE_NAME: sos
   _REGION: europe-west1
   _SERVICE_NAME: epic-sos-prod
   _SECRET_SETTINGS_NAME: epic_sos_settings
-
-images:
