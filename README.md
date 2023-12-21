@@ -8,7 +8,7 @@ Science of Sales
 Run the following command to build using Cloud Build:
 
 ```bash
-gcloud builds submit --config cloudmigrate.yaml --project science-of-sales
+gcloud builds submit --config cloudbuild.yaml --project science-of-sales
 ```
 ## Deploy
 
