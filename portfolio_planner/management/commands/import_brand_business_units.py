@@ -32,7 +32,7 @@ class Command(BaseCommand):
                     BrandBusinessUnit.objects.filter(brand=brand, name='Default Business Unit').delete()
 
                     # Create the new BrandBusinessUnit
-                    BrandBusinessUnit.objects.update_or_create(
+                    brand_bu, created = BrandBusinessUnit.objects.update_or_create(
                         name=row['Name'],
                         description=row['Description'],
                         status='active',
@@ -40,7 +40,8 @@ class Command(BaseCommand):
                         brand=brand
                     )
 
-                    self.stdout.write(self.style.SUCCESS(f"Successfully processed business unit '{row['Name']}' for brand '{brand_name}'"))
+                    action = "created" if created else "updated"
+                    self.stdout.write(self.style.SUCCESS(f"Successfully {action} business unit '{brand_bu.name}' for brand '{brand.name}'"))
         except FileNotFoundError:
             raise CommandError(f'File "{csv_file_path}" does not exist')
         except Brand.DoesNotExist:
