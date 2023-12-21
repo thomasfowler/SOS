@@ -1,5 +1,6 @@
 from datetime import date
 from decimal import Decimal
+from logging import getLogger
 
 from django.conf import settings
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -20,6 +21,9 @@ from model_utils.models import TimeStampedModel
 from rolepermissions.checkers import has_role
 
 from sos.roles import BusinessUnitHead, SalesDirector
+
+
+logger = getLogger(__name__)
 
 
 class User(BaseUser):
@@ -381,23 +385,27 @@ class Opportunity(TimeStampedModel, StatusModel):
 
     def save(self, *args, **kwargs):
         # Check that the BusinessUnit is related to the Brand
-        if self.business_unit.brand != self.brand:
+        if self.business_unit and self.business_unit.brand != self.brand:
             raise IntegrityError("Business Unit must belong to the selected Brand")
 
-        # Set status tracking fields
-        if self.pk is not None:
-            original = Opportunity.objects.get(pk=self.pk)
-            if self.status != original.status:
-                if self.status == 'won' and not self.won_date:
-                    self.won_date = date.today()
-                elif self.status == 'lost' and not self.lost_date:
-                    self.lost_date = date.today()
-                elif self.status == 'abandoned' and not self.abandoned_date:
-                    self.abandoned_date = date.today()
-                elif self.status == 'disabled' and not self.disabled_date:
-                    self.disabled_date = date.today()
-                elif self.status == 'expired' and not self.expired_date:
-                    self.expired_date = date.today()
+        # Check if an instance with this primary key already exists
+        if self.pk:
+            try:
+                original = Opportunity.objects.get(pk=self.pk)
+                if self.status != original.status:
+                    if self.status == 'won' and not self.won_date:
+                        self.won_date = date.today()
+                    elif self.status == 'lost' and not self.lost_date:
+                        self.lost_date = date.today()
+                    elif self.status == 'abandoned' and not self.abandoned_date:
+                        self.abandoned_date = date.today()
+                    elif self.status == 'disabled' and not self.disabled_date:
+                        self.disabled_date = date.today()
+                    elif self.status == 'expired' and not self.expired_date:
+                        self.expired_date = date.today()
+            except Opportunity.DoesNotExist:
+                logger.warning(f"Opportunity with id {self.pk} does not exist. Status date not set.")
+                pass
 
         # Set the approval date
         if self.approved and not self.approved_date:
