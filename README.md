@@ -3,14 +3,14 @@ Science of Sales
 
 # Build and Deploy
 
-## Build
+## Build & Deploy with Cloud Build
 
 Run the following command to build using Cloud Build:
 
 ```bash
 gcloud builds submit --config cloudbuild.yaml --project science-of-sales
 ```
-## Deploy
+## Manually Deploy
 
 Run the following command to deploy to Cloud Run:
 
@@ -25,7 +25,7 @@ gcloud run deploy epic-sos-prod \
 
 Note: These are configured for the Epic SoS instance. Change as needed for AdReach
 
-For example:
+Note: The deploy step is built into the Cloud Build step, so you should not need to run this manually.
 
 ### Env Vars
 
