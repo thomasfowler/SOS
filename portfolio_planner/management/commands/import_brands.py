@@ -20,6 +20,8 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS(f'Importing brands from {csv_file_path}'))
             with open(csv_file_path, newline='', encoding='utf-8-sig') as csvfile:
                 reader = csv.DictReader(csvfile)
+                created_count = 0
+                updated_count = 0
                 for row in reader:
                     user_email = row['Email']
                     user = User.objects.get(email=user_email)
@@ -43,7 +45,19 @@ class Command(BaseCommand):
                     )
 
                     action = "created" if created else "updated"
+
+                    # Count our actions
+                    if action == "created":
+                        created_count += 1
+                    elif action == "updated":
+                        updated_count += 1
+
                     self.stdout.write(self.style.SUCCESS(f"Successfully {action} brand '{brand.name}'"))
+
+                # Write out summary
+                self.stdout.write(self.style.SUCCESS(f"Imported {created_count} brands, updated {updated_count} brands"))
+                self.stdout.write(self.style.SUCCESS(f"Total records created/updated: {created_count + updated_count}"))
+                self.stdout.write(self.style.SUCCESS(f"Total rows in CSV: {reader.line_num -1}"))
         except FileNotFoundError:
             raise CommandError(f'File "{csv_file_path}" does not exist')
         except User.DoesNotExist:
