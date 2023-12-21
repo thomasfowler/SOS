@@ -326,6 +326,16 @@ p {
    transition: 0.2s;
 }
 
+.reset-password-button {
+  font-weight: 500
+}
+
+.reset-password-button:hover {
+   background: #c3fd48;
+   color: black;
+   transition: 0.2s;
+}
+
 .register-now {
   text-align: center;
   margin-top: 20px;

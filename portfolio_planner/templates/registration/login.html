@@ -26,7 +26,7 @@
             </div>
             <div class="form-group mt-3 animate__animated animate__fadeIn animate__delay-1s">
                 <label>Password</label>
-                <a href="" class="forgot-password">Forgot password</a>
+                <a href="{% url 'password_reset' %}" class="forgot-password">Forgot password</a>
                 <input type="password" class="form-control" id="{{ form.password.id_for_label }}" name="{{ form.password.name }}" required>
             </div>
             <div class="checkbox mt-4 mb-3 animate__animated animate__fadeIn animate__delay-1s">

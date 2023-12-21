@@ -94,6 +94,7 @@ INSTALLED_APPS = [
     'djmoney',
     'nested_admin',
     'django_tables2',
+    'password_reset',
     # Local Apps
     'portfolio_planner',
 ]
@@ -114,7 +115,9 @@ ROOT_URLCONF = 'sos.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / "portfolio_planner/templates",
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -253,3 +256,8 @@ LOGIN_URL = '/login/'
 
 # What CALENDAR period does this fiscal year start on? 1 is January, 12 is December.
 FISCAL_YEAR_START_MONTH = env.int('FISCAL_YEAR_START_MONTH')
+
+# Sendgrid
+SENDGRID_API_KEY = env.str('SENDGRID_API_KEY')
+PASSWORD_REST_EMAIL_TEMPLATE_ID = env.str('PASSWORD_REST_EMAIL_TEMPLATE_ID')
+PASSWORD_RESET_EMAIL_FROM = env.str('PASSWORD_RESET_EMAIL_FROM')

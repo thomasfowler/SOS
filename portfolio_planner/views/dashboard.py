@@ -40,35 +40,53 @@ class DashboardView(TemplateView):
 
         Because the entire dashboard uses the same Brand roles based query, we can just use the same queryset for all.
         """
-        # Perform the role based Brands query
-        filters = get_brand_role_filters(request.user)
 
+        # Route the request to the appropriate method
+        action = kwargs.get('action')
+        filters = get_brand_role_filters(request.user)
         self.queryset = Brand.objects.filter(**filters)
 
+        if action == 'top_brands':
+            # Requires Data Preparation
+            self.prepare_data(request)
+            return self.top_brands(request, *args, **kwargs)
+        elif action == 'grow_status':
+            # Requires Data Preparation
+            self.prepare_data(request)
+            return self.grow_status(request, *args, **kwargs)
+        elif action == 'brand_table':
+            # Requires Data Preparation
+            self.prepare_data(request)
+            return self.brand_table(request, *args, **kwargs)
+        elif action == 'time_remaining':
+            return self.time_remaining(request, *args, **kwargs)
+        elif action == 'opportunities_status':
+            return self.opportunities_status(request, *args, **kwargs)
+
+        # Just run this function if we don't have an action. This renders the base template for the dashboard
+        return super().dispatch(request, *args, **kwargs)
+
+    def prepare_data(self, request):
+        # Perform the role based Brands query
         # Next, figure out the details we need allocate the brand into one of the G.R.O.W. buckets
         self.sum_target_values = Opportunity.objects.filter(brand__in=self.queryset).aggregate(
             total_target=Sum('target')
         )
-
         # Get current fiscal year so that we can get all the opportunities for the previous fiscal year
         self.current_fiscal_year = FiscalYear.objects.get(is_current=True)
         self.last_fiscal_year = FiscalYear.objects.get(year=self.current_fiscal_year.year - 1)
-
         all_revenue_last_fiscal = Opportunity.objects.filter(status__in=['active', 'won']).with_revenue(
             fiscal_year=self.last_fiscal_year).aggregate(_revenue_last_fiscal=Sum('total_revenue'))[
             '_revenue_last_fiscal']
-
         # Set some default values for the G.R.O.W. buckets. We will add to these in the brand loop below
         self.game_changer_target = convert_to_money(0)
         self.real_opportunity_target = convert_to_money(0)
         self.open_target = convert_to_money(0)
         self.wish_target = convert_to_money(0)
-
         self.game_changer_revenue_last_fiscal = convert_to_money(0)
         self.real_opportunity_revenue_last_fiscal = convert_to_money(0)
         self.open_revenue_last_fiscal = convert_to_money(0)
         self.wish_revenue_last_fiscal = convert_to_money(0)
-
         # Loop through the opportunities and figure out if they are in a G.R.O.W. bucket
         for brand in self.queryset:
             # Get the sum target for all brand opportunities
@@ -108,24 +126,6 @@ class DashboardView(TemplateView):
             brand.total_target = convert_to_money(target) if target is not None else convert_to_money(0)
             brand.total_revenue_last_fiscal = convert_to_money(
                 revenue_last_fiscal) if revenue_last_fiscal is not None else convert_to_money(0)
-
-        # Route the request to the appropriate method
-        action = kwargs.get('action')
-
-        if action == 'top_brands':
-            return self.top_brands(request, *args, **kwargs)
-        elif action == 'grow_status':
-            return self.grow_status(request, *args, **kwargs)
-        elif action == 'brand_table':
-            # Pass the current_params to the brand_table method
-            return self.brand_table(request, *args, **kwargs)
-        elif action == 'time_remaining':
-            return self.time_remaining(request, *args, **kwargs)
-        elif action == 'opportunities_status':
-            return self.opportunities_status(request, *args, **kwargs)
-
-        # Just run this function if we don't have an action. This renders the base template for the dashboard
-        return super().dispatch(request, *args, **kwargs)
 
     @method_decorator(require_GET)
     def top_brands(self, request, *args, **kwargs) -> HttpResponse:
