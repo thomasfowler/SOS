@@ -7,7 +7,9 @@ from decimal import Decimal
 
 User = get_user_model()
 
+
 class Command(BaseCommand):
+    """Imports opportunities from a CSV file."""
     help = 'Imports opportunities from a CSV file'
 
     def add_arguments(self, parser):
