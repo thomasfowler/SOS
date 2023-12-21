@@ -30,7 +30,7 @@ class Command(BaseCommand):
                     org_business_unit_name = row['Org BU']
                     org_business_unit = OrgBusinessUnit.objects.get(name=org_business_unit_name)
 
-                    Brand.objects.update_or_create(
+                    brand, created = Brand.objects.update_or_create(
                         name=row['Name'],
                         defaults={
                             'description': row['Description'],
@@ -42,7 +42,8 @@ class Command(BaseCommand):
                         }
                     )
 
-                    self.stdout.write(self.style.SUCCESS(f"Successfully processed brand '{row['Name']}'"))
+                    action = "created" if created else "updated"
+                    self.stdout.write(self.style.SUCCESS(f"Successfully {action} brand '{brand.name}'"))
         except FileNotFoundError:
             raise CommandError(f'File "{csv_file_path}" does not exist')
         except User.DoesNotExist:
