@@ -20,7 +20,12 @@
                 </div>
                 <div class="card-body d-flex justify-content-center align-items-center" style="height: auto;">
                     <div id="top-brands-budget-chart-container" hx-get="top_brands/" hx-trigger="load" style="width:100%;">
-                        <!-- Bar graph content here - rendered via HTMX -->
+                        <!-- Pie graph content here - rendered via HTMX -->
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border text-secondary" role="status">
+                              <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,6 +47,11 @@
                 <div class="card-body">
                     <div id="grow-status-chart-container" hx-get="grow_status/" hx-trigger="load">
                         <!-- Bar graph content here - rendered via HTMX -->
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border text-secondary" role="status">
+                              <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -55,6 +65,11 @@
                 <div class="card-header">Sales Time Remaining</div>
                     <div id="time-remaining-chart-container" hx-get="time_remaining/" hx-trigger="load">
                         <!-- Bar graphs content here - rendered via HTMX -->
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border text-secondary" role="status">
+                              <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
                     </div>
                 <div class="card-body"></div>
             </div>
@@ -65,6 +80,11 @@
                     <div class="card-body d-flex justify-content-center align-items-center p-2" style="height: auto;">
                         <div id="opportunities-chart-container" hx-get="opportunities_status/" hx-trigger="load" style="width:100%;">
                             <!-- Pie graphs content here - rendered via HTMX -->
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border text-secondary" role="status">
+                                  <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
             </div>
@@ -77,6 +97,11 @@
             {# We use the dashboard_action url and give the named action to get to the right url. We then pass in the URL params from the original request in order filter the table #}
             <div id="brand-table-container" hx-get="{% url 'dashboard_action' action='brand_table' %}?{{ request.GET.urlencode }}" hx-trigger="load">
                 <!-- Brand Table content here - rendered via HTMX -->
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border text-secondary" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
             </div>
     </div>
 
