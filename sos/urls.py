@@ -16,11 +16,52 @@ from portfolio_planner.views.opportunity import edit_opportunity
 from portfolio_planner.views.opportunity import remove_opportunity
 from portfolio_planner.views.opportunity import filtered_brands
 from portfolio_planner.views.opportunity import filtered_business_units
+from portfolio_planner.views.registration import CustomPasswordResetView
 
 urlpatterns = [
     # Auth
-    path('login/', auth_views.LoginView.as_view(), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='registration/login.html', next_page='home'), name='logout'),
+    path(
+        'login/', auth_views.LoginView.as_view(),
+        name='login'
+    ),
+    path(
+        'logout/', auth_views.LogoutView.as_view(
+            template_name='registration/login.html', next_page='home'),
+        name='logout'
+    ),
+    # Password Reset
+    # Sends user an email with a link to reset their password.
+    # Uses a custom class so we can send using Sendgrid
+    path(
+        "password_reset/", CustomPasswordResetView.as_view(
+            template_name='registration/password_reset_form.html',
+        ),
+        name="password_reset"
+    ),
+    # Simple page to confirm that the password reset email has been sent
+    path(
+        "password_reset/done/",
+        auth_views.PasswordResetDoneView.as_view(
+            template_name='registration/password_reset_done.html',
+        ),
+        name="password_reset_done",
+    ),
+    # Page to enter new password. Requires uidb64 and token from email link
+    path(
+        "reset/<uidb64>/<token>/",
+        auth_views.PasswordResetConfirmView.as_view(
+            template_name='registration/password_reset_confirm.html',
+        ),
+        name="password_reset_confirm",
+    ),
+    # Page to confirm that the password has been reset
+    path(
+        "reset/done/",
+        auth_views.PasswordResetCompleteView.as_view(
+            template_name='registration/password_reset_complete.html',
+        ),
+        name="password_reset_complete",
+    ),
     # Site URLs
     # home
     path('', HomeOrLoginView.as_view(), name='home'),

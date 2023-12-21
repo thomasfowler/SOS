@@ -205,3 +205,6 @@ models.png
 
 # Ignore source data. Contains confidential information and should not be committed to git.
 /data_prep/source_data/
+
+# Djangos email folder - used only for dev
+/sent_emails/
