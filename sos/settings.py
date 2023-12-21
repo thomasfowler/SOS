@@ -94,7 +94,6 @@ INSTALLED_APPS = [
     'djmoney',
     'nested_admin',
     'django_tables2',
-    'password_reset',
     # Local Apps
     'portfolio_planner',
 ]
