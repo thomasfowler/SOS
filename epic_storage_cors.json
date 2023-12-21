@@ -1,0 +1,11 @@
+[
+    {
+      "origin": [
+        "https://epic.scienceofsales.biz",
+        "https://epic-sos-prod-qwf7jf277a-ew.a.run.app"
+      ],
+      "method": ["GET"],
+      "responseHeader": ["Content-Type"],
+      "maxAgeSeconds": 3600
+    }
+]

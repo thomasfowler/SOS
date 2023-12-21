@@ -44,6 +44,13 @@ gcloud builds submit --config cloudmigrate.yaml \
 
 This will build with substitutions for AdReach instance.
 
+### CORS on Cloud Storage
+
+This only needs to be done once per bucket. It is done via the console. Here is the command for the epic config file:
+```bash
+gcloud storage buckets update gs://epic_sos_prod_static --cors-file=epic_storage_cors.json
+```
+
 ## Data Import
 
 ### Syncing Groups
@@ -74,7 +81,6 @@ order provided below:
 
 Obviously adjust the paths for the CSV source files you are importing.
 
-
 # TODO:
 
 1. In order to see what opportunities need to be captured for a brand, we need to provide a
@@ -87,7 +93,6 @@ Obviously adjust the paths for the CSV source files you are importing.
 4. Add / edit opportunity needs some form validation. Disable the drop downs until correct things selected etc
 5. For opportunities, we probably need to track who created the opportunity, and who last updated it
 6. Password reset link / workflow / page
-7. 
 
 
 ### Notes from meeting
@@ -96,4 +101,4 @@ If not account manager, on opportunities show the rep
 
 Add opportunity - if agency is null, then you can only choose a brand that is not associated with an agency
 
-Create opportunity - if sales director or bu manager, you can create an opp for another user
+Create opportunity - if sales director or BU manager, you can create an opp for another user
